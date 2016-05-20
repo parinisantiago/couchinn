@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-05-2016 a las 23:06:44
+-- Tiempo de generación: 20-05-2016 a las 09:27:37
 -- Versión del servidor: 5.6.30-0ubuntu0.15.10.1
--- Versión de PHP: 5.6.20-1+deb.sury.org~wily+1
+-- Versión de PHP: 5.6.21-1+donate.sury.org~wily+4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,18 +23,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `admin`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id_admin` int(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `clave` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `couch`
 --
 
 CREATE TABLE IF NOT EXISTS `couch` (
   `id_couch` int(100) NOT NULL,
+  `id_usuario` int(100) NOT NULL,
   `id_tipo` int(100) NOT NULL,
   `titulo` varchar(100) NOT NULL,
   `descripcion` text NOT NULL,
   `ubicacion` varchar(100) NOT NULL,
   `direccion` varchar(100) NOT NULL,
   `capacidad` int(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `couch`
+--
+
+INSERT INTO `couch` (`id_couch`, `id_usuario`, `id_tipo`, `titulo`, `descripcion`, `ubicacion`, `direccion`, `capacidad`) VALUES
+(1, 0, 1, 'asd', 'asdasd', 'asdasd', 'asdad', 123123);
 
 -- --------------------------------------------------------
 
@@ -46,7 +66,15 @@ CREATE TABLE IF NOT EXISTS `foto` (
   `id_foto` int(100) NOT NULL,
   `id_couch` int(100) NOT NULL,
   `ruta` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `foto`
+--
+
+INSERT INTO `foto` (`id_foto`, `id_couch`, `ruta`) VALUES
+(1, 3, 'algo'),
+(2, 2, 'asd');
 
 -- --------------------------------------------------------
 
@@ -61,6 +89,20 @@ CREATE TABLE IF NOT EXISTS `pregunta` (
   `id_usuariorespuesta` int(100) DEFAULT NULL,
   `contenidopregunta` text NOT NULL,
   `contenidorespuesta` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `premium`
+--
+
+CREATE TABLE IF NOT EXISTS `premium` (
+  `id_premium` int(100) NOT NULL,
+  `id_usuario` int(100) NOT NULL,
+  `tarjeta` varchar(20) NOT NULL,
+  `f_incripcion` datetime(6) NOT NULL,
+  `f_desuscripcion` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -128,7 +170,14 @@ CREATE TABLE IF NOT EXISTS `reserva` (
 CREATE TABLE IF NOT EXISTS `tipo` (
   `id_tipo` int(100) NOT NULL,
   `nombre` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipo`
+--
+
+INSERT INTO `tipo` (`id_tipo`, `nombre`) VALUES
+(1, 'asdasd');
 
 -- --------------------------------------------------------
 
@@ -143,13 +192,28 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `apellido` varchar(100) NOT NULL,
   `fnac` date NOT NULL,
   `telefono` varchar(50) NOT NULL,
-  `clave` varchar(20) NOT NULL,
-  `nrotarjeta` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `clave` varchar(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `email`, `nombre`, `apellido`, `fnac`, `telefono`, `clave`) VALUES
+(1, 'parinisantiago@gmail.com', 'Santiago', 'Parini', '2016-05-31', '2214691152', 'pello'),
+(3, 'lau@gmail.com', 'MarÃ­a', 'Laura', '1900-01-01', '+542214691152', 'asdasd'),
+(4, 'tomas@gmail.com', 'Tomas', 'Tomas', '1900-01-01', '+54-221-45-67', 'asdasd');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indices de la tabla `couch`
@@ -174,6 +238,14 @@ ALTER TABLE `pregunta`
   ADD KEY `id_couch` (`id_couch`),
   ADD KEY `id_usuariopregunta` (`id_usuariopregunta`),
   ADD KEY `id_usuariorespuesta` (`id_usuariorespuesta`);
+
+--
+-- Indices de la tabla `premium`
+--
+ALTER TABLE `premium`
+  ADD PRIMARY KEY (`id_premium`),
+  ADD UNIQUE KEY `tarjeta` (`tarjeta`),
+  ADD UNIQUE KEY `id_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `publicacion`
@@ -218,29 +290,37 @@ ALTER TABLE `tipo`
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`) USING BTREE,
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `nrotarjeta` (`nrotarjeta`),
-  ADD KEY `email_2` (`email`),
-  ADD KEY `nrotarjeta_2` (`nrotarjeta`);
+  ADD KEY `email_2` (`email`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
+-- AUTO_INCREMENT de la tabla `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id_admin` int(100) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `couch`
 --
 ALTER TABLE `couch`
-  MODIFY `id_couch` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_couch` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `foto`
 --
 ALTER TABLE `foto`
-  MODIFY `id_foto` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_foto` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
   MODIFY `id_pregunta` int(100) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `premium`
+--
+ALTER TABLE `premium`
+  MODIFY `id_premium` int(100) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
@@ -265,12 +345,12 @@ ALTER TABLE `reserva`
 -- AUTO_INCREMENT de la tabla `tipo`
 --
 ALTER TABLE `tipo`
-  MODIFY `id_tipo` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tipo` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
