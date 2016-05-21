@@ -1,5 +1,5 @@
 <?php
-//prueba
+//prue
 
     include_once("../conectarBD.php");
 
