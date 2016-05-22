@@ -9,20 +9,21 @@ if( isset($_SESSION['sesion_usuario']) ){
 
                 <ul class="nav navbar-nav" >
                     <li ><a href = "index.php" > Home</a ></li >
-                    <?php 
-                        //Si no es premium, mostrar boton para hacerse premium
-                        if(isset($_SESSION['sesion_usuario'])){
+
+                    <?php
+
+                        //Si no es premium, mostrar boton para hacerse premium, estaria agregar un mensaje de que ya es premium en el caso de que lo sea con un else
                             include_once("conectarBD.php");
                             $query= "SELECT id_usuario FROM premium WHERE id_usuario='".$_SESSION['id_usuario']."'";
                             $resultado= mysqli_query($conexion, $query);
                             
                             if(mysqli_num_rows($resultado) == 0){
                     ?>
+
                                 <li ><a href = "hacerse_premium.php" > Ser Premium</a ></li >
-                    <?php   }
-                        }
-                    ?>
-                    
+
+                    <?php }  ?>
+
                     <li ><a href = "listado_tipos_hospedajes.php" > Listado de tipos de hospedajes</a ></li >
                     <li class="dropdown" >
                         <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Mi perfil <span class="caret" ></span ></a >
