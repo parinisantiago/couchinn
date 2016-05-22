@@ -22,6 +22,28 @@
 					<?php echo($_GET['msg']); ?>
 				</div>
 			<?php } ?>
+		<?php
+			include_once("conectarBD.php");
+			//despues cambiar from usuario por from admin
+			$query="SELECT * FROM usuario WHERE id_usuario='".$_SESSION['id_usuario']."'";
+        	$result=mysqli_query($conexion,$query);
+        	if (mysqli_num_rows($result) == 1){
+        		$query="SELECT nombre FROM tipo";
+        		$result=mysqli_query($conexion,$query);
+        		while($row = mysqli_fetch_array($result)){
+					//Guardo los datos de la BD en las variables de php
+					$nombre = $row["nombre"];
+					echo " · ";
+					echo($nombre);
+					echo("<br>");
+					  	
+				}
+        	}
+        	else{
+        		echo("Necesita ser administrador para acceder al listado");
+        	}
+			
+			?>
 		</div>
 	</body>
 
