@@ -1,3 +1,6 @@
+<?php session_start();
+if( isset($_SESSION['sesion_usuario']) ){
+?>
 <!DOCTYPE html>
 <html>
 
@@ -48,3 +51,11 @@
 	</body>
 
 </html>
+
+
+
+<?php
+	//si no esta loggueado redirige al usuario al index y le manda por get el mensaje correspondiente y setea al error como un warning
+	} else {
+		header("Location: index.php/msg=debe estar logueado para ver esta pagina&&class=alert-warning");
+}?>
