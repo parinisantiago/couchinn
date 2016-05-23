@@ -1,5 +1,4 @@
 <?php
-echo ($_SESSION['admin']);
 session_start();
 if( isset($_SESSION['sesion_usuario']) ){
 
