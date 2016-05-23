@@ -1,6 +1,41 @@
 <?php
+echo ($_SESSION['admin']);
 session_start();
 if( isset($_SESSION['sesion_usuario']) ){
+
+    //si es administrador muestra esta barra
+    if( isset($_SESSION['admin'])) {
+    ?>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top" >
+            <div class="container" >
+                <div id = "navbar" class="navbar-collapse collapse" >
+
+                    <ul class="nav navbar-nav" >
+                        <li ><a href = "index.php" > Home</a ></li >
+
+                        <li ><a href = "listado_tipos_hospedajes.php" > Listado de tipos de hospedajes</a ></li >
+                        <li class="dropdown" >
+                            <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Mi perfil <span class="caret" ></span ></a >
+                            <ul class="dropdown-menu" >
+                                <li ><a href = "#" > Ver perfil </a ></li >
+                                <li ><a href = "user_modForm.php" > Modificar perfil </a ></li >
+                            </ul >
+                        </li >
+                    </ul >
+
+                    <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
+                        <button type="submit" class="btn btn-default">Close Session</button>
+                    </form>
+
+                </div >
+            </div >
+        </nav >
+
+    <?php
+        //si no es admin muestra la pagina de usuario comun
+        } else {
+
     ?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" >
@@ -23,8 +58,6 @@ if( isset($_SESSION['sesion_usuario']) ){
                                 <li ><a href = "hacerse_premium.php" > Ser Premium</a ></li >
 
                     <?php }  ?>
-
-                    <li ><a href = "listado_tipos_hospedajes.php" > Listado de tipos de hospedajes</a ></li >
                     <li class="dropdown" >
                         <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Mi perfil <span class="caret" ></span ></a >
                         <ul class="dropdown-menu" >
@@ -42,7 +75,7 @@ if( isset($_SESSION['sesion_usuario']) ){
         </div >
     </nav >
 
-<?php } else {?>
+<?php }  } else {?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" >
         <div class="container">
@@ -69,7 +102,6 @@ if( isset($_SESSION['sesion_usuario']) ){
                     </div>
                     <button type="submit" class="btn btn-default">Sign in</button>
                 </form>
-/
             </div>
         </div>
     </nav>
