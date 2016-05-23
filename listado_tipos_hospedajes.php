@@ -28,7 +28,7 @@ if( isset($_SESSION['sesion_usuario']) ){
 		<?php
 			include_once("conectarBD.php");
 			//despues cambiar from usuario por from admin
-			$query="SELECT * FROM usuario WHERE id_usuario='".$_SESSION['id_usuario']."'";
+			$query="SELECT * FROM admin WHERE id_admin='".$_SESSION['id_usuario']."'";
         	$result=mysqli_query($conexion,$query);
         	if (mysqli_num_rows($result) == 1){
         		$query="SELECT nombre FROM tipo";
