@@ -10,19 +10,36 @@
 		<script src="js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 
-		<title> Couchinn </title>
+		<title> el mejor couch </title>
 	</head>
 
 	<body>
 
-		<?php include("navbar.php"); ?>
+		<?php include("navbar.php"); /*
+<?php $titulo=$row["titulo"];
+	            	$descripcion=$row["descripcion"];
+	            	$ubicacion=$row["ubicacion"];
+	            	$direccion=$row["direccion"];
+	            	$capacidad=$row["capacidad"];
+	            	echo ($titulo."<br>".$descripcion."<br>".$ubicacion."<br>".$direccion."<br>".$capacidad); ?>
+*/?>
 		<div class="container">
 			<?php if (isset($_GET['msg'])) { ?>
 				<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
 					<?php echo($_GET['msg']); ?>
 				</div>
 			<?php } ?>
-		</div>
+			 
+			<!-- Se muestra un listado de todos los couchs publicados --> 
+	        <h2>Elegí tu hospedaje!</h2>
+			<?php include("listado_hospedajes.php");?>
+	        <!-- Fin de se muestra un listado de todos los couchs publicados --> 
+
+			
+        
+	
+</div>
+
 	</body>
 
 </html>
