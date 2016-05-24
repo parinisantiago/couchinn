@@ -1,3 +1,20 @@
+function valNumTar(text){
+    if( text.value.length == 0){
+        text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
+        document.getElementById("glyphicon-numTar").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-numTar").innerHTML = "debe completar este campo";
+
+    }else if ( /[\- 0-9]+/.exec(text.value) != text.value){
+        text.parentNode.setAttribute("class", "form-group has-error has-feedback");
+        document.getElementById("glyphicon-numTar").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
+        document.getElementById("helpBlock-numTar").innerHTML = "El nombre del tipo no puede poseer numeros ni simbolos";
+
+    } else {
+        return(true);
+    }
+    return(false);
+}
+
 function valNomHos(text){
     if( text.value.length == 0){
         text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
@@ -155,4 +172,9 @@ function valUsuario(){
 function valTipoHospedaje(){
     var boolNom = valNomHos(document.getElementById("nomTipo"));
     return ( boolNom );
+}
+
+function valNumTarjeta() {
+    var boolNum= valNumTar(document.getElementById("nroTarjeta"));
+    return ( boolNum );
 }
