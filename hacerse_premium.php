@@ -12,7 +12,7 @@ if( isset($_SESSION['sesion_usuario']) ){
         <link href="default.css" rel="stylesheet">
 		<script src="js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
-
+		<script src="js/altaValidaciones.js"></script>
 		<title> el mejor couch </title>
 	</head>
 
@@ -27,12 +27,12 @@ if( isset($_SESSION['sesion_usuario']) ){
 			<?php } ?>
 			<div class="container">
 				<h1>Alta como usuario Premium</h1>
-				 <form class="form-horizontal" name="" method="post" onsubmit="" action="consultas/alta_premium.php">
+				 <form class="form-horizontal" name="" method="post" onsubmit="return valNumTarjeta()" action="consultas/alta_premium.php">
               <div class="form-group form-inline">
                  <label class="control-label" for="nroTarjeta">Número de tarjeta: </label>
-                  <input type="text" name="nroTarjeta" class="form-control" id="nroTarjeta" placeholder="Número de su tarjeta" aria-describedby="helpBlock-nom" required>
-                  <span id="glyphicon-nom" aria-hidden="true"></span>
-                  <span id="helpBlock-nom" class="help-block"></span>
+                  <input type="text" name="nroTarjeta" class="form-control" id="nroTarjeta" placeholder="Número de su tarjeta" aria-describedby="helpBlock-numTar" required>
+                  <span id="glyphicon-numTar" aria-hidden="true"></span>
+                  <span id="helpBlock-numTar" class="help-block"></span>
               </div>
              
               <div class="form-group">
