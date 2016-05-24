@@ -1,5 +1,5 @@
 <?php
-echo ($_SESSION['admin']);
+//echo ($_SESSION['admin']);
 session_start();
 if( isset($_SESSION['sesion_usuario']) ){
 
@@ -14,7 +14,22 @@ if( isset($_SESSION['sesion_usuario']) ){
                     <ul class="nav navbar-nav" >
                         <li ><a href = "index.php" > Home</a ></li >
 
-                        <li ><a href = "listado_tipos_hospedajes.php" > Listado de tipos de hospedajes</a ></li >
+                        <!--ASI ESTABA ANTES EL LISTADO DE TIPOS DE HOSPEDAJE, LO DEJO COMENTADO - LUCAS-->
+                        <!--<li ><a href = "listado_tipos_hospedajes.php" > Listado de tipos de hospedajes</a ></li >
+                        <li ><a href = "#" > Agregar tipos de hospedajes</a ></li >
+                        <li ><a href = "#" > Modificar tipos de hospedajes</a ></li >
+                        <li ><a href = "#" > Eliminar tipos de hospedajes</a ></li >-->
+                        <li class="dropdown" >
+                            <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Manejar Tipos de Hospedaje <span class="caret" ></span ></a >
+                            <ul class="dropdown-menu" >
+                                <li ><a href = "listado_tipos_hospedajes.php" > Listado de tipos de hospedajes</a ></li >
+                                <li ><a href = "alta_tipos_hospedaje_form.php" > Agregar tipos de hospedajes</a ></li >
+                                <!--
+                                <li ><a href = "modificar_tipos_hospedaje_form.php" > Modificar tipos de hospedajes</a ></li >
+                                <li ><a href = "eliminar_tipos_hospedaje_form.php" > Eliminar tipos de hospedajes</a ></li >
+                                -->
+                            </ul >
+                        </li >
                         <li class="dropdown" >
                             <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Mi perfil <span class="caret" ></span ></a >
                             <ul class="dropdown-menu" >

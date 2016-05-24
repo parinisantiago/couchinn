@@ -134,3 +134,8 @@ function valUsuario(){
     var boolTel =    valTel(document.getElementById("numUser"));
     return ( boolNom && boolAp && boolPass && boolEmail && boolFnac && boolTel );
 }
+
+function valTipoHospedaje(){
+    var boolNom = valNom(document.getElementById("nomTipo"));
+    return ( boolNom );
+}

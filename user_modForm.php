@@ -36,7 +36,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <?php echo($_GET['msg'])?>
             </div>
         <?php } ?>
-        <form class="form-horizontal" name="altaUsuario" method="post" onsubmit="return valUsuario()" action="/consultas/mod_usuario.php">
+        <form class="form-horizontal" name="altaUsuario" method="post" onsubmit="return valUsuario()" action="consultas/mod_usuario.php">
             <div class="form-group">
                 <label class="control-label" for="nomUser">Nombre</label>
                 <input type="text" name="nomUser" class="form-control" id="nomUser" placeholder="Nombre" aria-describedby="helpBlock-nom" value="<?php echo($row['nombre']); ?>" required>

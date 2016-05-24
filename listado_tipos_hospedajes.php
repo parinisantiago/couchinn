@@ -14,18 +14,20 @@ if( isset($_SESSION['sesion_usuario']) ){
 			<script src="js/jquery.min.js"></script>
 			<script src="bootstrap/js/bootstrap.min.js"></script>
 
-			<title> el mejor couch </title>
+			<title> Couchinn </title>
 		</head>
 
 		<body>
 
 		<?php include("navbar.php"); ?>
 		<div class="container">
+			<h3>Seleccione un tipo y luego decida que hacer con el</h3>
 			<?php if (isset($_GET['msg'])) { ?>
 				<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
 					<?php echo($_GET['msg']); ?>
 				</div>
 			<?php } ?>
+			<FORM name ="form1" method ="post" action ="radioButton.php">
 			<?php
 			include_once("conectarBD.php");
 			//despues cambiar from usuario por from admin
@@ -37,16 +39,22 @@ if( isset($_SESSION['sesion_usuario']) ){
 				while ($row = mysqli_fetch_array($result)) {
 					//Guardo los datos de la BD en las variables de php
 					$nombre = $row["nombre"];
-					echo " · ";
-					echo($nombre);
-					echo("<br>");
-
+					//Alto hack para listar los tipos para poder seleccionarlos y que se autocomplete el campo de modificacion
+             		echo("<input type='radio' name='nomTipoAModificar' value='".$nombre."'> ".$nombre."<br>");
+					// echo " · ";
+					// echo($nombre);
+					// echo("<br>");
 				}
 			} else {
 				echo("Necesita ser administrador para acceder al listado");
 			}
 
 			?>
+			<div class="form-group">
+                <button type="submit" name = "Eliminar" class="btn btn-default">Eliminar</button>
+                <button type="submit" name = "Modificar" class="btn btn-default">Modificar</button>
+            </div>
+            </form>
 		</div>
 		</body>
 
