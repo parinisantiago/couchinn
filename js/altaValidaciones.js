@@ -178,3 +178,9 @@ function valNumTarjeta() {
     var boolNum= valNumTar(document.getElementById("nroTarjeta"));
     return ( boolNum );
 }
+
+function valAdmin() {
+    var boolPass = valPass(document.getElementById("passUser"), document.getElementById("rePassUser"));
+    var boolEmail = valEmail(document.getElementById("emailUser"), document.getElementById("reEmailUser"));
+    return ( boolPass && boolEmail );
+}
