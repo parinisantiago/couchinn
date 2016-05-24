@@ -1,3 +1,20 @@
+function valNomHos(text){
+    if( text.value.length == 0){
+        text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
+        document.getElementById("glyphicon-nomTipo").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-nomTipo").innerHTML = "debe completar este campo";
+
+    }else if ( /[A-Za-z áéíóúàèìòùñ]+/.exec(text.value) != text.value){
+        text.parentNode.setAttribute("class", "form-group has-error has-feedback");
+        document.getElementById("glyphicon-nomTipo").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
+        document.getElementById("helpBlock-nomTipo").innerHTML = "El nombre del tipo no puede poseer numeros ni simbolos";
+
+    } else {
+        return(true);
+    }
+    return(false);
+}
+
 function valNom(text){
     if( text.value.length == 0){
         text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
@@ -136,6 +153,6 @@ function valUsuario(){
 }
 
 function valTipoHospedaje(){
-    var boolNom = valNom(document.getElementById("nomTipo"));
+    var boolNom = valNomHos(document.getElementById("nomTipo"));
     return ( boolNom );
 }
