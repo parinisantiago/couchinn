@@ -26,8 +26,7 @@ if( isset($_SESSION['sesion_usuario']) ){
         $query="SELECT * FROM tipo WHERE nombre='".$_POST["nomTipoAModificar"]."'";
         $result=mysqli_query($conexion,$query);
         $row=mysqli_fetch_array($result);
-        $_POST["id_tipo"] = $row["id_tipo"];
-        echo($_POST["id_tipo"]);
+
     ?>
     
     <body>
@@ -40,6 +39,7 @@ if( isset($_SESSION['sesion_usuario']) ){
         <form class="form-horizontal" name="nomTipo" method="post" onsubmit="return valTipoHospedaje()" action="consultas/modificar_tipo_hospedaje.php">
             <div class="form-group">
                 <label class="control-label" for="nomTipo">Nombre</label>
+                <input type="hidden" name="idTipo" value="<?php echo($row['id_tipo']) ?>">
                 <input type="text" name="nomTipo" class="form-control" id="nomTipo" placeholder="Nombre" aria-describedby="helpBlock-nom" value="<?php echo($row['nombre'])?>" required>
                 <span id="glyphicon-nom" aria-hidden="true"></span>
                 <span id="helpBlock-nom" class="help-block"></span>
