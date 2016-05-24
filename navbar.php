@@ -103,9 +103,13 @@ if( isset($_SESSION['sesion_usuario']) ){
                     <li ><a href = "#" > Contact</a ></li >
                 </ul>
 
+                <form id="recuperarContraseña" class="form-inline pull-right" method="get" action="user_recuperarContrasena_form.php">
+                    <button type="submit" class="btn btn-default">Recuperar Contraseña </button>
+                </form>
                 <form id="register" class="form-inline pull-right" method="get" action="user_form.php">
                     <button type="submit" class="btn btn-default">Registrarse </button>
                 </form>
+                
 
                 <form id="user-session" class="form-inline pull-right" method="post" action="consultas/logueo_usuario.php">
                     <div class="form-group">
@@ -117,6 +121,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                         <input type="password" name="clave" class="form-control" id="claveLoggin" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-default">Sign in</button>
+
                 </form>
             </div>
         </div>

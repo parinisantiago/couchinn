@@ -15,7 +15,7 @@ if( isset($_SESSION['sesion_usuario']) ){
         <script src="js/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="js/altaValidaciones.js"></script>
-        <title> el mejor couch </title>
+        <title> Couchinn </title>
 
     </head>
     

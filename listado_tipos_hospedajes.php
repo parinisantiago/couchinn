@@ -26,7 +26,7 @@ if( isset($_SESSION['sesion_usuario']) ){
 				<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
 					<?php echo($_GET['msg']); ?>
 				</div>
-			<?php } ?>
+			<?php } ?> 
 			<FORM name ="form1" method ="post" action ="radioButton.php">
 			<?php
 			include_once("conectarBD.php");

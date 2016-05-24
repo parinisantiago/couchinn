@@ -184,3 +184,7 @@ function valAdmin() {
     var boolEmail = valEmail(document.getElementById("emailUser"), document.getElementById("reEmailUser"));
     return ( boolPass && boolEmail );
 }
+function valRecuperarContraseña(){
+    var boolEmail = valEmail(document.getElementById("emailUser"), document.getElementById("reEmailUser"));
+    return (boolEmail);
+}
