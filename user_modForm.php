@@ -19,13 +19,17 @@ if( isset($_SESSION['sesion_usuario']) ){
 
     </head>
     
-    
-    <?php 
+
+    <?php
         include("navbar.php");
         include("conectarBD.php");
-        $query="SELECT * FROM usuario WHERE id_usuario='".$_SESSION['id_usuario']."'";
-        $result=mysqli_query($conexion,$query);
-        $row=mysqli_fetch_array($result);
+        if(isset($_SESSION['admin'])){
+            $query="SELECT * FROM admin WHERE id_admin='".$_SESSION['id_usuario']."'";
+        } else {
+            $query = "SELECT * FROM usuario WHERE id_usuario='" . $_SESSION['id_usuario'] . "'";
+        }
+        $result = mysqli_query($conexion, $query);
+        $row = mysqli_fetch_array($result);
     ?>
     <!-- hay un bardo con el formulario de iniciar sesion en la navbar, valida el html cuando no debería. -->
     
@@ -35,14 +39,46 @@ if( isset($_SESSION['sesion_usuario']) ){
             <div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
                 <?php echo($_GET['msg'])?>
             </div>
-        <?php } ?>
+        <?php }
+        if (isset($_SESSION['admin'])) {?>
+        <form class="form-horizontal" name="altaUsuario" method="post" onsubmit="return valAdmin()" action="consultas/mod_usuario.php">
+            <div class="form-group">
+                <label class="control-label" for="passUser">Contraseña</label>
+                <input type="password" name="passUser" class="form-control" id="passUser" placeholder="Contraseña" aria-describedby="helpBlock-pass" value="<?php echo($row['clave']); ?>" required>
+                <span id="glyphicon-pass" aria-hidden="true"></span>
+                <span id="helpBlock-pass" class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="rePassUser">Confirmar Contraseña</label>
+                <input type="password" name="rePassUser" class="form-control" id="rePassUser" placeholder="Confirmar Contraseña" aria-describedby="helpBlock-rePass" value="<?php echo($row['clave']); ?>" required>
+                <span id="glyphicon-rePass" aria-hidden="true"></span>
+                <span id="helpBlock-rePass" class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="emailUser">Email</label>
+                <input type="email" name="emailUser" class="form-control" id="emailUser" placeholder="Email" aria-describedby="helpBlock-email" value="<?php echo($row['email']); ?>"  required>
+                <span id="glyphicon-email" aria-hidden="true"></span>
+                <span id="helpBlock-email" class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="reEmailUser">Confirmar Email</label>
+                <input type="email" name="reEmailUser" class="form-control" id="reEmailUser" placeholder="Confirmar Email" aria-describedby="helpBlock-reEmail" value="<?php echo($row['email']); ?>" required>
+                <span id="glyphicon-reEmail" aria-hidden="true"></span>
+                <span id="helpBlock-reEmail" class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Registrarse</button>
+                <button type="button" class="btn btn-default" href="index.php">Cancelar</button>
+            </div>
+        </form>
+            <?php }else{ ?>
         <form class="form-horizontal" name="altaUsuario" method="post" onsubmit="return valUsuario()" action="consultas/mod_usuario.php">
             <div class="form-group">
                 <label class="control-label" for="nomUser">Nombre</label>
                 <input type="text" name="nomUser" class="form-control" id="nomUser" placeholder="Nombre" aria-describedby="helpBlock-nom" value="<?php echo($row['nombre']); ?>" required>
                 <span id="glyphicon-nom" aria-hidden="true"></span>
                 <span id="helpBlock-nom" class="help-block"></span>
-            </div>
+            </div>1
             <div class="form-group">
                 <label class="control-label" for="apUser">Apellido</label>
                 <input type="text" name="apUser" class="form-control" id="apUser" placeholder="Apellido" aria-describedby="helpBlock-ap" value="<?php echo($row['apellido']); ?>" required>
@@ -90,6 +126,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <button type="button" class="btn btn-default" href="index.php">Cancelar</button>
             </div>
         </form>
+            <?php } ?>
     </div>
 
     </body>
