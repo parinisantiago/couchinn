@@ -2,15 +2,7 @@
 	include_once("conectarBD.php");
 	$query= "SELECT * FROM couch NATURAL JOIN tipo";
 	$resultado= mysqli_query($conexion, $query);
-	if (isset($_SESSION['id_usuario'])){
-		$es_premium_query= "SELECT id_usuario FROM premium WHERE id_usuario='".$_SESSION['id_usuario']."'";
-  		$es_premium_query_res= mysqli_query($conexion, $es_premium_query);                
-	    if(mysqli_num_rows($es_premium_query_res) == 0){
-	       	$esPremium=false;
-	    } else{
-	       		 $esPremium=true;
-	          }
-	}
+	
 ?>
 <div class="list-group">
 	
@@ -25,7 +17,17 @@
 	            	$capacidad=$row["capacidad"];
 	            	$tipo=$row["nombre"];
 					$id_couch=$row["id_couch"];
-    	
+					$id_usuario=$row["id_usuario"];
+    	//
+					
+		$es_premium_query= "SELECT id_usuario FROM premium WHERE id_usuario='".$id_usuario."'";
+  		$es_premium_query_res= mysqli_query($conexion, $es_premium_query);                
+	    if(mysqli_num_rows($es_premium_query_res) == 0){
+	       	$esPremium=false;
+	    } else{
+	       		 $esPremium=true;
+	          }
+	
 	            	?>
 <a href="#" class="list-group-item">
 		<div class="row">
