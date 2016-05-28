@@ -11,7 +11,7 @@
 
     if($row["nombre"] == $nombre) {
 
-       $update="DELETE FROM tipo WHERE id_tipo='".$_POST['idTipo']."'";
+       $update="UPDATE tipo SET eliminado=1 WHERE id_tipo='".$_POST['idTipo']."'";
         mysqli_query($conexion,$update);
         header("Location: ../listado_tipos_hospedajes.php?msg=Su tipo se ha eliminado correctamente&&class=alert-success");
     }else {

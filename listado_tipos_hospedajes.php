@@ -34,7 +34,8 @@ if( isset($_SESSION['sesion_usuario']) ){
 			$query = "SELECT * FROM admin WHERE id_admin='" . $_SESSION['id_usuario'] . "'";
 			$result = mysqli_query($conexion, $query);
 			if (mysqli_num_rows($result) == 1) {
-				$query = "SELECT nombre FROM tipo";
+				//selecciona solo los que no estan eliminados lógicamente.
+				$query = "SELECT nombre FROM tipo WHERE eliminado=0";
 				$result = mysqli_query($conexion, $query);
 				while ($row = mysqli_fetch_array($result)) {
 					//Guardo los datos de la BD en las variables de php

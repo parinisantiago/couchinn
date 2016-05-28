@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2016 a las 19:40:24
+-- Tiempo de generación: 28-05-2016 a las 17:08:37
 -- Versión del servidor: 5.7.9
 -- Versión de PHP: 5.6.16
 
@@ -33,7 +33,14 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `clave` varchar(100) NOT NULL,
   PRIMARY KEY (`id_admin`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `email`, `clave`) VALUES
+(1, 'admin@admin.com', 'admin');
 
 -- --------------------------------------------------------
 
@@ -53,14 +60,15 @@ CREATE TABLE IF NOT EXISTS `couch` (
   `capacidad` int(100) NOT NULL,
   PRIMARY KEY (`id_couch`),
   KEY `id_tipo` (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `couch`
 --
 
 INSERT INTO `couch` (`id_couch`, `id_usuario`, `id_tipo`, `titulo`, `descripcion`, `ubicacion`, `direccion`, `capacidad`) VALUES
-(1, 0, 1, 'asd', 'asdasd', 'asdasd', 'asdad', 123123);
+(1, 3, 1, 'Bungalow Frente al mar', 'Luminoso alojamiento frente al mar para 2 personas.', 'Las Toninas, Bs. As.', 'Calle 90 Nro 785', 2),
+(2, 1, 2, 'Carpa en la montana', 'Disfruta este intercambio en nuestra carpa en la montana', 'Sierra de La Ventana, BS. AS:', 'Calle holanda entre la sierra y los lenguados', 5);
 
 -- --------------------------------------------------------
 
@@ -76,15 +84,15 @@ CREATE TABLE IF NOT EXISTS `foto` (
   PRIMARY KEY (`id_foto`),
   UNIQUE KEY `ruta` (`ruta`),
   KEY `id_couch` (`id_couch`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `foto`
 --
 
 INSERT INTO `foto` (`id_foto`, `id_couch`, `ruta`) VALUES
-(1, 3, 'algo'),
-(2, 2, 'asd');
+(1, 1, 'foto1.jpg'),
+(3, 2, 'foto2.jpg');
 
 -- --------------------------------------------------------
 
@@ -122,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `premium` (
   PRIMARY KEY (`id_premium`),
   UNIQUE KEY `tarjeta` (`tarjeta`),
   UNIQUE KEY `id_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -211,7 +219,9 @@ CREATE TABLE IF NOT EXISTS `tarjetas` (
 --
 
 INSERT INTO `tarjetas` (`nro_tarjeta`) VALUES
-('123456789');
+('123456789'),
+(''),
+('987654321');
 
 -- --------------------------------------------------------
 
@@ -223,19 +233,26 @@ DROP TABLE IF EXISTS `tipo`;
 CREATE TABLE IF NOT EXISTS `tipo` (
   `id_tipo` int(100) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
+  `eliminado` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipo`
 --
 
-INSERT INTO `tipo` (`id_tipo`, `nombre`) VALUES
-(1, 'asdasd'),
-(2, 'departamento'),
-(3, 'bungalow'),
-(4, 'casa'),
-(5, 'chalet');
+INSERT INTO `tipo` (`id_tipo`, `nombre`, `eliminado`) VALUES
+(1, 'asdasd', 1),
+(2, 'departamento', 1),
+(3, 'bungalow', 0),
+(4, 'casa', 0),
+(5, 'chale', 0),
+(6, 'lalalal', 0),
+(7, 'otroTipo', 0),
+(8, 'dnoinfgog', 0),
+(9, 'hotel', 1),
+(10, 'qw', 0),
+(11, 'fg', 0);
 
 -- --------------------------------------------------------
 
