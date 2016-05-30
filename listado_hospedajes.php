@@ -29,7 +29,7 @@
 	          }
 	
 	            	?>
-<a href="detalle_couch.php/?id=.<?php echo($id_couch) ?>." class="list-group-item">
+<a href="detalle_couch.php/?id=<?php echo($id_couch) ?>" class="list-group-item">
 		<div class="row">
   <div class="col-md-2"><img class="img-circle" height="130" width="180"  src="<?php 
   //Si es premium muestro la foto del hospedaje, si no muestro el logo de couchinn
