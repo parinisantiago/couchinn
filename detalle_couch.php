@@ -55,7 +55,7 @@
               <!-- informacion del usuario, ni idea porque no se lista igual que el couch -->
 
               <div class="col-md-offset-2 col-md-6 inf_couch">
-                  <d1 class="d1-horizontal">
+                  <d1 class="dl-horizontal">
                       <dt> nombre: </dt>
                       <dd> <?php echo($couch["nombre"]) ?> <?php echo($couch["apellido"]) ?></dd>
                       <dt> email:</dt>
