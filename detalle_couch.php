@@ -22,9 +22,17 @@
 	</head>
 
 	<body>
+    <?php include("navbar.php"); ?>
       <div class="container">
-          <?php foreach ( mysqli_fetch_array($resultado) as $couch ) { ?>
-
+          <?php while ( $couch = mysqli_fetch_array($resultado)) { ?>
+              <div>
+                <p class="h2"> Datos del couch </p>
+                <p class="h3"> Titulo:<?php echo($couch["titulo"]); ?> </p>
+                <d1 class="dl-horizontal">
+                    <dt> descripcion </dt>
+                    <dd> <?php echo($couch["descripcion"]) ?></dd>
+                </d1>
+              </div>
          <?php   }    ?>
       </div>
     </body>
