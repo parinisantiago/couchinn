@@ -4,12 +4,12 @@
 
     $nombre= $_POST["nomTipo"];
 
-    $query= "SELECT nombre FROM tipo WHERE id_tipo='".$_POST['idTipo']."'";
+    $query= "SELECT nombre_tipo FROM tipo WHERE id_tipo='".$_POST['idTipo']."'";
 
     $resultado= mysqli_query($conexion, $query);
     $row=mysqli_fetch_array($resultado);
 
-    if($row["nombre"] == $nombre) {
+    if($row["nombre_tipo"] == $nombre) {
 
        $update="UPDATE tipo SET eliminado=1 WHERE id_tipo='".$_POST['idTipo']."'";
         mysqli_query($conexion,$update);

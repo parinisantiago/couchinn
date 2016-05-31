@@ -1,11 +1,15 @@
 <?php
 //echo ($_SESSION['admin']);
 
-session_start();
+
+ if(!isset($_SESSION['sesion_usuario']) ){
+   session_start();
+}
 if( isset($_SESSION['sesion_usuario']) ){
 
     //si es administrador muestra esta barra
-    if( isset($_SESSION['admin'])) {
+    if( isset($_SESSION['admin']) && ($_SESSION['admin'] == true)) {
+        echo("entro al if");
     ?>
 
         <nav class="navbar navbar-inverse navbar-fixed-top" >
@@ -50,7 +54,7 @@ if( isset($_SESSION['sesion_usuario']) ){
 
     <?php
         //si no es admin muestra la pagina de usuario comun
-        } else {
+         }else {echo("entro al else");
 
     ?>
 
@@ -66,9 +70,9 @@ if( isset($_SESSION['sesion_usuario']) ){
                         //Si no es premium, mostrar boton para hacerse premium, estaria agregar un mensaje de que ya es premium en el caso de que lo sea con un else
                             include_once("conectarBD.php");
                             $query= "SELECT id_usuario FROM premium WHERE id_usuario='".$_SESSION['id_usuario']."'";
-                            $resultado= mysqli_query($conexion, $query);
+                            $resultado_navbar= mysqli_query($conexion, $query);
                             
-                            if(mysqli_num_rows($resultado) == 0){
+                            if(mysqli_num_rows($resultado_navbar) == 0){
                     ?>
 
                                 <li ><a href = "hacerse_premium.php" > Ser Premium</a ></li >

@@ -24,7 +24,6 @@
 
 <?php include("navbar.php"); ?>
 <div class="container">
-
           <?php while ( $couch = mysqli_fetch_array($resultado)) { ?>
 
               <p class="h2 col-md-offset-4"> Datos del Couch</p>
@@ -45,8 +44,8 @@
                     <dd> <?php echo($couch["direccion"]) ?></dd>
                     <dt> capacidad: </dt>
                     <dd> <?php echo($couch["capacidad"]) ?></dd>
-                    
-                    <!--<dt> fecha: </dt> <dd> <?php// echo(date("d/m/y", $couch["fecha"])) ?></dd>   -->
+                    <dt> fecha: </dt>
+                    <dd> <?php echo(date("d/m/y", $couch["fecha"])) ?></dd>   
                 </d1>
               </div>
 
@@ -63,7 +62,7 @@
                       <dt> teléfono:</dt>
                       <dd> <?php echo($couch["telefono"]) ?></dd>
                       <dt> fecha de nacimiento:</dt>
-                      <dd> <?php echo($couch["fnac"]) ?></dd>
+                      <dd> <?php echo($couch["fNac"]) ?></dd>
                   </d1>
               </div>
 

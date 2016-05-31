@@ -1,3 +1,4 @@
+<?php $today= date('Y-m-d');?>
 <?php
 session_start();
 if( isset($_SESSION['sesion_usuario']) ){
@@ -23,7 +24,7 @@ if( isset($_SESSION['sesion_usuario']) ){
     <?php
         include("navbar.php");
         include("conectarBD.php");
-        if(isset($_SESSION['admin'])){
+        if(isset($_SESSION['admin']) && ($_SESSION['admin'] == true)){
             $query="SELECT * FROM admin WHERE id_admin='".$_SESSION['id_usuario']."'";
         } else {
             $query = "SELECT * FROM usuario WHERE id_usuario='" . $_SESSION['id_usuario'] . "'";
@@ -40,7 +41,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <?php echo($_GET['msg'])?>
             </div>
         <?php }
-        if (isset($_SESSION['admin'])) {?>
+        if (isset($_SESSION['admin']) && ($_SESSION['admin'] == true)) {?>
         <form class="form-horizontal" name="altaUsuario" method="post" onsubmit="return valAdmin()" action="consultas/mod_usuario.php">
             <div class="form-group">
                 <label class="control-label" for="passUser">Contraseña</label>
@@ -67,6 +68,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <span id="helpBlock-reEmail" class="help-block"></span>
             </div>
             <div class="form-group">
+
                 <button type="submit" class="btn btn-default">Registrarse</button>
                 <button type="button" class="btn btn-default" href="index.php">Cancelar</button>
             </div>

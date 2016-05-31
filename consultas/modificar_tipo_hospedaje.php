@@ -4,18 +4,13 @@
 
     $nombre= $_POST["nomTipo"];
 
-    $query= "SELECT nombre FROM tipo WHERE id_tipo='".$_POST['idTipo']."'";
+    $query= "SELECT nombre_tipo FROM tipo WHERE id_tipo='".$_POST['idTipo']."'";
     echo($query);
     $resultado= mysqli_query($conexion, $query);
     $row=mysqli_fetch_array($resultado);
-    echo("----------");
-    echo($row["nombre"]);
-    echo("----------");
-    echo($nombre);
-    echo("----------");
-    if($row["nombre"] != $nombre) {
+    if($row["nombre_tipo"] != $nombre) {
 
-       $update="UPDATE tipo SET nombre='".$nombre."' WHERE id_tipo='".$_POST['idTipo']."'";
+       $update="UPDATE tipo SET nombre_tipo='".$nombre."' WHERE id_tipo='".$_POST['idTipo']."'";
         echo("asdasd");
         mysqli_query($conexion,$update);
         header("Location: ../listado_tipos_hospedajes.php?msg=Su tipo se ha modificado correctamente&&class=alert-success");

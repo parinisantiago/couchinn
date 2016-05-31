@@ -29,7 +29,6 @@
 					<?php echo($_GET['msg']); ?>
 				</div>
 			<?php } ?>
-			 
 			<!-- Se muestra un listado de todos los couchs publicados --> 
 	        <h2>Elegí tu hospedaje!</h2>
 			<?php include("listado_hospedajes.php");?>

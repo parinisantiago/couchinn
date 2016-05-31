@@ -17,6 +17,7 @@
         $row= mysqli_fetch_array($resultado);
         $_SESSION["sesion_usuario"] = true;
         $_SESSION["id_usuario"]= $row['id_usuario'];
+        $_SESSION['admin'] = false;
         $class="alert-success";
         $msg="Se ha iniciado sesión correctamente";
 

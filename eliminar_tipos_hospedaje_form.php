@@ -23,7 +23,7 @@ if( isset($_SESSION['sesion_usuario']) ){
     <?php 
         include("navbar.php");
         include("conectarBD.php");
-        $query="SELECT * FROM tipo WHERE nombre='".$_POST["nomTipoAModificar"]."'";
+        $query="SELECT * FROM tipo WHERE nombre_tipo='".$_POST["nomTipoAModificar"]."'";
         $result=mysqli_query($conexion,$query);
         $row=mysqli_fetch_array($result);
 
@@ -40,7 +40,7 @@ if( isset($_SESSION['sesion_usuario']) ){
             <div class="form-group">
                 <label class="control-label" for="nomTipo">Usted va a eliminar el siguiente tipo</label>
                 <input type="hidden" name="idTipo" value="<?php echo($row['id_tipo']) ?>">
-                <input type="text" name="nomTipo"  class="form-control" id="nomTipo" placeholder="Nombre" aria-describedby="helpBlock-nomTipo" value="<?php echo($row['nombre'])?>" required>
+                <input type="text" name="nomTipo"  class="form-control" id="nomTipo" placeholder="Nombre" aria-describedby="helpBlock-nomTipo" value="<?php echo($row['nombre_tipo'])?>" required>
                 <span id="glyphicon-nomTipo" aria-hidden="true"></span>
                 <span id="helpBlock-nomTipo" class="help-block"></span>
             <div class="form-group">
