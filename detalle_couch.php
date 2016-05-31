@@ -113,4 +113,4 @@ $first= true; //control para las imagenes
 </div>
 </body>
 
-</html>
+</html>     

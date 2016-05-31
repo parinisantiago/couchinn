@@ -80,7 +80,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <input type="text" name="nomUser" class="form-control" id="nomUser" placeholder="Nombre" aria-describedby="helpBlock-nom" value="<?php echo($row['nombre']); ?>" required>
                 <span id="glyphicon-nom" aria-hidden="true"></span>
                 <span id="helpBlock-nom" class="help-block"></span>
-            </div>1
+            </div>
             <div class="form-group">
                 <label class="control-label" for="apUser">Apellido</label>
                 <input type="text" name="apUser" class="form-control" id="apUser" placeholder="Apellido" aria-describedby="helpBlock-ap" value="<?php echo($row['apellido']); ?>" required>
