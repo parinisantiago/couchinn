@@ -34,9 +34,9 @@ if( isset($_SESSION['sesion_usuario']) ){
 				<input type='radio' name='tipoTarjeta' value="American Express"> American Express  
               <div class="form-group">
                  <label class="control-label" for="nroTarjeta">Numero Tarjeta</label>
-                  <input type="text" name="nroTarjeta" class="form-control" id="nroTarjeta" placeholder="Numero tarjeta" aria-describedby="helpBlock-num" required>
-                  <span id="glyphicon-num" aria-hidden="true"></span>
-                  <span id="helpBlock-num" class="help-block"></span>
+                  <input type="text" name="nroTarjeta" class="form-control" id="nroTarjeta" placeholder="Numero tarjeta" aria-describedby="helpBlock-nroTarjeta" required>
+                  <span id="glyphicon-nroTarjeta" aria-hidden="true"></span>
+                  <span id="helpBlock-nroTarjeta" class="help-block"></span>
               </div>
               <div class="form-group">
                   <label class="control-label" for="fechaCaducidad">Fecha de Caducidad</label>

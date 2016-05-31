@@ -1,18 +1,23 @@
 function valNumTar(text){
     if( text.value.length == 0){
         text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
-        document.getElementById("glyphicon-num").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
-        document.getElementById("helpBlock-num").innerHTML = "debe completar este campo";
+        document.getElementById("glyphicon-nroTarjeta").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-nroTarjeta").innerHTML = "debe completar este campo";
 
     }else if ( /[\- 0-9]+/.exec(text.value) != text.value){
         text.parentNode.setAttribute("class", "form-group has-error has-feedback");
-        document.getElementById("glyphicon-num").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
-        document.getElementById("helpBlock-num").innerHTML = "El numero no puede poseer letras ni simbolos";
+        document.getElementById("glyphicon-nroTarjeta").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
+        document.getElementById("helpBlock-nroTarjeta").innerHTML = "El numero no puede poseer letras ni simbolos";
 
+    } else if ( text.value.length != 16) {
+        text.parentNode.setAttribute("class", "form-group has-error has-feedback");
+        document.getElementById("glyphicon-nroTarjeta").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
+        document.getElementById("helpBlock-nroTarjeta").innerHTML = "El numero debe ser de 16 digitos";
+        
     } else {
         text.parentNode.setAttribute("class", "form-group has-success has-feedback"); /* Los pollitos cantan pio pio pio*/
-        document.getElementById("glyphicon-num").setAttribute("class","glyphicon glyphicon-ok form-control-feedback");
-        document.getElementById("helpBlock-num").innerHTML = " ";
+        document.getElementById("glyphicon-nroTarjeta").setAttribute("class","glyphicon glyphicon-ok form-control-feedback");
+        document.getElementById("helpBlock-nroTarjeta").innerHTML = " ";
         return(true);
     }
     return(false);
