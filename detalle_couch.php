@@ -40,7 +40,7 @@ $first= true; //control para las imagenes
 
                 <?php for($i = 0; $i < $cant_fotos; $i++){ ?>
 
-                    <li data-target="#carousel-example-generic" data-slide-to=<?php echo($i); if($i == 0){ echo(" class=active");} ?>></li>
+                    <li data-target="#myCarousel" data-slide-to=<?php echo($i); if($i == 0){ echo(" class=active");} ?>></li>
 
                 <?php } ?>
 
@@ -62,11 +62,11 @@ $first= true; //control para las imagenes
 
             </div>
             <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
