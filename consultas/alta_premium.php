@@ -30,6 +30,7 @@
         header("Location: ../index.php?msg=Ya es usuario Premium!&&class=alert-success");
     }
     else{
-        header("Location: ../hacerse_premium.php?msg=Error al hacerse premium!&&class=alert-danger");
+        //header("Location: ../hacerse_premium.php?msg=Error al hacerse premium!&&class=alert-danger");
+        header("location:javascript://history.go(-1)");
     }
 ?>
