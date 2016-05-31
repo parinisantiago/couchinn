@@ -38,7 +38,7 @@ $first= true; //control para las imagenes
             <!-- Indicators -->
             <ol class="carousel-indicators">
 
-                <?php for($i = 0; $i <= $cant_fotos; $i++){ ?>
+                <?php for($i = 0; $i < $cant_fotos; $i++){ ?>
 
                     <li data-target="#carousel-example-generic" data-slide-to=<?php echo($i); if($i == 0){ echo(" class=active");} ?>></li>
 
@@ -48,14 +48,17 @@ $first= true; //control para las imagenes
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="img/header.png" >
-                </div>
-                <?php while ( $foto = mysqli_fetch_array($resultado_foto)) {?>
+                <?php while ( $foto = mysqli_fetch_array($resultado_foto)) {
+                    if( $first){ $first=false;?>
+                    <div class="item active">
+                        <img src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
+                     </div>
+                <?php } else {?>
                     <div class="item">
                         <img src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
                     </div>
-                <?php } ?>
+                <?php }
+                } ?>
 
             </div>
             <!-- Controls -->
@@ -113,4 +116,4 @@ $first= true; //control para las imagenes
 </div>
 </body>
 
-</html>     
+</html>
