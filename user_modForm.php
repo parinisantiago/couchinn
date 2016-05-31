@@ -124,7 +124,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <span id="helpBlock-num" class="help-block"></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-default">Registrarse</button>
+                <button type="submit" class="btn btn-default">Guardar cambios</button>
                 <button type="button" class="btn btn-default" href="index.php">Cancelar</button>
             </div>
         </form>
