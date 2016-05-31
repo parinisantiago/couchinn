@@ -27,13 +27,13 @@ if( isset($_SESSION['sesion_usuario']) ){
 					<?php echo($_GET['msg']); ?>
 				</div>
 			<?php } ?> 
-			<FORM name ="form1" method ="post" action ="radioButton.php">
+			<form name ="form1" method ="post" action ="radioButton.php">
 			<?php
 			include_once("conectarBD.php");
 			//despues cambiar from usuario por from admin
-			$query = "SELECT * FROM admin WHERE id_admin='" . $_SESSION['id_usuario'] . "'";
-			$result = mysqli_query($conexion, $query);
-			if (mysqli_num_rows($result) == 1) {
+			//$query = "SELECT * FROM admin WHERE id_admin='" . $_SESSION['id_usuario'] . "'"; esto no es necesario, ya se sabe que es un administrador
+			//$result = mysqli_query($conexion, $query);
+			//if (mysqli_num_rows($result) == 1) {
 				//selecciona solo los que no estan eliminados lógicamente.
 				$query = "SELECT nombre_tipo FROM tipo WHERE eliminado=0";
 				$result = mysqli_query($conexion, $query);
@@ -41,14 +41,12 @@ if( isset($_SESSION['sesion_usuario']) ){
 					//Guardo los datos de la BD en las variables de php
 					$nombre = $row["nombre_tipo"];
 					//Alto hack para listar los tipos para poder seleccionarlos y que se autocomplete el campo de modificacion
-             		echo("<input type='radio' name='nomTipoAModificar' value='".$nombre."'> ".$nombre."<br>");
-					// echo " · ";
-					// echo($nombre);
-					// echo("<br>");
-				}
-			} else {
-				echo("Necesita ser administrador para acceder al listado");
-			}
+					?>
+             		<input type='radio' name='nomTipoAModificar' value= <?php echo($nombre);?>> <?php echo($nombre); ?> <br>
+		<?php		}
+		//	} else {
+		//		echo("Necesita ser administrador para acceder al listado"); abajo redirecciona al index si no es administrador
+		//	}
 
 			?>
 			<div class="form-group">
