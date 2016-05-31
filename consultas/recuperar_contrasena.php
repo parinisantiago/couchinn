@@ -9,7 +9,10 @@
     $row=mysqli_fetch_array($resultado);
 
     if($row["email"] == $email) {
-        header("Location: ../index.php?msg=Su contraseña se ha recuperado correctamente: ".$row["clave"]."&&class=alert-success");
+        echo "<script>
+        alert('Se ha enviado a su mail: ".$email." la siguiente contraseña: ".$row["clave"]."');
+        window.location.href='../index.php';
+        </script>";
     }else {
         header("Location: ../user_recuperarContrasena_form.php?msg=No existe un email que posee ese nombre&&class=alert-danger");
     }

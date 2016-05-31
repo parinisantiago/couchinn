@@ -1,13 +1,13 @@
 function valNumTar(text){
     if( text.value.length == 0){
         text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
-        document.getElementById("glyphicon-numTar").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
-        document.getElementById("helpBlock-numTar").innerHTML = "debe completar este campo";
+        document.getElementById("glyphicon-num").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-num").innerHTML = "debe completar este campo";
 
     }else if ( /[\- 0-9]+/.exec(text.value) != text.value){
         text.parentNode.setAttribute("class", "form-group has-error has-feedback");
-        document.getElementById("glyphicon-numTar").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
-        document.getElementById("helpBlock-numTar").innerHTML = "El nombre del tipo no puede poseer numeros ni simbolos";
+        document.getElementById("glyphicon-num").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
+        document.getElementById("helpBlock-num").innerHTML = "El nombre del tipo no puede poseer numeros ni simbolos";
 
     } else {
         return(true);
@@ -174,9 +174,58 @@ function valTipoHospedaje(){
     return ( boolNom );
 }
 
+function valCodigoSeguridadTarjeta(text){
+    if( text.value.length == 0){
+        text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
+        document.getElementById("glyphicon-num").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-num").innerHTML = "debe completar este campo";
+
+    }else if ( /[\- 0-9]+/.exec(text.value) != text.value){
+        text.parentNode.setAttribute("class", "form-group has-error has-feedback");
+        document.getElementById("glyphicon-num").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
+        document.getElementById("helpBlock-num").innerHTML = "El nombre del tipo no puede poseer numeros ni simbolos";
+    }else if( text.value.length != 3){
+        text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
+        document.getElementById("glyphicon-num").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-num").innerHTML = "El codigo debe ser un numero de 3 digitos";
+
+    } else {
+        return(true);
+    }
+    return(false);
+}
+
+function valCodPost(text){
+    if( text.value.length == 0){
+        text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
+        document.getElementById("glyphicon-numTar").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-numTar").innerHTML = "debe completar este campo";
+
+    }else if ( /[\- 0-9]+/.exec(text.value) != text.value){
+        text.parentNode.setAttribute("class", "form-group has-error has-feedback");
+        document.getElementById("glyphicon-numTar").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
+        document.getElementById("helpBlock-numTar").innerHTML = "El nombre del tipo no puede poseer numeros ni simbolos";
+    }else if( text.value.length != 4){
+        text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
+        document.getElementById("glyphicon-numTar").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-numTar").innerHTML = "El codigo debe ser un numero de 4 digitos";
+
+    } else {
+        return(true);
+    }
+    return(false);
+}
+
 function valNumTarjeta() {
     var boolNum= valNumTar(document.getElementById("nroTarjeta"));
-    return ( boolNum );
+    var boolFC= valDate(document.getElementById("fechaCaducidad"));
+    var boolCD= valCodigoSeguridadTarjeta(document.getElementById("codSeguridad"));
+    var boolNom= valNom(document.getElementById("titular"));
+    var boolDir= valNom(document.getElementById("direccion"));
+    var boolCiu= valNom(document.getElementById("ciudad"));
+    var boolProv= valNom(document.getElementById("provincia"));
+    var boolCP= valCodPost(document.getElementById("codPostal"));
+    return ( boolNum && boolFC && boolCD && boolNom && boolDir && boolCiu && boolProv && boolCP );
 }
 
 function valAdmin() {
