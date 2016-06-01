@@ -21,12 +21,16 @@ if( isset($_SESSION['sesion_usuario']) ){
 
 		<?php include("navbar.php"); ?>
 		<div class="container">
-			<h3>Seleccione un tipo y luego decida que hacer con el</h3>
+			<div class="panel panel-primary">
+			<div class="panel-heading">
+				Seleccione un tipo y luego decida que hacer con el
+			</div>
 			<?php if (isset($_GET['msg'])) { ?>
 				<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
 					<?php echo($_GET['msg']); ?>
 				</div>
-			<?php } ?> 
+			<?php } ?>
+				<div class="panel-body">
 			<form name ="form1" method ="post" action ="radioButton.php">
 			<?php
 			include_once("conectarBD.php");
@@ -46,15 +50,20 @@ if( isset($_SESSION['sesion_usuario']) ){
              			<input type='radio' checked name='nomTipoAModificar' value= <?php echo($nombre);?>> <?php echo($nombre); ?> <br>
              			<?php $temp = 0; ?>
              		<?php	} else {?>
-             			<input type='radio' name='nomTipoAModificar' value= <?php echo($nombre);?>> <?php echo($nombre); ?> <br>
+             			<input type='radio'  name='nomTipoAModificar' value= <?php echo($nombre);?>> <?php echo($nombre); ?> <br>
              		<?php	} ?>
 				<?php	} ?>
-			<div class="form-group">
+			</div>
+			<div class="panel-footer">
+			<div class="form-group " id="buttons-tipo-couch">
                 <button type="submit" name = "Eliminar" class="btn btn-default">Eliminar</button>
                 <button type="submit" name = "Modificar" class="btn btn-default">Modificar</button>
                 <a class="btn btn-default" href="index.php">Cancelar</a>
             </div>
+			</div>
             </form>
+
+			</div>
 		</div>
 		</body>
 
