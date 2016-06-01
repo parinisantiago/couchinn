@@ -9,13 +9,15 @@
         <link href="default.css" rel="stylesheet">
 		<script src="js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="js/altaValidaciones.js"></script>
 
 		<title> couchinn </title>
 	</head>
 
 	<body>
 
-		<?php include("navbar.php"); /*
+		<?php 
+			include("navbar.php"); /*
 <?php $titulo=$row["titulo"];
 	            	$descripcion=$row["descripcion"];
 	            	$ubicacion=$row["ubicacion"];
@@ -24,6 +26,7 @@
 	            	echo ($titulo."<br>".$descripcion."<br>".$ubicacion."<br>".$direccion."<br>".$capacidad); ?>
 */?>
 		<div class="container">
+
 			<?php if (isset($_GET['msg'])) { ?>
 				<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
 					<?php echo($_GET['msg']); ?>
