@@ -69,7 +69,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                             include_once("conectarBD.php");
                             $query= "SELECT id_usuario FROM premium WHERE id_usuario='".$_SESSION['id_usuario']."'";
                             $resultado_navbar= mysqli_query($conexion, $query);
-                            
+
                             if(mysqli_num_rows($resultado_navbar) == 0){
                     ?>
 
@@ -93,7 +93,7 @@ if( isset($_SESSION['sesion_usuario']) ){
         </div >
     </nav >
 
-<?php }  } else {?>
+<?php }  } else { include("modal-Pass.php");?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" >
         <div class="container">
@@ -103,15 +103,15 @@ if( isset($_SESSION['sesion_usuario']) ){
                     <li ><a href = "index.php" > <img class="img-responsive center-block" height = "40" width = "100" src="img/header.png"></a ></li >
                     <li ><a href = "#" > About</a ></li >
                     <li ><a href = "#" > Contact</a ></li >
+                    <li> <a href="#" data-toggle="modal" data-target="#modalRecPass"> Recuperar Contraseña </a>
+                    </li>
                 </ul>
 
-                <form id="recuperarContraseña" class="form-inline pull-right" method="get" action="user_recuperarContrasena_form.php">
-                    <button type="submit" class="btn btn-default">Recuperar Contraseña </button>
-                </form>
+
                 <form id="register" class="form-inline pull-right" method="get" action="user_form.php">
                     <button type="submit" class="btn btn-default">Registrarse </button>
                 </form>
-                
+
 
                 <form id="user-session" class="form-inline pull-right" method="post"  action="consultas/logueo_usuario.php">
                     <div class="form-group">
@@ -132,5 +132,5 @@ if( isset($_SESSION['sesion_usuario']) ){
 <?php } ?>
 
     <div class="" id="img-header">
-        
+
     </div>
