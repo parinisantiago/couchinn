@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2016 a las 03:22:01
+-- Tiempo de generación: 01-06-2016 a las 17:26:36
 -- Versión del servidor: 5.7.9
 -- Versión de PHP: 5.6.16
 
@@ -58,6 +58,8 @@ CREATE TABLE IF NOT EXISTS `couch` (
   `ubicacion` varchar(100) NOT NULL,
   `direccion` varchar(100) NOT NULL,
   `capacidad` int(100) NOT NULL,
+  `eliminado_couch` tinyint(1) NOT NULL DEFAULT '0',
+  `despublicado` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_couch`),
   KEY `id_tipo` (`id_tipo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
@@ -66,9 +68,9 @@ CREATE TABLE IF NOT EXISTS `couch` (
 -- Volcado de datos para la tabla `couch`
 --
 
-INSERT INTO `couch` (`id_couch`, `id_usuario`, `id_tipo`, `titulo`, `descripcion`, `ubicacion`, `direccion`, `capacidad`) VALUES
-(1, 3, 1, 'Bungalow Frente al mar', 'Luminoso alojamiento frente al mar para 2 personas.', 'Las Toninas, Bs. As.', 'Calle 90 Nro 785', 2),
-(2, 1, 2, 'Carpa en la montana', 'Disfruta este intercambio en nuestra carpa en la montana', 'Sierra de La Ventana, BS. AS:', 'Calle holanda entre la sierra y los lenguados', 5);
+INSERT INTO `couch` (`id_couch`, `id_usuario`, `id_tipo`, `titulo`, `descripcion`, `ubicacion`, `direccion`, `capacidad`, `eliminado_couch`, `despublicado`) VALUES
+(1, 3, 1, 'Bungalow Frente al mar', 'Luminoso alojamiento frente al mar para 2 personas.', 'Las Toninas, Bs. As.', 'Calle 90 Nro 785', 2, 0, 0),
+(2, 1, 2, 'Carpa en la montana', 'Disfruta este intercambio en nuestra carpa en la montana', 'Sierra de La Ventana, BS. AS:', 'Calle holanda entre la sierra y los lenguados', 5, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -127,13 +129,19 @@ DROP TABLE IF EXISTS `premium`;
 CREATE TABLE IF NOT EXISTS `premium` (
   `id_premium` int(100) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(100) DEFAULT NULL,
-  `tarjeta` varchar(16) DEFAULT NULL,
+  `tarjeta` varchar(16) NOT NULL,
   `f_incripcion` datetime(6) DEFAULT NULL,
   `f_desuscripcion` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id_premium`),
-  UNIQUE KEY `tarjeta` (`tarjeta`),
   UNIQUE KEY `id_usuario` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `premium`
+--
+
+INSERT INTO `premium` (`id_premium`, `id_usuario`, `tarjeta`, `f_incripcion`, `f_desuscripcion`) VALUES
+(5, 1, '4444444444444444', '2016-06-01 00:00:00.000000', NULL);
 
 -- --------------------------------------------------------
 
@@ -218,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `tipo` (
   `nombre_tipo` varchar(30) NOT NULL,
   `eliminado` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipo`
@@ -234,8 +242,9 @@ INSERT INTO `tipo` (`id_tipo`, `nombre_tipo`, `eliminado`) VALUES
 (7, 'otroTipo', 0),
 (8, 'dnoinfgog', 0),
 (9, 'hotel', 1),
-(10, 'qw', 0),
-(11, 'fg', 0);
+(10, 'asaasd', 0),
+(11, 'fg', 1),
+(12, 'dagag', 1);
 
 -- --------------------------------------------------------
 
@@ -255,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id_usuario`) USING BTREE,
   UNIQUE KEY `email` (`email`),
   KEY `email_2` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -265,7 +274,8 @@ INSERT INTO `usuario` (`id_usuario`, `email`, `nombre`, `apellido`, `fnac`, `tel
 (1, 'la@la.com', 'Santiago', 'Parini', '2016-05-17', '2214691152', 'la'),
 (3, 'lau@gmail.com', 'María', 'Laura', '1900-01-01', '+542214691152', 'asdasd'),
 (4, 'tomas@gmail.com', 'Tomas', 'Tomas', '1900-01-01', '+54-221-45-67', 'asdasd'),
-(5, 'aguirre@gmail.com', 'Marcos', 'Aguirre', '2016-05-31', '26695914', '123456');
+(5, 'aguirre@gmail.com', 'Marcos', 'Aguirre', '2016-05-31', '26695914', '123456'),
+(6, 'asd@asd.co', 'Lucas Aasd', 'Costa', '2016-05-11', '123123', 'asd');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -1,10 +1,19 @@
 <?php
 
 include("conectarBD.php");
-
-$query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE couch.id_couch ='".$_GET["id"]."'";
+session_start();
+$query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE (couch.id_couch ='".$_GET["id"]."' AND couch.eliminado_couch = 0)";
 $resultado= mysqli_query($conexion, $query);
+$row = mysqli_fetch_array($resultado);
 $first= true; //control para las imagenes
+$esDuenio = false;
+if ($_SESSION["id_usuario"] == $row["id_usuario"])
+{
+    $esDuenio = true;
+}
+$query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE (couch.id_couch ='".$_GET["id"]."' AND couch.eliminado_couch = 0)";
+$resultado= mysqli_query($conexion, $query);
+if (mysqli_num_rows($resultado) == 1){
 ?>
 <!DOCTYPE html>
 <html>
@@ -78,17 +87,17 @@ $first= true; //control para las imagenes
 
         <div class="col-md-offset-2 col-md-6 inf_couch">
             <d1 class="dl-horizontal">
-                <dt> título: </dt>
+                <dt> Título: </dt>
                 <dd> <?php echo($couch["titulo"]) ?></dd>
-                <dt> descripción: </dt>
+                <dt> Descripción: </dt>
                 <dd> <?php echo($couch["descripcion"]) ?></dd>
-                <dt> tipo:</dt>
+                <dt> Tipo:</dt>
                 <dd> <?php echo($couch["nombre_tipo"]) ?></dd>
-                <dt> ubicación: </dt>
+                <dt> Ubicación: </dt>
                 <dd> <?php echo($couch["ubicacion"]) ?></dd>
-                <dt> dirección: </dt>
+                <dt> Dirección: </dt>
                 <dd> <?php echo($couch["direccion"]) ?></dd>
-                <dt> capacidad: </dt>
+                <dt> Capacidad: </dt>
                 <dd> <?php echo($couch["capacidad"]) ?></dd>
             </d1>
         </div>
@@ -99,19 +108,28 @@ $first= true; //control para las imagenes
 
         <div class="col-md-offset-2 col-md-6 inf_couch">
             <d1 class="dl-horizontal">
-                <dt> nombre: </dt>
+                <dt> Nombre: </dt>
                 <dd> <?php echo($couch["nombre"]) ?> <?php echo($couch["apellido"]) ?></dd>
-                <dt> email:</dt>
+                <dt> Email:</dt>
                 <dd> <?php echo($couch["email"]) ?></dd>
-                <dt> teléfono:</dt>
+                <dt> Teléfono:</dt>
                 <dd> <?php echo($couch["telefono"]) ?></dd>
-                <dt> fecha de nacimiento:</dt>
+                <dt> Fecha de nacimiento:</dt>
                 <dd> <?php echo($couch["fnac"]) ?></dd>
             </d1>
         </div>
-
+        
     <?php   }    ?>
+    <?php   if (!$esDuenio) {  ?>
+                <a class="btn btn-default" href="index.php">Reservar</a>
+        <?php   }  ?>
 </div>
 </body>
 
 </html>
+<?php } else { 
+    echo("Este Couch ha sido eliminado"); ?>
+    <br><a class="btn btn-default" href="index.php">Volver</a>
+<?php } ?>
+
+

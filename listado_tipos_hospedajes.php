@@ -37,21 +37,22 @@ if( isset($_SESSION['sesion_usuario']) ){
 				//selecciona solo los que no estan eliminados lógicamente.
 				$query = "SELECT nombre_tipo FROM tipo WHERE eliminado=0";
 				$result = mysqli_query($conexion, $query);
+				$temp = 1;
 				while ($row = mysqli_fetch_array($result)) {
 					//Guardo los datos de la BD en las variables de php
 					$nombre = $row["nombre_tipo"];
 					//Alto hack para listar los tipos para poder seleccionarlos y que se autocomplete el campo de modificacion
-					?>
-             		<input type='radio' name='nomTipoAModificar' value= <?php echo($nombre);?>> <?php echo($nombre); ?> <br>
-		<?php		}
-		//	} else {
-		//		echo("Necesita ser administrador para acceder al listado"); abajo redirecciona al index si no es administrador
-		//	}
-
-			?>
+					if ($temp == 1){?>
+             			<input type='radio' checked name='nomTipoAModificar' value= <?php echo($nombre);?>> <?php echo($nombre); ?> <br>
+             			<?php $temp = 0; ?>
+             		<?php	} else {?>
+             			<input type='radio' name='nomTipoAModificar' value= <?php echo($nombre);?>> <?php echo($nombre); ?> <br>
+             		<?php	} ?>
+				<?php	} ?>
 			<div class="form-group">
                 <button type="submit" name = "Eliminar" class="btn btn-default">Eliminar</button>
                 <button type="submit" name = "Modificar" class="btn btn-default">Modificar</button>
+                <a class="btn btn-default" href="index.php">Cancelar</a>
             </div>
             </form>
 		</div>

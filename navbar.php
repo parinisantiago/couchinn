@@ -1,5 +1,4 @@
 <?php
-//echo ($_SESSION['admin']);
 
 
  if(!isset($_SESSION['sesion_usuario']) ){
@@ -9,7 +8,7 @@ if( isset($_SESSION['sesion_usuario']) ){
 
     //si es administrador muestra esta barra
     if( isset($_SESSION['admin']) && ($_SESSION['admin'] == true)) {
-        echo("entro al if");
+        
     ?>
 
         <nav class="navbar navbar-inverse navbar-fixed-top" >
@@ -17,7 +16,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <div id = "navbar" class="navbar-collapse collapse" >
 
                     <ul class="nav navbar-nav" >
-                        <li ><a href = "index.php" > Home</a ></li >
+                        <li ><a href = "index.php" > <img class="img-responsive center-block" height = "40" width = "100" src="img/header.png"></a ></li >
 
                         <!--ASI ESTABA ANTES EL LISTADO DE TIPOS DE HOSPEDAJE, LO DEJO COMENTADO - LUCAS-->
                         <!--<li ><a href = "listado_tipos_hospedajes.php" > Listado de tipos de hospedajes</a ></li >
@@ -54,8 +53,7 @@ if( isset($_SESSION['sesion_usuario']) ){
 
     <?php
         //si no es admin muestra la pagina de usuario comun
-         }else {echo("entro al else");
-
+         }else {
     ?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" >
@@ -63,7 +61,7 @@ if( isset($_SESSION['sesion_usuario']) ){
             <div id = "navbar" class="navbar-collapse collapse" >
 
                 <ul class="nav navbar-nav" >
-                    <li ><a href = "index.php" > Home</a ></li >
+                    <li ><a href = "index.php" > <img class="img-responsive center-block" height = "40" width = "100" src="img/header.png"></a ></li >
 
                     <?php
 
@@ -102,7 +100,7 @@ if( isset($_SESSION['sesion_usuario']) ){
             <div id="navbar" class="navbar-collapse collapse">
 
                 <ul class="nav navbar-nav">
-                    <li ><a href = "index.php" > Home</a ></li >
+                    <li ><a href = "index.php" > <img class="img-responsive center-block" height = "40" width = "100" src="img/header.png"></a ></li >
                     <li ><a href = "#" > About</a ></li >
                     <li ><a href = "#" > Contact</a ></li >
                 </ul>
@@ -115,7 +113,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                 </form>
                 
 
-                <form id="user-session" class="form-inline pull-right" method="post" action="consultas/logueo_usuario.php">
+                <form id="user-session" class="form-inline pull-right" method="post"  action="consultas/logueo_usuario.php">
                     <div class="form-group">
                         <label class="sr-only" for="emailLoggin">Email address</label>
                         <input type="email" name="email" class="form-control" id="emailLoggin" placeholder="Email" maxlength="30">
@@ -134,5 +132,5 @@ if( isset($_SESSION['sesion_usuario']) ){
 <?php } ?>
 
     <div class="" id="img-header">
-        <img class="img-responsive center-block" src="img/header.png">
+        
     </div>

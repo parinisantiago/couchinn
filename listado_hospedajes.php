@@ -1,6 +1,6 @@
 <?php	            	
 	include_once("conectarBD.php");
-	$query= "SELECT * FROM couch NATURAL JOIN tipo";
+	$query= "SELECT * FROM couch NATURAL JOIN tipo WHERE (couch.despublicado = 0 AND couch.eliminado_couch = 0)";
 	$resultado= mysqli_query($conexion, $query);
 	
 ?>

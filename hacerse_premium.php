@@ -28,7 +28,11 @@ if( isset($_SESSION['sesion_usuario']) ){
 				</div>
 			<?php } ?>
 			<form class="form-horizontal" name="hacersePremium" method="post" onsubmit="return valNumTarjeta()" action="consultas/alta_premium.php">
-				<h3>Tipo de Tarjeta</h3>
+				<h1 align="center">Ventajas de ser Premium</h1>
+        <p align="center">Al hacerse premium sus couch podran ser listados usando la foto principal de dicho couch, el importe actual es de $ARS 90 por año. </p><br>
+        <p align="center">A continuacion podra ingresar los datos de su tarjeta para realizar su pago y transformarse en usuario Premium instantaneamente.</p><br>
+        <hr>
+        <h3>Tipo de Tarjeta</h3>
 				<input type='radio' name='tipoTarjeta' value="Visa" checked> Visa
 				<input type='radio' name='tipoTarjeta' value="Mastercard"> Mastercard 
 				<input type='radio' name='tipoTarjeta' value="American Express"> American Express  
@@ -88,7 +92,7 @@ if( isset($_SESSION['sesion_usuario']) ){
               </div>
 
               <div class="form-group">
-                  <button type="submit" name = "hacersePremium" class="btn btn-default">Registrarse</button>
+                  <button type="submit" name = "hacersePremium" class="btn btn-default">Pagar</button>
                   <a class="btn btn-default" href="index.php">Cancelar</a>
               </div>
           </form>

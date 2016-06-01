@@ -9,9 +9,6 @@
     $resultado=mysqli_query($conexion, $query);
 
 
-    $queryAdmin= "SELECT * FROM admin WHERE email='".$email."' AND clave='".$clave."'";
-    $resultadoAdmin=mysqli_query($conexion, $query);
-
     if (mysqli_num_rows($resultado) == 1) {
         session_start();
         $row= mysqli_fetch_array($resultado);
@@ -37,7 +34,15 @@
         //si no es ninguno de los dos tira error
         } else {
             $class = "alert-danger";
-            $msg = "<strong>Error al iniciar sesión</strong>. Usuario o contraseña incorrecta";
+            $query= "SELECT email FROM usuario WHERE email='".$email."'";
+            $resultado=mysqli_query($conexion, $query);
+            if (mysqli_num_rows($resultado) == 0){
+                $msg = "<strong>Error al iniciar sesión</strong>. Usuario no existe";
+            }
+            else{
+                $msg = "<strong>Error al iniciar sesión</strong>. Usuario o contraseña incorrecta";
+            }
+            
         }
     }
   header("Location: ../index.php?class=".$class."&&msg=".$msg);

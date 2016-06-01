@@ -45,7 +45,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <span id="helpBlock-nomTipo" class="help-block"></span>
             <div class="form-group">
                 <button type="submit" class="btn btn-default">Aceptar</button>
-                <a class="btn btn-default" href="index.php">Cancelar</a>
+                <a class="btn btn-default" href="listado_tipos_hospedajes.php">Cancelar</a>
             </div>
         </form>
     </div>
