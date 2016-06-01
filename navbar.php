@@ -118,11 +118,11 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <form id="user-session" class="form-inline pull-right" method="post" action="consultas/logueo_usuario.php">
                     <div class="form-group">
                         <label class="sr-only" for="emailLoggin">Email address</label>
-                        <input type="email" name="email" class="form-control" id="emailLoggin" placeholder="Email">
+                        <input type="email" name="email" class="form-control" id="emailLoggin" placeholder="Email" maxlength="30">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="claveLoggin">Password</label>
-                        <input type="password" name="clave" class="form-control" id="claveLoggin" placeholder="Password">
+                        <input type="password" name="clave" class="form-control" id="claveLoggin" placeholder="Password" maxlength="15">
                     </div>
                     <button type="submit" class="btn btn-default">Sign in</button>
 

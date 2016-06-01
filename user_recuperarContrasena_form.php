@@ -28,7 +28,7 @@
           <form class="form-horizontal" name="recuperarContrasena" method="post" onsubmit="return valRecuperarContraseña()" action="consultas/recuperar_contrasena.php">
               <div class="form-group">
                   <label class="control-label" for="emailUser">Ingrese su e-mail de registro en el que recibira el link para recuperar contraseña</label>
-                  <input type="email" name="emailUser" class="form-control" id="emailUser" placeholder="Email" aria-describedby="helpBlock-email" required>
+                  <input type="email" name="emailUser" class="form-control" id="emailUser" maxlength="30" placeholder="Email" aria-describedby="helpBlock-email" required>
                   <span id="glyphicon-email" aria-hidden="true"></span>
                   <span id="helpBlock-email" class="help-block"></span>
               </div>

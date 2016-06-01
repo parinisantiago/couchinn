@@ -28,7 +28,7 @@
           <form class="form-horizontal" name="nomTipo" method="post" onsubmit="return valTipoHospedaje()" action="consultas/alta_tipo_hospedaje.php">
               <div class="form-group">
                  <label class="control-label" for="nomTipo">Nuevo tipo de hospedaje</label>
-                  <input type="text" name="nomTipo" class="form-control" id="nomTipo" placeholder="Nombre" aria-describedby="helpBlock-nom" required>
+                  <input type="text" name="nomTipo" class="form-control" id="nomTipo" maxlength="30" placeholder="Nombre" aria-describedby="helpBlock-nom" required>
                   <span id="glyphicon-nom" aria-hidden="true"></span>
                   <span id="helpBlock-nom" class="help-block"></span>
               </div>

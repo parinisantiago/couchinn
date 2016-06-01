@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2016 a las 01:45:45
+-- Tiempo de generación: 01-06-2016 a las 03:22:01
 -- Versión del servidor: 5.7.9
 -- Versión de PHP: 5.6.16
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `id_admin` int(100) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL,
-  `clave` varchar(100) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `clave` varchar(15) NOT NULL,
   PRIMARY KEY (`id_admin`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
@@ -127,20 +127,13 @@ DROP TABLE IF EXISTS `premium`;
 CREATE TABLE IF NOT EXISTS `premium` (
   `id_premium` int(100) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(100) DEFAULT NULL,
-  `tarjeta` varchar(20) DEFAULT NULL,
+  `tarjeta` varchar(16) DEFAULT NULL,
   `f_incripcion` datetime(6) DEFAULT NULL,
   `f_desuscripcion` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id_premium`),
   UNIQUE KEY `tarjeta` (`tarjeta`),
   UNIQUE KEY `id_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `premium`
---
-
-INSERT INTO `premium` (`id_premium`, `id_usuario`, `tarjeta`, `f_incripcion`, `f_desuscripcion`) VALUES
-(12, 1, '1233123312331233', '2016-05-31 00:00:00.000000', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -216,33 +209,13 @@ CREATE TABLE IF NOT EXISTS `reserva` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tarjetas`
---
-
-DROP TABLE IF EXISTS `tarjetas`;
-CREATE TABLE IF NOT EXISTS `tarjetas` (
-  `nro_tarjeta` varchar(100) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tarjetas`
---
-
-INSERT INTO `tarjetas` (`nro_tarjeta`) VALUES
-('123456789'),
-(''),
-('987654321');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tipo`
 --
 
 DROP TABLE IF EXISTS `tipo`;
 CREATE TABLE IF NOT EXISTS `tipo` (
   `id_tipo` int(100) NOT NULL AUTO_INCREMENT,
-  `nombre_tipo` varchar(100) NOT NULL,
+  `nombre_tipo` varchar(30) NOT NULL,
   `eliminado` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id_tipo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
@@ -273,12 +246,12 @@ INSERT INTO `tipo` (`id_tipo`, `nombre_tipo`, `eliminado`) VALUES
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id_usuario` int(100) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `apellido` varchar(100) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `nombre` varchar(35) NOT NULL,
+  `apellido` varchar(35) NOT NULL,
   `fnac` date NOT NULL,
-  `telefono` varchar(50) NOT NULL,
-  `clave` varchar(20) NOT NULL,
+  `telefono` varchar(25) NOT NULL,
+  `clave` varchar(15) NOT NULL,
   PRIMARY KEY (`id_usuario`) USING BTREE,
   UNIQUE KEY `email` (`email`),
   KEY `email_2` (`email`)

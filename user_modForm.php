@@ -45,25 +45,25 @@ if( isset($_SESSION['sesion_usuario']) ){
         <form class="form-horizontal" name="altaUsuario" method="post" onsubmit="return valAdmin()" action="consultas/mod_usuario.php">
             <div class="form-group">
                 <label class="control-label" for="passUser">Contraseña</label>
-                <input type="password" name="passUser" class="form-control" id="passUser" placeholder="Contraseña" aria-describedby="helpBlock-pass" value="<?php echo($row['clave']); ?>" required>
+                <input type="password" name="passUser" class="form-control" id="passUser" maxlength="15" placeholder="Contraseña" aria-describedby="helpBlock-pass" value="<?php echo($row['clave']); ?>" required>
                 <span id="glyphicon-pass" aria-hidden="true"></span>
                 <span id="helpBlock-pass" class="help-block"></span>
             </div>
             <div class="form-group">
                 <label class="control-label" for="rePassUser">Confirmar Contraseña</label>
-                <input type="password" name="rePassUser" class="form-control" id="rePassUser" placeholder="Confirmar Contraseña" aria-describedby="helpBlock-rePass" value="<?php echo($row['clave']); ?>" required>
+                <input type="password" name="rePassUser" class="form-control" id="rePassUser" maxlength="15" placeholder="Confirmar Contraseña" aria-describedby="helpBlock-rePass" value="<?php echo($row['clave']); ?>" required>
                 <span id="glyphicon-rePass" aria-hidden="true"></span>
                 <span id="helpBlock-rePass" class="help-block"></span>
             </div>
             <div class="form-group">
                 <label class="control-label" for="emailUser">Email</label>
-                <input type="email" name="emailUser" class="form-control" id="emailUser" placeholder="Email" aria-describedby="helpBlock-email" value="<?php echo($row['email']); ?>"  required>
+                <input type="email" name="emailUser" class="form-control" id="emailUser" maxlength="30" placeholder="Email" aria-describedby="helpBlock-email" value="<?php echo($row['email']); ?>"  required>
                 <span id="glyphicon-email" aria-hidden="true"></span>
                 <span id="helpBlock-email" class="help-block"></span>
             </div>
             <div class="form-group">
                 <label class="control-label" for="reEmailUser">Confirmar Email</label>
-                <input type="email" name="reEmailUser" class="form-control" id="reEmailUser" placeholder="Confirmar Email" aria-describedby="helpBlock-reEmail" value="<?php echo($row['email']); ?>" required>
+                <input type="email" name="reEmailUser" class="form-control" id="reEmailUser" maxlength="30" placeholder="Confirmar Email" aria-describedby="helpBlock-reEmail" value="<?php echo($row['email']); ?>" required>
                 <span id="glyphicon-reEmail" aria-hidden="true"></span>
                 <span id="helpBlock-reEmail" class="help-block"></span>
             </div>
@@ -77,37 +77,37 @@ if( isset($_SESSION['sesion_usuario']) ){
         <form class="form-horizontal" name="altaUsuario" method="post" onsubmit="return valUsuario()" action="consultas/mod_usuario.php">
             <div class="form-group">
                 <label class="control-label" for="nomUser">Nombre</label>
-                <input type="text" name="nomUser" class="form-control" id="nomUser" placeholder="Nombre" aria-describedby="helpBlock-nom" value="<?php echo($row['nombre']); ?>" required>
+                <input type="text" name="nomUser" class="form-control" id="nomUser" maxlength="35" placeholder="Nombre" aria-describedby="helpBlock-nom" value="<?php echo($row['nombre']); ?>" required>
                 <span id="glyphicon-nom" aria-hidden="true"></span>
                 <span id="helpBlock-nom" class="help-block"></span>
             </div>
             <div class="form-group">
                 <label class="control-label" for="apUser">Apellido</label>
-                <input type="text" name="apUser" class="form-control" id="apUser" placeholder="Apellido" aria-describedby="helpBlock-ap" value="<?php echo($row['apellido']); ?>" required>
+                <input type="text" name="apUser" class="form-control" id="apUser" maxlength="35" placeholder="Apellido" aria-describedby="helpBlock-ap" value="<?php echo($row['apellido']); ?>" required>
                 <span id="glyphicon-ap" aria-hidden="true"></span>
                 <span id="helpBlock-ap" class="help-block"></span>
             </div>
             <div class="form-group">
                 <label class="control-label" for="passUser">Contraseña</label>
-                <input type="password" name="passUser" class="form-control" id="passUser" placeholder="Contraseña" aria-describedby="helpBlock-pass" value="<?php echo($row['clave']); ?>" required>
+                <input type="password" name="passUser" class="form-control" id="passUser" maxlength="15" placeholder="Contraseña" aria-describedby="helpBlock-pass" value="<?php echo($row['clave']); ?>" required>
                 <span id="glyphicon-pass" aria-hidden="true"></span>
                 <span id="helpBlock-pass" class="help-block"></span>
             </div>
             <div class="form-group">
                 <label class="control-label" for="rePassUser">Confirmar Contraseña</label>
-                <input type="password" name="rePassUser" class="form-control" id="rePassUser" placeholder="Confirmar Contraseña" aria-describedby="helpBlock-rePass" value="<?php echo($row['clave']); ?>" required>
+                <input type="password" name="rePassUser" class="form-control" id="rePassUser" maxlength="15" placeholder="Confirmar Contraseña" aria-describedby="helpBlock-rePass" value="<?php echo($row['clave']); ?>" required>
                 <span id="glyphicon-rePass" aria-hidden="true"></span>
                 <span id="helpBlock-rePass" class="help-block"></span>
             </div>
             <div class="form-group">
                 <label class="control-label" for="emailUser">Email</label>
-                <input type="email" name="emailUser" class="form-control" id="emailUser" placeholder="Email" aria-describedby="helpBlock-email" value="<?php echo($row['email']); ?>"  required>
+                <input type="email" name="emailUser" class="form-control" id="emailUser" maxlength="30" placeholder="Email" aria-describedby="helpBlock-email" value="<?php echo($row['email']); ?>"  required>
                 <span id="glyphicon-email" aria-hidden="true"></span>
                 <span id="helpBlock-email" class="help-block"></span>
             </div>
             <div class="form-group">
                 <label class="control-label" for="reEmailUser">Confirmar Email</label>
-                <input type="email" name="reEmailUser" class="form-control" id="reEmailUser" placeholder="Confirmar Email" aria-describedby="helpBlock-reEmail" value="<?php echo($row['email']); ?>" required>
+                <input type="email" name="reEmailUser" class="form-control" id="reEmailUser" maxlength="30" placeholder="Confirmar Email" aria-describedby="helpBlock-reEmail" value="<?php echo($row['email']); ?>" required>
                 <span id="glyphicon-reEmail" aria-hidden="true"></span>
                 <span id="helpBlock-reEmail" class="help-block"></span>
             </div>
@@ -119,7 +119,7 @@ if( isset($_SESSION['sesion_usuario']) ){
             </div>
             <div class="form-group">
                 <label class="control-label" for="numUser">Telefono</label>
-                <input type="text" name="numUser" class="form-control" id="numUser" placeholder="Telefono" aria-describedby="helpBlock-num" value="<?php echo($row['telefono']); ?>" required>
+                <input type="text" name="numUser" class="form-control" id="numUser" maxlength="25" placeholder="Telefono" aria-describedby="helpBlock-num" value="<?php echo($row['telefono']); ?>" required>
                 <span id="glyphicon-num" aria-hidden="true"></span>
                 <span id="helpBlock-num" class="help-block"></span>
             </div>
