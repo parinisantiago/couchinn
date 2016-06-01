@@ -46,16 +46,16 @@ $first= true; //control para las imagenes
 
             </ol>
 
-            <!-- Wrapper for slides -->
+            <!-- Wrapper for slides class="img-responsive center-block"-->
             <div class="carousel-inner" role="listbox">
                 <?php while ( $foto = mysqli_fetch_array($resultado_foto)) {
                     if( $first){ $first=false;?>
                     <div class="item active">
-                        <img src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
+                        <img  src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
                      </div>
                 <?php } else {?>
                     <div class="item">
-                        <img src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
+                        <img  src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
                     </div>
                 <?php }
                 } ?>
@@ -90,8 +90,6 @@ $first= true; //control para las imagenes
                 <dd> <?php echo($couch["direccion"]) ?></dd>
                 <dt> capacidad: </dt>
                 <dd> <?php echo($couch["capacidad"]) ?></dd>
-                <dt> fecha: </dt>
-                <dd> <?php echo(date("d/m/y", $couch["fecha"])) ?></dd>
             </d1>
         </div>
 
@@ -108,7 +106,7 @@ $first= true; //control para las imagenes
                 <dt> teléfono:</dt>
                 <dd> <?php echo($couch["telefono"]) ?></dd>
                 <dt> fecha de nacimiento:</dt>
-                <dd> <?php echo(date("d/m/y",$couch["fNac"])) ?></dd>
+                <dd> <?php echo($couch["fnac"]) ?></dd>
             </d1>
         </div>
 

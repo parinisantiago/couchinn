@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2016 a las 17:08:37
+-- Tiempo de generación: 01-06-2016 a las 01:45:45
 -- Versión del servidor: 5.7.9
 -- Versión de PHP: 5.6.16
 
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `foto` (
   PRIMARY KEY (`id_foto`),
   UNIQUE KEY `ruta` (`ruta`),
   KEY `id_couch` (`id_couch`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `foto`
@@ -92,7 +92,10 @@ CREATE TABLE IF NOT EXISTS `foto` (
 
 INSERT INTO `foto` (`id_foto`, `id_couch`, `ruta`) VALUES
 (1, 1, 'foto1.jpg'),
-(3, 2, 'foto2.jpg');
+(3, 2, 'foto2.jpg'),
+(4, 1, 'foto3.jpg'),
+(5, 1, 'foto4.jpg'),
+(6, 2, 'foto5.jpg');
 
 -- --------------------------------------------------------
 
@@ -130,7 +133,14 @@ CREATE TABLE IF NOT EXISTS `premium` (
   PRIMARY KEY (`id_premium`),
   UNIQUE KEY `tarjeta` (`tarjeta`),
   UNIQUE KEY `id_usuario` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `premium`
+--
+
+INSERT INTO `premium` (`id_premium`, `id_usuario`, `tarjeta`, `f_incripcion`, `f_desuscripcion`) VALUES
+(12, 1, '1233123312331233', '2016-05-31 00:00:00.000000', NULL);
 
 -- --------------------------------------------------------
 
@@ -232,21 +242,21 @@ INSERT INTO `tarjetas` (`nro_tarjeta`) VALUES
 DROP TABLE IF EXISTS `tipo`;
 CREATE TABLE IF NOT EXISTS `tipo` (
   `id_tipo` int(100) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) NOT NULL,
+  `nombre_tipo` varchar(100) NOT NULL,
   `eliminado` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipo`
 --
 
-INSERT INTO `tipo` (`id_tipo`, `nombre`, `eliminado`) VALUES
+INSERT INTO `tipo` (`id_tipo`, `nombre_tipo`, `eliminado`) VALUES
 (1, 'asdasd', 1),
 (2, 'departamento', 1),
-(3, 'bungalow', 0),
+(3, 'bungalow', 1),
 (4, 'casa', 0),
-(5, 'chale', 0),
+(5, 'chale', 1),
 (6, 'lalalal', 0),
 (7, 'otroTipo', 0),
 (8, 'dnoinfgog', 0),
@@ -279,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `email`, `nombre`, `apellido`, `fnac`, `telefono`, `clave`) VALUES
-(1, 'la@la.com', 'Santiago', 'Parini', '2016-05-31', '2214691152', 'la'),
+(1, 'la@la.com', 'Santiago', 'Parini', '2016-05-17', '2214691152', 'la'),
 (3, 'lau@gmail.com', 'María', 'Laura', '1900-01-01', '+542214691152', 'asdasd'),
 (4, 'tomas@gmail.com', 'Tomas', 'Tomas', '1900-01-01', '+54-221-45-67', 'asdasd'),
 (5, 'aguirre@gmail.com', 'Marcos', 'Aguirre', '2016-05-31', '26695914', '123456');
