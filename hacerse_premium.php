@@ -89,7 +89,7 @@ if( isset($_SESSION['sesion_usuario']) ){
 
               <div class="form-group">
                   <button type="submit" name = "hacersePremium" class="btn btn-default">Registrarse</button>
-                  <button type="button" class="btn btn-default" href="index.php">Cancelar</button>
+                  <a class="btn btn-default" href="index.php">Cancelar</a>
               </div>
           </form>
 		</div>
