@@ -39,6 +39,9 @@
     height: 425px;
 }
 
+#buttons-tipo-couch{
+    margin-top: 1%;
+}
 
 .carousel-inner > .item img {
     max-height: 100%;  
