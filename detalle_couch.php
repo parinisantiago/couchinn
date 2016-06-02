@@ -27,7 +27,7 @@ if (mysqli_num_rows($resultado) == 1){
     <script src="js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
-    <title> couchinn </title>
+    <title> Couchinn </title>
 </head>
 
 <body>

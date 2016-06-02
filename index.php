@@ -11,7 +11,7 @@
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<script src="js/altaValidaciones.js"></script>
 
-		<title> couchinn </title>
+		<title> Couchinn </title>
 	</head>
 
 	<body>

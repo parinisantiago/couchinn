@@ -44,7 +44,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                     </ul >
 
                     <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
-                        <button type="submit" class="btn btn-default">Close Session</button>
+                        <button type="submit" class="btn btn-default">Cerrar Sesion</button>
                     </form>
 
                 </div >
@@ -86,7 +86,7 @@ if( isset($_SESSION['sesion_usuario']) ){
                 </ul >
 
                 <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
-                    <button type="submit" class="btn btn-default">Close Session</button>
+                    <button type="submit" class="btn btn-default">Cerrar Sesion</button>
                 </form>
 
             </div >
@@ -101,8 +101,8 @@ if( isset($_SESSION['sesion_usuario']) ){
 
                 <ul class="nav navbar-nav">
                     <li ><a href = "index.php" > <img class="img-responsive center-block" height = "40" width = "100" src="img/header.png"></a ></li >
-                    <li ><a href = "#" > About</a ></li >
-                    <li ><a href = "#" > Contact</a ></li >
+                    <li ><a href = "#" > About </a ></li >
+                    <li ><a href = "#" > Contacto </a ></li >
                     <li> <a href="#" data-toggle="modal" data-target="#modalRecPass"> Recuperar Contraseña </a>
                     </li>
                 </ul>
@@ -115,14 +115,14 @@ if( isset($_SESSION['sesion_usuario']) ){
 
                 <form id="user-session" class="form-inline pull-right" method="post"  action="consultas/logueo_usuario.php">
                     <div class="form-group">
-                        <label class="sr-only" for="emailLoggin">Email address</label>
+                        <label class="sr-only" for="emailLoggin">Email</label>
                         <input type="email" name="email" class="form-control" id="emailLoggin" placeholder="Email" maxlength="30">
                     </div>
                     <div class="form-group">
-                        <label class="sr-only" for="claveLoggin">Password</label>
-                        <input type="password" name="clave" class="form-control" id="claveLoggin" placeholder="Password" maxlength="15">
+                        <label class="sr-only" for="claveLoggin">Contraseña</label>
+                        <input type="password" name="clave" class="form-control" id="claveLoggin" placeholder="Contraseña" maxlength="15">
                     </div>
-                    <button type="submit" class="btn btn-default">Sign in</button>
+                    <button type="submit" class="btn btn-default">Iniciar Sesion</button>
 
                 </form>
             </div>

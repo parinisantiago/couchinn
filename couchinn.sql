@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2016 a las 17:26:36
+-- Tiempo de generación: 02-06-2016 a las 19:01:10
 -- Versión del servidor: 5.7.9
 -- Versión de PHP: 5.6.16
 
@@ -62,15 +62,17 @@ CREATE TABLE IF NOT EXISTS `couch` (
   `despublicado` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_couch`),
   KEY `id_tipo` (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `couch`
 --
 
 INSERT INTO `couch` (`id_couch`, `id_usuario`, `id_tipo`, `titulo`, `descripcion`, `ubicacion`, `direccion`, `capacidad`, `eliminado_couch`, `despublicado`) VALUES
-(1, 3, 1, 'Bungalow Frente al mar', 'Luminoso alojamiento frente al mar para 2 personas.', 'Las Toninas, Bs. As.', 'Calle 90 Nro 785', 2, 0, 0),
-(2, 1, 2, 'Carpa en la montana', 'Disfruta este intercambio en nuestra carpa en la montana', 'Sierra de La Ventana, BS. AS:', 'Calle holanda entre la sierra y los lenguados', 5, 0, 0);
+(1, 8, 14, 'Bungalow Frente al mar', 'Luminoso alojamiento frente al mar para 2 personas.', 'Las Toninas, Bs. As., Argentina.', 'Calle 90 Nro 785', 2, 0, 0),
+(2, 9, 16, 'Carpa en la montana', 'Disfruta este intercambio en nuestra carpa en la montana.', 'Sierra de La Ventana, BS. AS., Argentina.', 'Calle holanda entre la sierra y los lenguados', 3, 0, 0),
+(3, 10, 17, 'Posada en La Plata', 'Linda posada con diferente tipo de habitaciones a su disposicion.', 'La Plata, Bs.As., Argentina.', '60 e 1 y 2.', 5, 0, 0),
+(4, 10, 15, 'Departamento en La Plata', 'Departamento mono ambiente muy comodo cerca del centro.', 'La Plata, Bs.As., Argentnia.', '7 e 48 y 49.', 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -95,9 +97,9 @@ CREATE TABLE IF NOT EXISTS `foto` (
 INSERT INTO `foto` (`id_foto`, `id_couch`, `ruta`) VALUES
 (1, 1, 'foto1.jpg'),
 (3, 2, 'foto2.jpg'),
-(4, 1, 'foto3.jpg'),
-(5, 1, 'foto4.jpg'),
-(6, 2, 'foto5.jpg');
+(4, 3, 'foto3.jpg'),
+(5, 3, 'foto4.jpg'),
+(6, 4, 'foto5.jpg');
 
 -- --------------------------------------------------------
 
@@ -134,14 +136,7 @@ CREATE TABLE IF NOT EXISTS `premium` (
   `f_desuscripcion` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id_premium`),
   UNIQUE KEY `id_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `premium`
---
-
-INSERT INTO `premium` (`id_premium`, `id_usuario`, `tarjeta`, `f_incripcion`, `f_desuscripcion`) VALUES
-(5, 1, '4444444444444444', '2016-06-01 00:00:00.000000', NULL);
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -226,25 +221,17 @@ CREATE TABLE IF NOT EXISTS `tipo` (
   `nombre_tipo` varchar(30) NOT NULL,
   `eliminado` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipo`
 --
 
 INSERT INTO `tipo` (`id_tipo`, `nombre_tipo`, `eliminado`) VALUES
-(1, 'asdasd', 1),
-(2, 'departamento', 1),
-(3, 'bungalow', 1),
-(4, 'casa', 0),
-(5, 'chale', 1),
-(6, 'lalalal', 0),
-(7, 'otroTipo', 0),
-(8, 'dnoinfgog', 0),
-(9, 'hotel', 1),
-(10, 'asaasd', 0),
-(11, 'fg', 1),
-(12, 'dagag', 1);
+(14, 'Casa', 0),
+(15, 'Departamento', 0),
+(16, 'Camping', 0),
+(17, 'Posada', 0);
 
 -- --------------------------------------------------------
 
@@ -264,18 +251,16 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id_usuario`) USING BTREE,
   UNIQUE KEY `email` (`email`),
   KEY `email_2` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id_usuario`, `email`, `nombre`, `apellido`, `fnac`, `telefono`, `clave`) VALUES
-(1, 'la@la.com', 'Santiago', 'Parini', '2016-05-17', '2214691152', 'la'),
-(3, 'lau@gmail.com', 'María', 'Laura', '1900-01-01', '+542214691152', 'asdasd'),
-(4, 'tomas@gmail.com', 'Tomas', 'Tomas', '1900-01-01', '+54-221-45-67', 'asdasd'),
-(5, 'aguirre@gmail.com', 'Marcos', 'Aguirre', '2016-05-31', '26695914', '123456'),
-(6, 'asd@asd.co', 'Lucas Aasd', 'Costa', '2016-05-11', '123123', 'asd');
+(8, 'lucas@gmail.com', 'Lucas', 'Costa', '1993-05-19', '456789', 'asd'),
+(9, 'leo@gmail.com', 'Leo', 'Armendariz', '1992-05-20', '15465365', 'asd'),
+(10, 'euge@gmail.com', 'Euge', 'Parini', '1994-12-25', '4345461', 'asd');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
