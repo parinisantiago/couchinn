@@ -120,7 +120,7 @@ if (mysqli_num_rows($resultado) == 1){
         </div>
         
     <?php   }    ?>
-    <?php   if (!$esDuenio) {  ?>
+    <?php   if (!$esDuenio && !$_SESSION["admin"]) {  ?>
                 <a class="btn btn-default" href="index.php">Reservar</a>
         <?php   }  ?>
 </div>
