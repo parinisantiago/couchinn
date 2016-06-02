@@ -1,9 +1,9 @@
 <?php
     include_once("../conectarBD.php");
 
-    $email= $_POST["emailUser"];
+    $email= $_POST["emailRec"];
 
-    $query= "SELECT * FROM usuario WHERE email='".$_POST['emailUser']."'";
+    $query= "SELECT * FROM usuario WHERE email='".$_POST['emailRec']."'";
 
     $resultado= mysqli_query($conexion, $query);
     $row=mysqli_fetch_array($resultado);
