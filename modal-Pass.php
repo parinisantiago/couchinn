@@ -7,11 +7,12 @@
                     <label class="control-label" for="emailUser">Ingrese su e-mail de registro en el que recibira el link para recuperar contraseña</label>
                 </div>
                 <div class="modal-body">
-                    <form class="form-inline" name="recuperarContrasena" method="post" onsubmit="return valRecuperarContraseña()" action="consultas/recuperar_contrasena.php">
+                    <form class="form-inline" name="recuperarContrasena" method="post" onsubmit="return valRecuperarContrasena()" action="consultas/recuperar_contrasena.php">
                         <div class="form-group">
-                            <input type="email" name="emailUser" class="form-control" id="emailUser" maxlength="30" placeholder="Email" aria-describedby="helpBlock-email" required>
-                            <span id="glyphicon-email" aria-hidden="true"></span>
-                            <span id="helpBlock-email" class="help-block"></span>
+                            <label class="control-label" for="emailRec">Email</label>
+                            <input type="email" name="emailRec" class="form-control" id="emailRec" maxlength="30" placeholder="Email" aria-describedby="helpBlock-email" required>
+                            <span id="glyphicon-emailRec" aria-hidden="true"></span>
+                            <span id="helpBlock-emailRec" class="help-block"></span>
                         </div>
 
                         <div class="form-group">
