@@ -337,7 +337,26 @@ function valAdmin() {
     var boolEmail = valEmail(document.getElementById("emailUser"), document.getElementById("reEmailUser"));
     return ( boolPass && boolEmail );
 }
-function valRecuperarContraseña(){
-    var boolEmail = valEmail(document.getElementById("emailUser"), document.getElementById("reEmailUser"));
+
+function valEmailRec(email) { /*agregarle una expresion regular*/
+    if (email.value.length == 0){
+        email.parentNode.setAttribute("class", "form-group has-warning has-feedback");
+        document.getElementById("glyphicon-email").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-email").innerHTML = "debe completar este campo";
+    } else if(!/.+@.+/.test(email.value) ){
+        email.parentNode.setAttribute("class", "form-group has-error has-feedback");
+        document.getElementById("glyphicon-email").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
+        document.getElementById("helpBlock-email").innerHTML = "escriba un formato valido de email";
+    } else {
+        email.parentNode.setAttribute("class", "form-group has-success has-feedback");
+        document.getElementById("glyphicon-email").setAttribute("class","glyphicon glyphicon-ok form-control-feedback");
+        document.getElementById("helpBlock-email").innerHTML = " ";
+        return(true);
+    }
+    return(false);
+}
+
+function valRecuperarContrasena(){
+   var boolEmail = valEmailRec(document.getElementById("emailRec"))
     return (boolEmail);
 }
