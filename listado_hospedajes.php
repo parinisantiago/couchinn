@@ -29,9 +29,9 @@
 	          }
 	
 	            	?>
- <?php if(isset($_SESSION['sesion_usuario'])){ ?>
+
 <a href="detalle_couch.php?id=<?php echo($id_couch) ?>" class="list-group-item">
-		<?php } ?>
+		
 		<div class="row">
   <div class="col-md-2"><img class="img-circle" height="130" width="180"  src="<?php 
   //Si es premium muestro la foto del hospedaje, si no muestro el logo de couchinn

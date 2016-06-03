@@ -60,7 +60,7 @@ function valNom(text){
         document.getElementById("helpBlock-nom").innerHTML = " ";
         return(true);
     }
-    document.getElementById("nomUser").focus();
+    document.getElementById("nom").focus();
     return(false);
 }
 
@@ -82,7 +82,7 @@ function valAp(text){
         document.getElementById("helpBlock-ap").innerHTML = " ";
         return(true);
     }
-    document.getElementById("apUser").focus();
+    document.getElementById("ap").focus();
     return(false);
 }
 
@@ -109,7 +109,7 @@ function valPass(pass, confirmation) {
         document.getElementById("helpBlock-pass").innerHTML = " ";
         return(true);
     }
-    document.getElementById("passUser").focus();
+    document.getElementById("pass").focus();
     return(false);
 }
 
@@ -134,7 +134,7 @@ function valEmail(email, confirmation) { /*agregarle una expresion regular*/
         document.getElementById("helpBlock-email").innerHTML = " ";
         return(true);
     }
-    document.getElementById("emailUser").focus();
+    document.getElementById("email").focus();
     return(false);
 }
 
@@ -153,7 +153,7 @@ function valDate(date){
         document.getElementById("helpBlock-fNac").innerHTML = " ";
         return(true);
     }
-    document.getElementById("fNacUser").focus();
+    document.getElementById("fNac").focus();
     return(false);
 }
 
@@ -172,7 +172,7 @@ function valTel(number){
         document.getElementById("helpBlock-num").innerHTML = " ";
         return(true);
     }
-    document.getElementById("numUser").focus();
+    document.getElementById("num").focus();
     return(false);
 }
 
@@ -369,7 +369,7 @@ function valEmailRec(email) { /*agregarle una expresion regular*/
         document.getElementById("helpBlock-email").innerHTML = " ";
         return(true);
     }
-    document.getElementById("emailRec").focus();
+    document.getElementById("email").focus();
     return(false);
 }
 

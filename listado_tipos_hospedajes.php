@@ -10,7 +10,7 @@ if( isset($_SESSION['sesion_usuario']) ){
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-			<link href="default.css" rel="stylesheet">
+			<link href="default.css" rel="stylesheet"><link rel="icon" href="img/logo.png">
 			<script src="js/jquery.min.js"></script>
 			<script src="bootstrap/js/bootstrap.min.js"></script>
 

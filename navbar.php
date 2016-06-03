@@ -1,16 +1,16 @@
 <?php
 
 
- if(!isset($_SESSION['sesion_usuario']) ){
-   session_start();
+if(!isset($_SESSION['sesion_usuario']) && !isset($_SESSION["anonimo"])){
+    session_start();
+    $_SESSION["anonimo"] = true;
 }
-if( isset($_SESSION['sesion_usuario']) ){
-
+if( isset($_SESSION['sesion_usuario'])){
     //si es administrador muestra esta barra
     if( isset($_SESSION['admin']) && ($_SESSION['admin'] == true)) {
         
     ?>
-
+        
         <nav class="navbar navbar-inverse navbar-fixed-top" >
             <div class="container" >
                 <div id = "navbar" class="navbar-collapse collapse" >
@@ -101,8 +101,6 @@ if( isset($_SESSION['sesion_usuario']) ){
 
                 <ul class="nav navbar-nav">
                     <li ><a href = "index.php" > <img class="img-responsive center-block" height = "40" width = "100" src="img/header.png"></a ></li >
-                    <li ><a href = "#" > About </a ></li >
-                    <li ><a href = "#" > Contacto </a ></li >
                     <li> <a href="#" data-toggle="modal" data-target="#modalRecPass"> Recuperar Contraseña </a>
                     </li>
                 </ul>
@@ -116,11 +114,11 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <form id="user-session" class="form-inline pull-right" method="post"  action="consultas/logueo_usuario.php">
                     <div class="form-group">
                         <label class="sr-only" for="emailLoggin">Email</label>
-                        <input type="email" name="email" class="form-control" id="emailLoggin" placeholder="Email" maxlength="30">
+                        <input type="email" name="email" class="form-control" id="emailLoggin" placeholder="Email" maxlength="30" required>
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="claveLoggin">Contraseña</label>
-                        <input type="password" name="clave" class="form-control" id="claveLoggin" placeholder="Contraseña" maxlength="15">
+                        <input type="password" name="clave" class="form-control" id="claveLoggin" placeholder="Contraseña" maxlength="15" required>
                     </div>
                     <button type="submit" class="btn btn-default">Iniciar Sesion</button>
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2016 a las 19:01:10
+-- Tiempo de generación: 03-06-2016 a las 23:06:07
 -- Versión del servidor: 5.7.9
 -- Versión de PHP: 5.6.16
 
@@ -88,18 +88,19 @@ CREATE TABLE IF NOT EXISTS `foto` (
   PRIMARY KEY (`id_foto`),
   UNIQUE KEY `ruta` (`ruta`),
   KEY `id_couch` (`id_couch`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `foto`
 --
 
 INSERT INTO `foto` (`id_foto`, `id_couch`, `ruta`) VALUES
-(1, 1, 'foto1.jpg'),
+(1, 2, 'foto11.jpg'),
 (3, 2, 'foto2.jpg'),
 (4, 3, 'foto3.jpg'),
 (5, 3, 'foto4.jpg'),
-(6, 4, 'foto5.jpg');
+(6, 4, 'foto5.jpg'),
+(7, 2, 'foto6.jpg');
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `premium` (
   `f_desuscripcion` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id_premium`),
   UNIQUE KEY `id_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -221,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `tipo` (
   `nombre_tipo` varchar(30) NOT NULL,
   `eliminado` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipo`
@@ -231,7 +232,15 @@ INSERT INTO `tipo` (`id_tipo`, `nombre_tipo`, `eliminado`) VALUES
 (14, 'Casa', 0),
 (15, 'Departamento', 0),
 (16, 'Camping', 0),
-(17, 'Posada', 0);
+(17, 'Posada', 0),
+(18, 'asdasasd', 1),
+(19, 'asdasdadasdfsdfsdf', 1),
+(20, 'ffffff', 1),
+(21, 'asdasdasd', 1),
+(22, 'fgfagag', 1),
+(23, 'aaadd', 1),
+(24, 'affafada', 1),
+(25, 'dfdsfsdafasd', 1);
 
 -- --------------------------------------------------------
 
@@ -251,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id_usuario`) USING BTREE,
   UNIQUE KEY `email` (`email`),
   KEY `email_2` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`

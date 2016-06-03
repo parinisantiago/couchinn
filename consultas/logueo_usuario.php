@@ -15,6 +15,7 @@
         $_SESSION["sesion_usuario"] = true;
         $_SESSION["id_usuario"]= $row['id_usuario'];
         $_SESSION['admin'] = false;
+        $_SESSION["anonimo"] = false;
         $class="alert-success";
         $msg="Se ha iniciado sesión correctamente";
 
@@ -28,6 +29,7 @@
             $_SESSION["sesion_usuario"] = true;
             $_SESSION["id_usuario"] = $rowAdmin['id_admin'];
             $_SESSION['admin'] = true;
+            $_SESSION["anonimo"] = false;
             $class = "alert-success";
             $msg = "Se ha iniciado sesión correctamente como administrador";
 

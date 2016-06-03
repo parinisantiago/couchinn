@@ -1,7 +1,13 @@
 <?php
 
 include("conectarBD.php");
-session_start();
+
+session_start(); 
+
+if (isset($_SESSION["anonimo"]) && !isset($_SESSION["admin"])){ //!isset($_SESSION["admin"]) forma rebuscada de verificar que "anonimo"
+    $_SESSION["id_usuario"] = -1;                               //esta en false (se lo setea a false en logueo_usuario.php)
+}
+
 $query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE (couch.id_couch ='".$_GET["id"]."' AND couch.eliminado_couch = 0)";
 $resultado= mysqli_query($conexion, $query);
 $row = mysqli_fetch_array($resultado);
@@ -23,7 +29,7 @@ if (mysqli_num_rows($resultado) == 1){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="default.css" rel="stylesheet">
+    <link href="default.css" rel="stylesheet"><link rel="icon" href="img/logo.png">
     <script src="js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
@@ -55,21 +61,29 @@ if (mysqli_num_rows($resultado) == 1){
 
             </ol>
 
+            <?php if ($cant_fotos != 0){ ?>
             <!-- Wrapper for slides class="img-responsive center-block"-->
-            <div class="carousel-inner" role="listbox">
-                <?php while ( $foto = mysqli_fetch_array($resultado_foto)) {
-                    if( $first){ $first=false;?>
-                    <div class="item active">
-                        <img  src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
-                     </div>
-                <?php } else {?>
-                    <div class="item">
-                        <img  src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
-                    </div>
-                <?php }
-                } ?>
+                <div class="carousel-inner" role="listbox">
+                    <?php while ( $foto = mysqli_fetch_array($resultado_foto)) {
+                        if( $first){ $first=false;?>
+                        <div class="item active">
+                            <img  src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
+                         </div>
+                    <?php } else {?>
+                        <div class="item">
+                            <img  src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
+                        </div>
+                    <?php }
+                    } ?>
 
-            </div>
+                </div>
+            <?php } else { ?>
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img  src=<?php echo("img/logo.png");?> >
+                    </div>
+            </div>    
+            <?php }        ?>
             <!-- Controls -->
             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -110,19 +124,14 @@ if (mysqli_num_rows($resultado) == 1){
             <d1 class="dl-horizontal">
                 <dt> Nombre: </dt>
                 <dd> <?php echo($couch["nombre"]) ?> <?php echo($couch["apellido"]) ?></dd>
-                <dt> Email:</dt>
-                <dd> <?php echo($couch["email"]) ?></dd>
-                <dt> Teléfono:</dt>
-                <dd> <?php echo($couch["telefono"]) ?></dd>
-                <dt> Fecha de nacimiento:</dt>
-                <dd> <?php echo($couch["fnac"]) ?></dd>
             </d1>
         </div>
         
     <?php   }    ?>
-    <?php   if (!$esDuenio && !$_SESSION["admin"]) {  ?>
+    <?php   if (isset($_SESSION["admin"]) && !$esDuenio && !$_SESSION["admin"]) {  ?>
                 <a class="btn btn-default" href="index.php">Reservar</a>
         <?php   }  ?>
+                <a class="btn btn-default" href="index.php">Volver</a>
 </div>
 </body>
 

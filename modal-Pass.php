@@ -10,7 +10,7 @@
                     <form class="form-inline" name="recuperarContrasena" method="post" onsubmit="return valRecuperarContrasena()" action="consultas/recuperar_contrasena.php">
                         <div class="form-group">
                             <label class="control-label" for="emailRec">Email</label>
-                            <input type="email" name="emailRec" class="form-control" id="emailRec" maxlength="30" placeholder="Email" aria-describedby="helpBlock-email" required>
+                            <input type="email" name="emailRec" class="form-control" id="emailRec" maxlength="30" placeholder="nombre_de_su_email@dominio.com" aria-describedby="helpBlock-email" required>
                             <span id="glyphicon-emailRec" aria-hidden="true"></span>
                             <span id="helpBlock-emailRec" class="help-block"></span>
                         </div>
