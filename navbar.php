@@ -35,7 +35,7 @@ if( isset($_SESSION['sesion_usuario'])){
                             </ul >
                         </li >
                         <li class="dropdown" >
-                            <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Mi perfil <span class="caret" ></span ></a >
+                            <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Administrador <span class="caret" ></span ></a >
                             <ul class="dropdown-menu" >
                                 <li ><a href = "#" > Ver perfil </a ></li >
                                 <li ><a href = "user_modForm.php" > Modificar perfil </a ></li >
@@ -44,8 +44,6 @@ if( isset($_SESSION['sesion_usuario'])){
                     </ul >
 
                     <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
-                    
-                        <span style="color:white;"><?php echo("Usted ha iniciado sesión como administrador")?></span> 
                         <button type="submit" class="btn btn-default">Cerrar Sesion</button>
                     </form>
 
@@ -80,7 +78,7 @@ if( isset($_SESSION['sesion_usuario'])){
 
                     <?php }  ?>
                     <li class="dropdown" >
-                        <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Mi perfil <span class="caret" ></span ></a >
+                        <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > <?php echo($_SESSION["nombre_completo"])?> <span class="caret" ></span ></a >
                         <ul class="dropdown-menu" >
                             <li ><a href = "#" > Ver perfil </a ></li >
                             <li ><a href = "user_modForm.php" > Modificar perfil </a ></li >
@@ -89,7 +87,7 @@ if( isset($_SESSION['sesion_usuario'])){
                 </ul >
 
                 <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
-                    <span style="color:white;"><?php echo("Usted ha iniciado sesión como ".$_SESSION["nombre_completo"])?></span>     
+                    
                     <button type="submit" class="btn btn-default">Cerrar Sesion</button>
                 </form>
 
