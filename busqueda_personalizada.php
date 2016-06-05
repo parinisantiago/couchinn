@@ -1,5 +1,12 @@
 <div class="input-group" id="adv-search">
-                
+                <?php 
+                //Para evitar error de undefined index.
+                if (!isset($_GET["titulo"])){ $_GET["titulo"] = '';}
+                if (!isset($_GET["ubicacion"])){ $_GET["ubicacion"] = '';}
+                if (!isset($_GET["descripcion"])){ $_GET["descripcion"] = '';}
+                if (!isset($_GET["capacidad"])){ $_GET["capacidad"] = '';}
+                if (!isset($_GET["tipo"])){ $_GET["tipo"] = '';}
+                 ?>
                 <div class="input-group-btn">
                     <div class="btn-group" role="group">
                         <div class="dropdown dropdown-lg">
