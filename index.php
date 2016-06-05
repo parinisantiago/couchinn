@@ -31,12 +31,13 @@
 		</div>	
 		<div class="row"><hr></div>
 		<div class="container">
-			<div class="col-md-3">
-				<?php if (isset($_GET['msg'])) { ?>
+			<?php if (isset($_GET['msg'])) { ?>
 					<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
 						<?php echo($_GET['msg']); ?>
 					</div>
 				<?php } ?>
+			<div class="col-md-3">
+				
 
 				<?php include("busqueda_personalizada.php");?>
 			</div>
