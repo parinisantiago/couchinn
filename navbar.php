@@ -44,8 +44,11 @@ if( isset($_SESSION['sesion_usuario'])){
                     </ul >
 
                     <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
+                    
+                        <span style="color:white;"><?php session_start();echo("Usted ha iniciado sesión como administrador")?></span> 
                         <button type="submit" class="btn btn-default">Cerrar Sesion</button>
                     </form>
+
 
                 </div >
             </div >
@@ -86,6 +89,7 @@ if( isset($_SESSION['sesion_usuario'])){
                 </ul >
 
                 <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
+                    <span style="color:white;"><?php session_start();echo("Usted ha iniciado sesión como ".$_SESSION["nombre_completo"])?></span>     
                     <button type="submit" class="btn btn-default">Cerrar Sesion</button>
                 </form>
 
@@ -112,6 +116,7 @@ if( isset($_SESSION['sesion_usuario'])){
 
 
                 <form id="user-session" class="form-inline pull-right" method="post"  action="consultas/logueo_usuario.php">
+                    
                     <div class="form-group">
                         <label class="sr-only" for="emailLoggin">Email</label>
                         <input type="email" name="email" class="form-control" id="emailLoggin" placeholder="Email" maxlength="30" required>
