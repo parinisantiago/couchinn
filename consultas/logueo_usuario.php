@@ -5,13 +5,15 @@
     $email= $_POST['email'];
     $clave= $_POST['clave'];
 
-    $query= "SELECT id_usuario,email,clave FROM usuario WHERE email='".$email."' AND clave='".$clave."'";
+    $query= "SELECT id_usuario,email,clave,nombre,apellido FROM usuario WHERE email='".$email."' AND clave='".$clave."'";
     $resultado=mysqli_query($conexion, $query);
 
 
     if (mysqli_num_rows($resultado) == 1) {
         session_start();
+
         $row= mysqli_fetch_array($resultado);
+        $_SESSION["nombre_completo"] = $row["nombre"]." ".$row["apellido"];
         $_SESSION["sesion_usuario"] = true;
         $_SESSION["id_usuario"]= $row['id_usuario'];
         $_SESSION['admin'] = false;
@@ -25,6 +27,7 @@
         $resultadoAdmin = mysqli_query($conexion, $queryAdmin);
         if (mysqli_num_rows($resultadoAdmin) == 1) {
             session_start();
+            $_SESSION["e-mail"] = $email;
             $rowAdmin = mysqli_fetch_array($resultadoAdmin);
             $_SESSION["sesion_usuario"] = true;
             $_SESSION["id_usuario"] = $rowAdmin['id_admin'];
