@@ -45,7 +45,7 @@ if( isset($_SESSION['sesion_usuario'])){
 
                     <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
                     
-                        <span style="color:white;"><?php session_start();echo("Usted ha iniciado sesión como administrador")?></span> 
+                        <span style="color:white;"><?php echo("Usted ha iniciado sesión como administrador")?></span> 
                         <button type="submit" class="btn btn-default">Cerrar Sesion</button>
                     </form>
 
@@ -89,7 +89,7 @@ if( isset($_SESSION['sesion_usuario'])){
                 </ul >
 
                 <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
-                    <span style="color:white;"><?php session_start();echo("Usted ha iniciado sesión como ".$_SESSION["nombre_completo"])?></span>     
+                    <span style="color:white;"><?php echo("Usted ha iniciado sesión como ".$_SESSION["nombre_completo"])?></span>     
                     <button type="submit" class="btn btn-default">Cerrar Sesion</button>
                 </form>
 
