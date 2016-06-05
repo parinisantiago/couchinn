@@ -1,8 +1,7 @@
 <?php	            	
 	include_once("conectarBD.php");
-	$query= "SELECT * FROM couch NATURAL JOIN tipo WHERE (couch.despublicado = 0 AND couch.eliminado_couch = 0)";
+	$query= "SELECT * FROM couch NATURAL JOIN tipo WHERE (couch.despublicado = 0 AND couch.eliminado_couch = 0 AND couch.titulo LIKE '%".$_GET["titulo"]."%' AND couch.descripcion LIKE '%".$_GET["descripcion"]."%' AND couch.ubicacion LIKE '%".$_GET["ubicacion"]."%' AND couch.capacidad LIKE '%".$_GET["capacidad"]."%' AND tipo.nombre_tipo LIKE '%".$_GET["tipo"]."%')";
 	$resultado= mysqli_query($conexion, $query);
-	
 ?>
 <div class="list-group">
 	

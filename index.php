@@ -18,14 +18,7 @@
 	<body>
 
 		<?php 
-			include("navbar.php"); /*
-<?php $titulo=$row["titulo"];
-	            	$descripcion=$row["descripcion"];
-	            	$ubicacion=$row["ubicacion"];
-	            	$direccion=$row["direccion"];
-	            	$capacidad=$row["capacidad"];
-	            	echo ($titulo."<br>".$descripcion."<br>".$ubicacion."<br>".$direccion."<br>".$capacidad); ?>
-*/?>
+			include("navbar.php");?>
 		<div class="container">
 
 			<?php if (isset($_GET['msg'])) { ?>
@@ -33,11 +26,14 @@
 					<?php echo($_GET['msg']); ?>
 				</div>
 			<?php } ?>
+			<?php include("busqueda_personalizada.php");?>
 			<!-- Se muestra un listado de todos los couchs publicados --> 
 	        <h2>Elegí tu hospedaje!</h2>
 			<?php include("listado_hospedajes.php");?>
 	        <!-- Fin de se muestra un listado de todos los couchs publicados --> 
-	        
+	        </div>
+			
+			
         
 	
 </div>
