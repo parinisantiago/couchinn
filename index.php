@@ -20,23 +20,34 @@
 		<?php 
 			include("navbar.php");?>
 		<div class="container">
+			<div class="col-md-12">
+				<!-- Busqueda simple --> 
+					<form class="form-inline" role="form" method="GET" action="index.php">
+	                          <input type="text" class="form-control" name="titulo" id="titulo" method="GET" action="index.php" placeholder="¿Qué estás buscando?" />
+	                          <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+	                        </form>
+	            <!-- Fin de Busqueda simple -->     
+	        </div>    
+		</div>	
+		<div class="row"><hr></div>
+		<div class="container">
+			<div class="col-md-3">
+				<?php if (isset($_GET['msg'])) { ?>
+					<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
+						<?php echo($_GET['msg']); ?>
+					</div>
+				<?php } ?>
 
-			<?php if (isset($_GET['msg'])) { ?>
-				<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
-					<?php echo($_GET['msg']); ?>
-				</div>
-			<?php } ?>
-			<?php include("busqueda_personalizada.php");?>
-			<!-- Se muestra un listado de todos los couchs publicados --> 
-	        <h2>Elegí tu hospedaje!</h2>
-			<?php include("listado_hospedajes.php");?>
-	        <!-- Fin de se muestra un listado de todos los couchs publicados --> 
-	        </div>
-			
-			
-        
-	
-</div>
+				<?php include("busqueda_personalizada.php");?>
+			</div>
+
+			<div class="col-md-9">
+				<!-- Se muestra un listado de todos los couchs publicados --> 
+				<?php include("listado_hospedajes.php");?>
+		        <!-- Fin de se muestra un listado de todos los couchs publicados --> 
+		        </div>
+			</div>	
+		</div>
 
 	</body>
 

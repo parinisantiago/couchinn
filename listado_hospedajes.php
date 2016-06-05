@@ -2,7 +2,12 @@
 	include_once("conectarBD.php");
 	$query= "SELECT * FROM couch NATURAL JOIN tipo WHERE (couch.despublicado = 0 AND couch.eliminado_couch = 0 AND couch.titulo LIKE '%".$_GET["titulo"]."%' AND couch.descripcion LIKE '%".$_GET["descripcion"]."%' AND couch.ubicacion LIKE '%".$_GET["ubicacion"]."%' AND couch.capacidad LIKE '%".$_GET["capacidad"]."%' AND tipo.nombre_tipo LIKE '%".$_GET["tipo"]."%')";
 	$resultado= mysqli_query($conexion, $query);
-?>
+	//Si no se arrojan resultados, se informa sobre lo ocurrido.
+	if (mysqli_num_rows($resultado) == 0) { ?>
+	<h4>No se encontraron couchs que coincidan con los criterios de búsqueda establecidos.</h4>	
+	<?php } ?>
+
+
 <div class="list-group">
 	
     <?php while ($row = mysqli_fetch_array($resultado)){
@@ -32,7 +37,7 @@
 <a href="detalle_couch.php?id=<?php echo($id_couch) ?>" class="list-group-item">
 		
 		<div class="row">
-  <div class="col-md-2"><img class="img-circle" height="130" width="180"  src="<?php 
+  <div class="col-md-3"><img class="img-circle" height="130" width="180"  src="<?php 
   //Si es premium muestro la foto del hospedaje, si no muestro el logo de couchinn
   if( (isset($esPremium)) && ($esPremium)){
   	$consultaFotos= "SELECT ruta FROM couch NATURAL JOIN foto WHERE couch.id_couch='".$id_couch."'";
