@@ -15,26 +15,44 @@
         </div>
         <div class="form-group">
           <label for="contain">Titulo</label>
-          <input class="form-control input-sm" type="text" name="titulo" id="titulo" maxlength="40" placeholder="Cualquiera" />
+          <input class="form-control input-sm" type="text" value="<?php echo($_GET["titulo"]) ?>" name="titulo" id="titulo" maxlength="40" placeholder="Cualquiera" />
         </div>
         <div class="form-group">
           <label for="contain">Descripción</label>
-          <input class="form-control input-sm" type="text" name="descripcion" id="descripcion" maxlength="60" placeholder="Cualquiera" />
+          <input class="form-control input-sm" type="text" value="<?php echo($_GET["descripcion"]) ?>" name="descripcion" id="descripcion" maxlength="60" placeholder="Cualquiera" />
         </div>
         <div class="form-group">
           <label for="contain">Tipo</label>
-          <input class="form-control input-sm" type="text" name="tipo" id="tipo" maxlength="30" onkeypress="return isLetterKey(event)" placeholder="Cualquiera"/>
+          <select class="form-control input-sm" name="tipo" id="tipo" maxlength="25">
+              
+              <?php if ($_GET["tipo"] == ''){ ?>
+                    <option selected>Cualquiera</option>
+
+              <?php } else { ?>
+                        <option hidden selected><?php echo($_GET["tipo"]) ?></option>
+                        <option>Cualquiera</option>
+                      <?php }?>
+              <?php 
+                  include("conectarBD.php");
+                  $queryDropdownTipos = "SELECT nombre_tipo FROM tipo";
+                  $resultadoDropdownTipos = mysqli_query($conexion, $queryDropdownTipos);
+                  while ($row = mysqli_fetch_array($resultadoDropdownTipos)) { 
+              ?>
+                    <option><?php echo($row["nombre_tipo"]); ?></option>
+              <?php } ?>
+              
+          </select>
         </div>
         <div class="form-group">
           <label for="contain">Ubicación</label>
-          <input class="form-control input-sm" type="text"  name="ubicacion" id="ubicacion" maxlength="70" placeholder="Cualquiera"/>
+          <input class="form-control input-sm" type="text"  value="<?php echo($_GET["ubicacion"]) ?>" name="ubicacion" id="ubicacion" maxlength="70" placeholder="Cualquiera"/>
         </div>
         <div class="form-group">
           <label for="contain">Capacidad</label>
-          <input class="form-control input-sm" type="text"  name="capacidad" id="capacidad" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="Cualquiera"/>
+          <input class="form-control input-sm" type="text"  value="<?php echo($_GET["capacidad"]) ?>" name="capacidad" id="capacidad" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="Cualquiera"/>
         </div>
         
-        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"> Buscar</span></button>
+        <button type="submit" class="btn btn-primary btn-md center-block"><span class="glyphicon glyphicon-search" aria-hidden="true"> Buscar</span></button>
       </form>
       </div>
     </div>
