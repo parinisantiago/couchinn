@@ -77,6 +77,12 @@ if( isset($_SESSION['sesion_usuario'])){
                                 <li ><a href = "hacerse_premium.php" > Ser Premium</a ></li >
 
                     <?php }  ?>
+                    <li class="dropdown">
+                        <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Mis Couchs <span class="caret" ></span ></a >
+                        <ul class="dropdown-menu" >
+                            <li ><a href = "altaCouch.php" > Crear couch </a ></li >
+                        </ul>
+                    </li>
                     <li class="dropdown" >
                         <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > <?php echo($_SESSION["nombre_completo"])?> <span class="caret" ></span ></a >
                         <ul class="dropdown-menu" >
@@ -132,6 +138,6 @@ if( isset($_SESSION['sesion_usuario'])){
 
 <?php } ?>
 
-    <div class="" id="img-header">
+    <div class="" id="">
 
     </div>
