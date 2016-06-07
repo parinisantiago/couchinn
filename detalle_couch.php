@@ -40,6 +40,13 @@ if (mysqli_num_rows($resultado) == 1){
 
 <?php include("navbar.php"); ?>
 <div class="container">
+                    <?php if (isset($_GET['msg'])) { ?>
+<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET["class"]); ?>">
+                        <?php echo($_GET['msg']); ?>
+                    </div>
+                <?php } ?>
+</div>
+<div class="container">
     <?php while ( $couch = mysqli_fetch_array($resultado)) {
 
         //busca las fotos del couch para agregarlas al carousel
@@ -129,7 +136,9 @@ if (mysqli_num_rows($resultado) == 1){
         
     <?php   }    ?>
     <?php   if (isset($_SESSION["admin"]) && !$esDuenio && !$_SESSION["admin"]) {  ?>
-                <a class="btn btn-default" href="index.php">Reservar</a>
+                <?php include("reservar_couch.php");?>
+                <a class="btn btn-default" href="#" data-toggle="modal" data-target="#modalReservarCouch"> Reservar</a>
+                
         <?php   }  ?>
                 <a class="btn btn-default" href="index.php">Volver</a>
 </div>
