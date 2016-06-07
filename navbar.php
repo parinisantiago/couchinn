@@ -138,6 +138,6 @@ if( isset($_SESSION['sesion_usuario'])){
 
 <?php } ?>
 
-    <div class="" id="">
+    <div class="" id="img-header">
 
     </div>
