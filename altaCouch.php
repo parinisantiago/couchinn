@@ -1,6 +1,9 @@
 <?php
     session_start();
     if(isset($_SESSION['sesion_usuario'])) {
+        include_once("conectarBD.php");
+        $query= "SELECT id_tipo,nombre_tipo FROM tipo WHERE eliminado = 0";
+        $result=mysqli_query($conexion, $query);
         ?>
         <html>
         <head>
@@ -32,10 +35,70 @@
             <div class="form-group">
                 <span class="text-muted"><em><span style="color:red;">*</span> Estos campos son requeridos</em></span>
             </div>
+
+            <!-- id dueno couch -->
             <div class="form-group">
                 <label class="control-label" for="idUser"></label>
-                <input type="hidden" name="idUser" class="form-control" id="idUser" value=<?php $_SESSION['id_usuario']?>>
+                <input type="hidden" name="idUser" class="form-control" id="idUser" value=<?php echo($_SESSION['id_usuario'])?>>
             </div>
+
+            <!-- titulo couch -->
+            <div class="form-group">
+                <label class="control-label" for="titCouch">Título<span style="color:red;">*</span></label>
+                <input type="text" name="titCouch" class="form-control" id="titCouch" placeholder="El nombre de mi couch" onkeypress="return isLetterKey(event)" maxlength="100" aria-describedby="helpBlock-nom" required>
+                <span id="glyphicon-titCouch" aria-hidden="true"></span>
+                <span id="helpBlock-titCouch" class="help-block"></span>
+            </div>
+
+            <!-- descripcion couch -->
+            <div class="form-group">
+                <label class="control-label" for="descCouch">Descripción<span style="color:red;">*</span></label>
+                <textarea name="descCouch" class="form-control" id="descCouch" maxlength="500" aria-describedby="helpBlock-nom" rows="5" cols="50" required> </textarea>
+                <span id="glyphicon-descCouch" aria-hidden="true"></span>
+                <span id="helpBlock-descCouch" class="help-block"></span>
+            </div>
+
+            <!-- ubicacion couch -->
+            <div class="form-group">
+                <label class="control-label" for="ubCouch">Ubicación<span style="color:red;">*</span></label>
+                <input type="text" name="ubCouch" class="form-control" id="ubCouch" placeholder="La Plata, Buenos aires, Argentina" onkeypress="return isLetterKey(event)" maxlength="100" aria-describedby="helpBlock-nom" required>
+                <span id="glyphicon-ubCouch" aria-hidden="true"></span>
+                <span id="helpBlock-ubCouch" class="help-block"></span>
+            </div>
+
+            <!-- direccion couch -->
+            <div class="form-group">
+                <label class="control-label" for="dirCouch">Dirección<span style="color:red;">*</span></label>
+                <input type="text" name="dirCouch" class="form-control" id="dirCouch" placeholder="Santa Fe e/ Corrientes y Brasil n 1500" onkeypress="return isLetterKey(event)" maxlength="100" aria-describedby="helpBlock-nom" required>
+                <span id="glyphicon-dirCouch" aria-hidden="true"></span>
+                <span id="helpBlock-dirCouch" class="help-block"></span>
+            </div>
+
+            <!-- capacidad couch -->
+            <div class="form-group">
+                <label class="control-label" for="capCouch">Capacidad<span style="color:red;">*</span></label>
+                <select class="form-control" id="dirCouch" name="dirCouch">
+                    <?php for($i=1; $i <= 20; $i++){ ?>
+
+                        <option value=<?php echo($i); ?>> <?php echo($i); ?> </option>
+
+                    <?php } ?>
+                </select>
+            </div>
+
+            <!-- tipo couch -->
+            <div class="form-group">
+                <label class="control-label" for="dirCouch">Tipo de couch<span style="color:red;">*</span></label>
+                <select class="form-control" id="dirCouch" name="dirCouch">
+                    <?php while ( $tipos = mysqli_fetch_array($result) ){ ?>
+
+                        <option value=<?php echo($tipos['id_tipo']); ?>> <?php echo($tipos['nombre_tipo']); ?> </option>
+
+                    <?php } ?>
+                </select>
+            </div>
+
+            <!-- botones de envio -->
             <div class="form-group">
                 <button type="submit" class="btn btn-default">Aceptar</button>
                 <a class="btn btn-default" href="index.php">Cancelar</a>
