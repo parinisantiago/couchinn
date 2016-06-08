@@ -10,14 +10,13 @@ if( isset($_SESSION['sesion_usuario']) ){?>
 			<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 			<link href="default.css" rel="stylesheet"><link rel="icon" href="img/logo.png">
 			<script src="js/jquery.min.js"></script>
-			<script src="js/altaValidaciones.js"></script>
 			<script src="bootstrap/js/bootstrap.min.js"></script>
 
 			<title> Couchinn </title>
 		</head>
 
 		<body>
-
+		<body onload="deshabilitarOnLoad();">	
 		<?php include("navbar.php"); ?>
 		<div class="container">
 			<div class="panel panel-primary">
@@ -37,35 +36,78 @@ if( isset($_SESSION['sesion_usuario']) ){?>
 				$query = "SELECT titulo,id_couch,despublicado FROM couch WHERE eliminado_couch=0 AND id_usuario = ".$_SESSION["id_usuario"]."";
 				$result = mysqli_query($conexion, $query);
 				$temp = 1;
+				$noEntro = true;
 				while ($row = mysqli_fetch_array($result)) {
+					$noEntro = false;
 					//Guardo los datos de la BD en las variables de php
 					$nombre = $row["titulo"];
 					$des = 0;
 					if ($row["despublicado"] == 0){
-						$nombre = $nombre." (Publicado)";
+						$nombre = $nombre." <font color='green'>(PUBLICADO)</font>";
 					}
 					else
 					{
-						$nombre = $nombre." (Despublicado)";
+						$nombre = $nombre." <font color='red'>(DESPUBLICADO)</font>";
 						$des = 1;
 					}
 					//Alto hack para listar los tipos para poder seleccionarlos y que se autocomplete el campo de modificacion
 					if ($temp == 1){?>
-             			<input type='radio' onclick = "return deshabilitar()" checked name="couch" value= "<?php echo($row["id_couch"]);?>"> <?php echo($nombre); ?> <br>
+             			<input type='radio' id = "<?php echo($des); ?>" onclick = "deshabilitar(this)" checked name="couch" value= "<?php echo($row["id_couch"]);?>"> <?php echo($nombre); ?> <br>
              			<?php $temp = 0; ?>
              		<?php	} else {?>
-             			<input type='radio' onclick = "return deshabilitar()" name="couch" value= "<?php echo($row["id_couch"]);?>"> <?php echo($nombre); ?> <br>
+             			<input type='radio' id = "<?php echo($des); ?>" onclick = "deshabilitar(this)" name="couch" value= "<?php echo($row["id_couch"]);?>"> <?php echo($nombre); ?> <br>
              		<?php	} ?>
-				<?php	} ?>
+				<?php	}
+					if ($noEntro) //AFUERA DEL WHILE SI NO ENTRO AL WHILE QUIERE DECIR QUE NO HABIA COUCHS PUBLICADOS
+					{?>
+						<p>USTED NO TIENE COUCHS PUBLICADOS EN ESTE MOMENTO</p>
+					<?php }
+				 ?>
 			</div>
 			<div class="panel-footer">
 			<div class="form-group " id="buttons-tipo-couch">
-			<input type='radio' onclick = "deshabilitar()" name="couch" value= "2"> asdasdasd <br>
 				<button type="submit" name = "Eliminar" onclick="return confirm('¿Esta seguro de que desea Eliminar el couch?')" class="btn btn-default">Eliminar</button>
                 <button type="submit" name = "Despublicar" id = "Despublicar" onclick="return confirm('¿Esta seguro de que desea Despublicar el couch?')" class="btn btn-default">Despublicar</button>
+                <button type="submit" name = "Publicar" id = "Publicar" onclick="return confirm('¿Esta seguro de que desea Publicar el couch?')" class="btn btn-default">Publicar</button>
                 <button type="submit" name = "Modificar" onclick="return confirm('¿Esta seguro de que desea Modificar el couch?')" class="btn btn-default">Modificar</button>
                 <a class="btn btn-default" href="index.php">Cancelar</a>
             </div>
+            <script>
+            	function deshabilitar(obj)
+            	{
+            		if (obj.id == "1")
+            		{
+						document.getElementById("Despublicar").disabled = true;
+            		}
+            		else
+            		{
+            			document.getElementById("Despublicar").disabled = false;
+            		}
+            		
+            	}
+            	function deshabilitarOnLoad() //Checkea onLoad (llamado desde el principio del <body>) si todos los couch estan despublicados
+            	{							  //si lo estan deshabilita de una el boton
+            		var vrows = document.getElementsByName("couch"); //Obtengo todos los radio buttion
+            		var todosDespublicados = true;
+            		if (vrows[0].id == 1)
+            		{
+            			document.getElementById("Despublicar").disabled = true; //Si el primero esta despublicado ya pone en disabled el Despublicar
+
+            		}
+            		for (i = 0; i < vrows.length; i++)
+            		{ 
+					    if (vrows[i].id == 0)
+					    {
+					    	todosDespublicados = false;
+					    	break;
+					    }
+					}
+            		if (todosDespublicados)
+            		{
+            			document.getElementById("Despublicar").disabled = true;
+            		}
+            	}
+            </script>
 			</div>
             </form>
 

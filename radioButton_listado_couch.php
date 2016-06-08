@@ -12,5 +12,8 @@
 	else if (isset($_POST["Despublicar"])){
 		include "consultas/despublicar_couch.php";
 	}
+	else if (isset($_POST["Publicar"])){
+		include "consultas/publicar_couch.php";
+	}
 
 ?>
