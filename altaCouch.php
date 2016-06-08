@@ -31,7 +31,7 @@
                 <?php echo($_GET['msg']) ?>
             </div>
         <?php } ?>
-        <form class="form-horizontal" name="altaCouch" method="post" onsubmit="return valCouch()" action="consultas/alta_couch.php">
+        <form class="form-horizontal" name="altaCouch" method="post" onsubmit="return valCouch()" action="consultas/alta_couch.php" enctype="multipart/form-data">
             <div class="form-group">
                 <span class="text-muted"><em><span style="color:red;">*</span> Estos campos son requeridos</em></span>
             </div>
@@ -69,7 +69,7 @@
             <!-- direccion couch -->
             <div class="form-group">
                 <label class="control-label" for="dirCouch">Dirección<span style="color:red;">*</span></label>
-                <input type="text" name="dirCouch" class="form-control" id="dirCouch" placeholder="Santa Fe e/ Corrientes y Brasil n 1500" onkeypress="return isLetterKey(event)" maxlength="100" aria-describedby="helpBlock-nom" required>
+                <input type="text" name="dirCouch" class="form-control" id="dirCouch" placeholder="Santa Fe e/ Corrientes y Brasil n 1500" maxlength="100" aria-describedby="helpBlock-nom" required>
                 <span id="glyphicon-dirCouch" aria-hidden="true"></span>
                 <span id="helpBlock-dirCouch" class="help-block"></span>
             </div>
@@ -88,8 +88,8 @@
 
             <!-- tipo couch -->
             <div class="form-group">
-                <label class="control-label" for="dirCouch">Tipo de couch<span style="color:red;">*</span></label>
-                <select class="form-control" id="dirCouch" name="dirCouch">
+                <label class="control-label" for="tipCouch">Tipo de couch<span style="color:red;">*</span></label>
+                <select class="form-control" id="tipCouch" name="tipCouch">
                     <?php while ( $tipos = mysqli_fetch_array($result) ){ ?>
 
                         <option value=<?php echo($tipos['id_tipo']); ?>> <?php echo($tipos['nombre_tipo']); ?> </option>
