@@ -4,7 +4,7 @@
 	$fDesde = $_POST['fIng'];
 	$fHasta = $_POST['fEgre'];
 	echo($_POST['fIng'].$_POST['fEgre'].$_POST['id_couch']);
-	$queryReservar="SELECT * FROM reserva WHERE ((finicio BETWEEN '".$fDesde."' AND '".$fHasta."') OR (ffin BETWEEN '".$fDesde."' AND '".$fHasta."')) AND (id_couch='".$_POST["id_couch"]."')";
+	$queryReservar="SELECT * FROM reserva WHERE (('".$fDesde."' BETWEEN finicio AND fFin) OR ('".$fHasta."' BETWEEN finicio AND fFin) OR (finicio BETWEEN '".$fDesde."' AND '".$fHasta."') OR (ffin BETWEEN '".$fDesde."' AND '".$fHasta."')) AND (id_couch='".$_POST["id_couch"]."')";
     $resultadoReservar= mysqli_query($conexion, $queryReservar);
     
     //Si no hay reservas para las fechas solicitadas, carga la solicitud
