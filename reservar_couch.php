@@ -1,5 +1,5 @@
 <?php $today= date('Y-m-d');?>
-
+<script src="js/altaValidaciones.js"></script>
     <div id="modalReservarCouch" class="modal fade" tabindex="-1" role="dialog" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -7,7 +7,7 @@
                     <label class="control-label" for="emailUser">Seleccione la fecha en que desea alojarse.</label>
                 </div>
                 <div class="modal-body">
-                    <form class="form-inline" name="reservar_couch" method="post" onsubmit="" action="consultas/reserva_couch.php">
+                    <form class="form-inline" name="reservar_couch" method="post" onsubmit="return fechasReserva()" action="consultas/reserva_couch.php">
                         <div class="form-group">
 
                               

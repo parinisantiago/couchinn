@@ -398,3 +398,11 @@ function isLetterKey(evt){
 function deshabilitar(){
     document.getElementById("Despublicar").disabled = true;
 }
+
+function fechasReserva(){
+    if (document.getElementById("fIng").value > document.getElementById("fEgre").value){
+        document.getElementById("helpBlock-fEgre").innerHTML = "No se pudo enviar su solicitud, la fecha de egreso <br> debe ser posterior a la fecha de ingreso.";
+        return false;
+    }   
+    return true;
+}
