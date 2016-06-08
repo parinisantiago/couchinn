@@ -394,3 +394,7 @@ function isLetterKey(evt){
         return true;  
     return false;
 }
+
+function deshabilitar(){
+    document.getElementById("Despublicar").disabled = true;
+}

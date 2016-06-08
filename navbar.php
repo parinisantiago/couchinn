@@ -81,6 +81,7 @@ if( isset($_SESSION['sesion_usuario'])){
                         <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Mis Couchs <span class="caret" ></span ></a >
                         <ul class="dropdown-menu" >
                             <li ><a href = "altaCouch.php" > Crear couch </a ></li >
+                            <li ><a href = "listado_mis_couchs.php" > Ver mis couch </a ></li >
                         </ul>
                     </li>
                     <li class="dropdown" >
