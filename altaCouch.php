@@ -98,6 +98,25 @@
                 </select>
             </div>
 
+            <!-- imagen couch -->
+            <div class="form-group">
+                <label class="control-label" for="imgCouch">Fotos del couch<span style="...">*</span> </label>
+                <input type="file" name="imgCouch" id="ímgCouch">
+            </div>
+            
+            <!-- imagen de portada -->
+           
+            <?php
+                $query_premium="SELECT id_usuario FROM premium WHERE id_usuario='". $_SESSION['id_usuario'] ."'";
+                $result_premium= mysqli_query($conexion, $query_premium);
+                if (mysqli_num_rows($result_premium) > 0){ ?>
+                    <div class="form-group">
+                        <label class="control-label" for="imgPrinCouch">Foto principal del couch<span style="...">*</span> </label>
+                        <input type="file" name="imgPrinCouch" id="imgPrinCouch">
+                    </div>
+              <?php  }
+            ?>
+            
             <!-- botones de envio -->
             <div class="form-group">
                 <button type="submit" class="btn btn-default">Aceptar</button>
