@@ -32,7 +32,7 @@ if (mysqli_num_rows($resultado) == 1){
     <link href="default.css" rel="stylesheet"><link rel="icon" href="img/logo.png">
     <script src="js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="js/altaValidaciones.js"></script>
     <title> Couchinn </title>
 </head>
 
@@ -140,7 +140,55 @@ if (mysqli_num_rows($resultado) == 1){
                 <a class="btn btn-default" href="#" data-toggle="modal" data-target="#modalReservarCouch"> Reservar</a>
                 
         <?php   }  ?>
+        <?php if($esDuenio){  ?>
+            <!-- Inicio de aceptar o rechazar reservas -->
+            <div class="col-md-6">
+             
+                <div class="panel panel-primary">
+                
+                        <div class="panel-heading">
+                            Listado de reservas en espera por este couch.
+                        </div>
+                            <?php 
+                                include_once("conectarBD.php");
+                                
+                                //Ltsta todas las reservas que están en espera de ser aceptadas o rechazadas
+                                $queryReservasEnEspera = "SELECT * FROM reserva NATURAL JOIN usuario WHERE ((id_couch = '".$_GET["id"]."') AND (estado = 'En espera'))";
+                                $resultadoReservasEnEspera = mysqli_query($conexion, $queryReservasEnEspera);
+                            ?>    
+                            <form name="formularioReservasEnEspera" action="consultas/aceptar_rechazar_reserva.php" method="POST">
+                            <?php    while ($rowReservas = mysqli_fetch_array($resultadoReservasEnEspera)) { 
+                            ?>
+
+                            
+                            <input type="hidden" name="idCouch" class="form-control" id="idCouch" value="<?php echo($_GET["id"])?>">
+                           <?php  echo("Solicitud de ".$rowReservas["nombre"]." ".$rowReservas["apellido"]." del ".$rowReservas["finicio"]." al ".$rowReservas["ffin"]);?>
+                           <br> 
+                           <div class="form-group" id="">
+                            <button type="submit" class="btn btn-primary" name = "aceptar" id="aceptar.<?php  echo($rowReservas["id_reserva"]); ?>" onclick="return confirm('¿Esta seguro de que desea aceptar la reserva?')" value="<?php  echo($rowReservas["id_reserva"]); ?>" class="btn btn-default">Aceptar</button>
+                            <button type="submit" class="btn btn-danger" name = "rechazar" id = "rechazar.<?php  echo($rowReservas["id_reserva"]); ?>" onclick="return confirm('¿Esta seguro de que desea rechazar la reserva?')" value="<?php  echo($rowReservas["id_reserva"]); ?>" class="btn btn-default">Rechazar</button>
+                            <hr>    
+                        </div> 
+                            <?php   }
+                            ?>
+                            
+                            
+                            </form>
+                          
+                </div>
+                
+            </div>
+            <!-- Fin de aceptar o rechazar reservas -->
+            <?php }  ?>
                 <a class="btn btn-default" href="index.php">Volver</a>
+
+                
+                 
+                
+
+
+
+
 </div>
 </body>
 
@@ -148,6 +196,7 @@ if (mysqli_num_rows($resultado) == 1){
 <?php } else { 
     echo("Este Couch ha sido eliminado"); ?>
     <br><a class="btn btn-default" href="index.php">Volver</a>
+
 <?php } ?>
 
 
