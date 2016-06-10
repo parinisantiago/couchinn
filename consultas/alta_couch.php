@@ -1,5 +1,5 @@
 <?php
-include_once("conectarBD.php");
+include_once("../conectarBD.php");
 
 //datos enviados por POST
 $idUser= $_POST['idUser'];
@@ -10,15 +10,20 @@ $dirCouch= $_POST['dirCouch'];
 $capCouch= $_POST['capCouch'];
 $tipCouch= $_POST['tipCouch'];
 
+
 //direccion base para los couch, se crea una carpeta para cada usuario
-$dirBase = "fotos_hospedajes/";
+$dirBase = "../fotos_hospedajes/" . $idUser . "/";
 $dirCompleta = $dirBase . basename($_FILES["imgCouch"]["name"]);
 $dirCompletaPrin=$dirBase . basename($_FILES['imgPrinCouch']['name']);
-
+//si el usuario no posee una carpeta para guardar sus fotos, la crea
+ if( ! file_exists($dirBase)) {
+     echo("no existe la carpeta");
+     mkdir($dirBase, 0777);
+ } else { echo("existe la carpeta");}
 
 //valida que sea es una imagen
 $tipoImgCouch = $_FILES['imgCouch']['type'];
-$tipoImgPrin = $_FILES['imgPrinCouch']['type'];
+$tipoImgPrinCouch = $_FILES['imgPrinCouch']['type'];
 if(! ( $tipoImgCouch == 'image/png' || $tipoImgCouch == 'image/jpg' || $tipoImgCouch == 'image/jpeg')){ header("redirect: ../altaCouch.php?variable=entro por el check");}
 if(! ( $tipoImgPrinCouch == 'image/png' || $tipoImgPrinCouch == 'image/jpg' || $tipoImgPrinCouch == 'image/jpeg')){ header("redirect: ../altaCouch.php?variable=entro por el check");}
 
@@ -39,4 +44,5 @@ if (move_uploaded_file($_FILES["imgPrinCouch"]["tmp_name"], $dirCompletaPrin)) {
 } else {
     echo "Sorry, there was an error uploading your file.";
 }
+
 

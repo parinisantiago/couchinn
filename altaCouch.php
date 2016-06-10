@@ -30,7 +30,7 @@ $result=mysqli_query($conexion, $query);
             <?php echo($_GET['msg']) ?>
         </div>
     <?php } ?>
-    <form class="form-horizontal" name="altaCouch" method="post" action="upload.php" enctype="multipart/form-data">
+    <form class="form-horizontal" name="altaCouch" method="post" action="consultas/alta_couch.php" enctype="multipart/form-data">
         <div class="form-group">
             <span class="text-muted"><em><span style="color:red;">*</span> Estos campos son requeridos</em></span>
         </div>
