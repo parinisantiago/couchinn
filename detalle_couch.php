@@ -142,7 +142,7 @@ if (mysqli_num_rows($resultado) == 1){
         <?php   }  ?>
         <?php if($esDuenio){  ?>
             <!-- Inicio de aceptar o rechazar reservas -->
-            <div class="col-md-6">
+            <div class="col-md-7">
              
                 <div class="panel panel-primary">
                 
@@ -162,11 +162,12 @@ if (mysqli_num_rows($resultado) == 1){
 
                             
                             <input type="hidden" name="idCouch" class="form-control" id="idCouch" value="<?php echo($_GET["id"])?>">
-                           <?php  echo("Solicitud de ".$rowReservas["nombre"]." ".$rowReservas["apellido"]." del ".$rowReservas["finicio"]." al ".$rowReservas["ffin"]);?>
-                           <br> 
+                          
+                           
                            <div class="form-group" id="">
-                            <button type="submit" class="btn btn-primary" name = "aceptar" id="aceptar.<?php  echo($rowReservas["id_reserva"]); ?>" onclick="return confirm('¿Esta seguro de que desea aceptar la reserva?')" value="<?php  echo($rowReservas["id_reserva"]); ?>" class="btn btn-default">Aceptar</button>
-                            <button type="submit" class="btn btn-danger" name = "rechazar" id = "rechazar.<?php  echo($rowReservas["id_reserva"]); ?>" onclick="return confirm('¿Esta seguro de que desea rechazar la reserva?')" value="<?php  echo($rowReservas["id_reserva"]); ?>" class="btn btn-default">Rechazar</button>
+                            <?php  echo("Solicitud de ".$rowReservas["nombre"]." ".$rowReservas["apellido"]." del ".$rowReservas["finicio"]." al ".$rowReservas["ffin"]);?>
+                            <button type="submit" class="btn btn-sm btn-primary glyphicon glyphicon-ok" name = "aceptar" id="aceptar.<?php  echo($rowReservas["id_reserva"]); ?>" onclick="return confirm('¿Esta seguro de que desea aceptar la reserva?')" value="<?php  echo($rowReservas["id_reserva"]); ?>" class="btn btn-default"> Aceptar</button>
+                            <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove" name = "rechazar" id = "rechazar.<?php  echo($rowReservas["id_reserva"]); ?>" onclick="return confirm('¿Esta seguro de que desea rechazar la reserva?')" value="<?php  echo($rowReservas["id_reserva"]); ?>" class="btn btn-default"> Rechazar</button>
                             <hr>    
                         </div> 
                             <?php   }
