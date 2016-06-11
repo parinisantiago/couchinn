@@ -1,54 +1,73 @@
-<!DOCTYPE html>
-<html>
+<?php 
+                //Para evitar error de undefined index.
+                if (!isset($_GET["titulo"])){ $_GET["titulo"] = '';}
+                if (!isset($_GET["ubicacion"])){ $_GET["ubicacion"] = '';}
+                if (!isset($_GET["descripcion"])){ $_GET["descripcion"] = '';}
+                if (!isset($_GET["capacidad"])){ $_GET["capacidad"] = '';}
+                if (!isset($_GET["tipo"])){ $_GET["tipo"] = '';}
+                 ?>
+<div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">Armá tu búsqueda personalizada!</div>
+      <div class="panel-body">
+        <form class="form-horizontal" role="form" method="GET" action="index.php">
+        <div class="form-group">    
+        </div>
+        <div class="form-group">
+          <label for="contain">Titulo</label>
+          <input class="form-control input-sm" type="text" value="<?php echo($_GET["titulo"]) ?>" name="titulo" id="titulo" maxlength="40" placeholder="Cualquiera" />
+        </div>
+        <div class="form-group">
+          <label for="contain">Descripción</label>
+          <input class="form-control input-sm" type="text" value="<?php echo($_GET["descripcion"]) ?>" name="descripcion" id="descripcion" maxlength="60" placeholder="Cualquiera" />
+        </div>
+        <div class="form-group">
+          <label for="contain">Tipo</label>
+          <select class="form-control input-sm" name="tipo" id="tipo" maxlength="25">
+              
+              <?php if ($_GET["tipo"] == ''){ ?>
+                    <option selected>Cualquiera</option>
 
-	<head>
-		<meta charset="utf-8">
-   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-   		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="default.css" rel="stylesheet"><link rel="icon" href="img/logo.png">
-        <link rel="icon" href="img/logo.png">
-		<script src="js/jquery.min.js"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="js/altaValidaciones.js"></script>
-
-		<title> Couchinn </title>
-	</head>
-
-	<body>
-
-		<?php 
-			include("navbar.php");?>
-		<div class="container">
-			<?php if (isset($_GET['msg'])) { ?>
-					<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
-						<?php echo($_GET['msg']); ?>
-					</div>
-				<?php } ?>
-			<div class="col-md-3">
-				
-
-				<?php include("busqueda_personalizada.php");?>
-			</div>
-
-			<div class="col-md-9">
-				<!-- Se muestra un listado de todos los couchs publicados --> 
-				<span style="color:#95ac3b;">
-					<?php 
-					//Muestra los criterios de búsqueda elegidos en los resultados.
-					if (($_GET["titulo"] != "") OR ($_GET["Descripcion"] != "") OR ($_GET["tipo"] != "Cualquiera" AND $_GET["tipo"] != "") OR ($_GET["tipo"] != "") OR ($_GET["ubicacion"] != "") OR ($_GET["caṕacidad"] != "")){ echo("Resultados de su búsqueda: ");}
-					if ($_GET["titulo"] != ""){ echo("Titulo-> ".$_GET["titulo"]." , "); } 
-					if ($_GET["descripcion"] != ""){ echo("Descripcion -> ".$_GET["descripcion"]." , "); } 
-					if ($_GET["tipo"] != "Cualquiera" AND $_GET["tipo"] != ""){ echo("Tipo-> ".$_GET["tipo"]." , "); } 
-					if ($_GET["ubicacion"] != ""){ echo("Ubicacion -> ".$_GET["ubicacion"]." , "); } 
-					if ($_GET["capacidad"] != ""){ echo("Capacidad-> ".$_GET["capacidad"]." personas , "); } ?>
-				</span>
-				<?php include("listado_hospedajes.php");?>
-		        <!-- Fin de se muestra un listado de todos los couchs publicados --> 
-		        </div>
-			</div>	
-		</div>
-
-	</body>
-
-</html>
+              <?php } else { ?>
+                        <option hidden selected><?php echo($_GET["tipo"]) ?></option>
+                        <option>Cualquiera</option>
+                      <?php }?>
+              <?php 
+                  include("conectarBD.php");
+                  $queryDropdownTipos = "SELECT nombre_tipo FROM tipo";
+                  $resultadoDropdownTipos = mysqli_query($conexion, $queryDropdownTipos);
+                  while ($row = mysqli_fetch_array($resultadoDropdownTipos)) { 
+              ?>
+                    <option><?php echo($row["nombre_tipo"]); ?></option>
+              <?php } ?>
+              
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contain">Ubicación</label>
+          <input class="form-control input-sm" type="text"  value="<?php echo($_GET["ubicacion"]) ?>" name="ubicacion" id="ubicacion" maxlength="70" placeholder="Cualquiera"/>
+        </div>
+        <div class="form-group">
+          <label for="contain">Capacidad</label>
+          <input class="form-control input-sm" type="text"  value="<?php echo($_GET["capacidad"]) ?>" name="capacidad" id="capacidad" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="Cualquiera"/>
+        </div>
+        <div class="container">
+            <button type="button" class="btn btn-primary btn-sm   glyphicon glyphicon-refresh" onclick="return limpiar();"> Limpiar</button>
+            <button type="submit" id="btnBuscar" class="btn btn-primary btn-sm "><span class="glyphicon glyphicon-search" aria-hidden="true"> Buscar</span></button>
+        </div>
+      </form>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function limpiar(){
+             document.getElementById("titulo").value="";
+             document.getElementById("descripcion").value="";
+             document.getElementById("ubicacion").value="";
+             document.getElementById("capacidad").value="";
+             document.getElementById("tipo").value="Cualquiera";
+             //Luego de limpiar todo, vuelve a listar todos los couch haciendo click automáticamente en buscar
+             document.getElementById("btnBuscar").click();
+             
+      }
+    </script>
+</div>
