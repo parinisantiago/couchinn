@@ -36,7 +36,7 @@
 				<span style="color:#95ac3b;">
 					<?php 
 					//Muestra los criterios de búsqueda elegidos en los resultados.
-					if (($_GET["titulo"] != "") OR ($_GET["Descripcion"] != "") OR ($_GET["tipo"] != "Cualquiera" AND $_GET["tipo"] != "") OR ($_GET["tipo"] != "") OR ($_GET["ubicacion"] != "") OR ($_GET["caṕacidad"] != "")){ echo("Resultados de su búsqueda: ");}
+					/* Tira undefined, ver por que: if (($_GET["titulo"] != "") OR ($_GET["Descripcion"] != "") OR ($_GET["tipo"] != "Cualquiera" AND $_GET["tipo"] != "") OR ($_GET["tipo"] != "") OR ($_GET["ubicacion"] != "") OR ($_GET["caṕacidad"] != "")){ echo("Resultados de su búsqueda: ");}*/
 					if ($_GET["titulo"] != ""){ echo("Titulo-> ".$_GET["titulo"]." , "); } 
 					if ($_GET["descripcion"] != ""){ echo("Descripcion -> ".$_GET["descripcion"]." , "); } 
 					if ($_GET["tipo"] != "Cualquiera" AND $_GET["tipo"] != ""){ echo("Tipo-> ".$_GET["tipo"]." , "); } 
