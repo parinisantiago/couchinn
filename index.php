@@ -20,17 +20,6 @@
 		<?php 
 			include("navbar.php");?>
 		<div class="container">
-			<div class="col-md-12">
-				<!-- Busqueda simple --> 
-					<form class="form-inline" role="form" method="GET" action="index.php">
-	                          <input type="text" class="form-control" name="titulo" id="titulo" method="GET" action="index.php" placeholder="¿Qué estás buscando?" />
-	                          <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-	                        </form>
-	            <!-- Fin de Busqueda simple -->     
-	        </div>    
-		</div>	
-		<div class="row"><hr></div>
-		<div class="container">
 			<?php if (isset($_GET['msg'])) { ?>
 					<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
 						<?php echo($_GET['msg']); ?>
@@ -44,6 +33,16 @@
 
 			<div class="col-md-9">
 				<!-- Se muestra un listado de todos los couchs publicados --> 
+				<span style="color:#95ac3b;">
+					<?php 
+					//Muestra los criterios de búsqueda elegidos en los resultados.
+					if (($_GET["titulo"] != "") OR ($_GET["Descripcion"] != "") OR ($_GET["tipo"] != "Cualquiera" AND $_GET["tipo"] != "") OR ($_GET["tipo"] != "") OR ($_GET["ubicacion"] != "") OR ($_GET["caṕacidad"] != "")){ echo("Resultados de su búsqueda: ");}
+					if ($_GET["titulo"] != ""){ echo("Titulo-> ".$_GET["titulo"]." , "); } 
+					if ($_GET["descripcion"] != ""){ echo("Descripcion -> ".$_GET["descripcion"]." , "); } 
+					if ($_GET["tipo"] != "Cualquiera" AND $_GET["tipo"] != ""){ echo("Tipo-> ".$_GET["tipo"]." , "); } 
+					if ($_GET["ubicacion"] != ""){ echo("Ubicacion -> ".$_GET["ubicacion"]." , "); } 
+					if ($_GET["capacidad"] != ""){ echo("Capacidad-> ".$_GET["capacidad"]." personas , "); } ?>
+				</span>
 				<?php include("listado_hospedajes.php");?>
 		        <!-- Fin de se muestra un listado de todos los couchs publicados --> 
 		        </div>
