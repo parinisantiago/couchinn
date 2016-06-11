@@ -51,9 +51,23 @@
           <label for="contain">Capacidad</label>
           <input class="form-control input-sm" type="text"  value="<?php echo($_GET["capacidad"]) ?>" name="capacidad" id="capacidad" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="Cualquiera"/>
         </div>
-        
-        <button type="submit" class="btn btn-primary btn-md center-block"><span class="glyphicon glyphicon-search" aria-hidden="true"> Buscar</span></button>
+        <div class="container">
+            <button type="button" class="btn btn-primary btn-sm   glyphicon glyphicon-refresh" onclick="return limpiar();"> Limpiar</button>
+            <button type="submit" id="btnBuscar" class="btn btn-primary btn-sm "><span class="glyphicon glyphicon-search" aria-hidden="true"> Buscar</span></button>
+        </div>
       </form>
       </div>
     </div>
+    <script type="text/javascript">
+      function limpiar(){
+             document.getElementById("titulo").value="";
+             document.getElementById("descripcion").value="";
+             document.getElementById("ubicacion").value="";
+             document.getElementById("capacidad").value="";
+             document.getElementById("tipo").value="Cualquiera";
+             //Luego de limpiar todo, vuelve a listar todos los couch haciendo click automáticamente en buscar
+             document.getElementById("btnBuscar").click();
+             
+      }
+    </script>
 </div>
