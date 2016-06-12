@@ -9,40 +9,32 @@ $ubCouh= $_POST['ubCouch'];
 $dirCouch= $_POST['dirCouch'];
 $capCouch= $_POST['capCouch'];
 $tipCouch= $_POST['tipCouch'];
+$warning= false;
 
 
 //direccion base para los couch, se crea una carpeta para cada usuario
 $dirBase = "../fotos_hospedajes/" . $idUser . "/";
-$dirCompleta = $dirBase . basename($_FILES["imgCouch"]["name"]);
-$dirCompletaPrin=$dirBase . basename($_FILES['imgPrinCouch']['name']);
+
 //si el usuario no posee una carpeta para guardar sus fotos, la crea
- if( ! file_exists($dirBase)) {
-     echo("no existe la carpeta");
-     mkdir($dirBase, 0777);
- } else { echo("existe la carpeta");}
+ if( ! file_exists($dirBase)) { mkdir($dirBase, 0777);}
+
+//valida las imagenes una por una
+$total = count($_FILES['imgCouch']['name']);
+for ( $i = 0; $i < $total; $i++){
+
+$ok=true;
+
+//ruta propiamente de la imagen
+$dirCompleta = $dirBase . basename($_FILES["imgCouch"]["name"][$i]);
 
 //valida que sea es una imagen
-$tipoImgCouch = $_FILES['imgCouch']['type'];
-$tipoImgPrinCouch = $_FILES['imgPrinCouch']['type'];
-if(! ( $tipoImgCouch == 'image/png' || $tipoImgCouch == 'image/jpg' || $tipoImgCouch == 'image/jpeg')){ header("redirect: ../altaCouch.php?variable=entro por el check");}
-if(! ( $tipoImgPrinCouch == 'image/png' || $tipoImgPrinCouch == 'image/jpg' || $tipoImgPrinCouch == 'image/jpeg')){ header("redirect: ../altaCouch.php?variable=entro por el check");}
+    $tipoImgCouch = $_FILES['imgCouch']['type'][$i];
+    if (!($tipoImgCouch == 'image/png' || $tipoImgCouch == 'image/jpg' || $tipoImgCouch == 'image/jpeg')) { $ok = false; }
 
 //valida que la imagen no exista
-if (file_exists($dirCompleta)){ echo("algo"); }
-if (file_exists($dirCompletaPrin)){ echo("algo"); }
+    if (file_exists($dirCompleta)) { $ok=false;}
 
-
-//si pasa todas las validaciones intenta agrega la imagen
-if (move_uploaded_file($_FILES["imgCouch"]["tmp_name"], $dirCompleta)) {
-    echo "The file ". basename( $_FILES["imgCouch"]["name"]). " has been uploaded.";
-} else {
-    echo "Sorry, there was an error uploading your file.";
+    if($ok){ move_uploaded_file($_FILES['imgCouch']['tmp_name'][$i], $dirCompleta);}
+    else { $warning= true; echo"no pudo agregar";}
 }
-
-if (move_uploaded_file($_FILES["imgPrinCouch"]["tmp_name"], $dirCompletaPrin)) {
-    echo "The file ". basename( $_FILES["imgPrinCouch"]["name"]). " has been uploaded.";
-} else {
-    echo "Sorry, there was an error uploading your file.";
-}
-
 
