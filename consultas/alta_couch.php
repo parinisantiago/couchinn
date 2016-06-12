@@ -9,12 +9,26 @@ $ubCouh= $_POST['ubCouch'];
 $dirCouch= $_POST['dirCouch'];
 $capCouch= $_POST['capCouch'];
 $tipCouch= $_POST['tipCouch'];
+$fPublicacion= date('Y-m-d');
+echo($fPublicacion);
 $warning= false;
+
+
+
+//agrega el couch
+
+$query="INSERT INTO couch(id_usuario, id_tipo, titulo, descripcion, ubicacion, direccion, capacidad,f_publicacion) VALUES ('". $idUser. "','" . $tipCouch . "','" . $titCouch ." ', '" . $descCouch . "','" . $ubCouh. "','" . $dirCouch . "','" . $capCouch . "','" . $fPublicacion . "')";
+echo ($query);
+mysqli_query($conexion, $query);
+
+//recoge el id resultante
+
+$idCouch=mysqli_insert_id($conexion);
 
 
 //direccion base para los couch, se crea una carpeta para cada usuario
 $dirBase = "../fotos_hospedajes/" . $idUser . "/";
-
+$dirBase2 = "fotos_hospedajes/" . $idUser . "/";
 //si el usuario no posee una carpeta para guardar sus fotos, la crea
  if( ! file_exists($dirBase)) { mkdir($dirBase, 0777);}
 
@@ -34,7 +48,12 @@ $dirCompleta = $dirBase . basename($_FILES["imgCouch"]["name"][$i]);
 //valida que la imagen no exista
     if (file_exists($dirCompleta)) { $ok=false;}
 
-    if($ok){ move_uploaded_file($_FILES['imgCouch']['tmp_name'][$i], $dirCompleta);}
-    else { $warning= true; echo"no pudo agregar";}
+    if($ok){
+        move_uploaded_file($_FILES['imgCouch']['tmp_name'][$i], $dirCompleta);
+        $dir2= $dirBase2.basename($_FILES["imgCouch"]["name"][$i]);
+        $query="INSERT INTO foto(id_couch, ruta) VALUES ('".$idCouch."','".$dir2."')";
+        mysqli_query($conexion, $query);
+    }
+    else { $warning= true;}
 }
 
