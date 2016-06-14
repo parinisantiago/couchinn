@@ -193,7 +193,7 @@ if (mysqli_num_rows($resultado) == 1){
              ?>
 
 
-            <form name="form-preguntas" class="form-horizontal" method="GET" onsubmit="altaPregunta.php">
+            <form name="form-preguntas" class="form-horizontal" method="GET" action="consultas/altaPregunta.php">
                 <div class="form-group">
                     <label class="control-label" for="preguntaCouch">Haga su pregunta al dueño: </label>
                     <textarea class="form-control" rows="5" cols="50" maxlength="500" name="preguntaCouch" id="preguntaCouch" required></textarea>
