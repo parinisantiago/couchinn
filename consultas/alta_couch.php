@@ -9,16 +9,13 @@ $ubCouh= $_POST['ubCouch'];
 $dirCouch= $_POST['dirCouch'];
 $capCouch= $_POST['capCouch'];
 $tipCouch= $_POST['tipCouch'];
-$fPublicacion= date('Y-m-d');
-echo($fPublicacion);
 $warning= false;
 
 
 
 //agrega el couch
 
-$query="INSERT INTO couch(id_usuario, id_tipo, titulo, descripcion, ubicacion, direccion, capacidad,f_publicacion) VALUES ('". $idUser. "','" . $tipCouch . "','" . $titCouch ." ', '" . $descCouch . "','" . $ubCouh. "','" . $dirCouch . "','" . $capCouch . "','" . $fPublicacion . "')";
-echo ($query);
+$query="INSERT INTO couch(id_usuario, id_tipo, titulo, descripcion, ubicacion, direccion, capacidad) VALUES ('". $idUser. "','" . $tipCouch . "','" . $titCouch ." ', '" . $descCouch . "','" . $ubCouh. "','" . $dirCouch . "','" . $capCouch . "')";
 mysqli_query($conexion, $query);
 
 //recoge el id resultante
