@@ -56,5 +56,5 @@ $dirCompleta = $dirBase . basename($_FILES["imgCouch"]["name"][$i]);
 }
 
     if($warning){
-        header("location:: ../index.php?msg=El couch se creo correctamente pero algunas de sus imagenes no pudieron ser subidas&&class=alert-warning");
-    } else { header("location: ../index.php?msg=Su couch se creo correctamente&&class=alert-success");}
+        header("Location: ../index.php?msg=El couch se creo correctamente pero algunas de sus imagenes no pudieron ser subidas&&class=alert-warning");
+    } else { header("Location: ../index.php?msg=Su couch se creo correctamente&&class=alert-success");}
