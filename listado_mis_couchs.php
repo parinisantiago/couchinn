@@ -69,7 +69,7 @@ if( isset($_SESSION['sesion_usuario']) ){?>
 				<button type="submit" name = "Eliminar" onclick="return confirm('¿Esta seguro de que desea Eliminar el couch?')" class="btn btn-default">Eliminar</button>
                 <button type="submit" name = "Despublicar" id = "Despublicar" onclick="return confirm('¿Esta seguro de que desea Despublicar el couch?')" class="btn btn-default">Despublicar</button>
                 <button type="submit" name = "Publicar" id = "Publicar" onclick="return confirm('¿Esta seguro de que desea Publicar el couch?')" class="btn btn-default">Publicar</button>
-                <button type="submit" name = "Modificar" onclick="return confirm('¿Esta seguro de que desea Modificar el couch?')" class="btn btn-default">Modificar</button>
+                <button type="submit" name = "Modificar" class="btn btn-default">Modificar</button>
                 <a class="btn btn-default" href="index.php">Cancelar</a>
             </div>
             <script>
