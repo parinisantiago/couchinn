@@ -16,6 +16,7 @@ $warning= false;
 //agrega el couch
 
 $query="INSERT INTO couch(id_usuario, id_tipo, titulo, descripcion, ubicacion, direccion, capacidad) VALUES ('". $idUser. "','" . $tipCouch . "','" . $titCouch ." ', '" . $descCouch . "','" . $ubCouh. "','" . $dirCouch . "','" . $capCouch . "')";
+
 mysqli_query($conexion, $query);
 
 //recoge el id resultante
