@@ -75,11 +75,11 @@ if (mysqli_num_rows($resultado) == 1){
                                             <?php while ( $foto = mysqli_fetch_array($resultado_foto)) {
                                                 if( $first){ $first=false;?>
                                                     <div class="item active">
-                                                        <img  src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
+                                                        <img  src=<?php echo($foto["ruta"]);?> >
                                                     </div>
                                                 <?php } else {?>
                                                     <div class="item">
-                                                        <img  src=<?php echo("fotos_hospedajes/".$foto["ruta"]);?> >
+                                                        <img  src=<?php echo($foto["ruta"]);?> >
                                                     </div>
                                                 <?php }
                                             } ?>
@@ -178,40 +178,76 @@ if (mysqli_num_rows($resultado) == 1){
                             
                             
                             </form>
-                          
+
                 </div>
-                
+
             </div>
             <!-- Fin de aceptar o rechazar reservas -->
             <?php }  ?>
             <a class="btn btn-default" href="index.php">Volver</a>
-
-            <!-- Text area para hacer preguntas en caso de que no sea el dueño del Couch -->
-
-            <?php if(!$esDuenio){
-
-             ?>
-
-
-            <form name="form-preguntas" class="form-horizontal" method="GET" action="consultas/altaPregunta.php">
-                <div class="form-group">
-                    <label class="control-label" for="preguntaCouch">Haga su pregunta al dueño: </label>
-                    <textarea class="form-control" rows="5" cols="50" maxlength="500" name="preguntaCouch" id="preguntaCouch" required></textarea>
-                </div>
-                <div class="form-group">
-                    <button type="submit" name="submit" class="btn btn-default">Preguntar</button>
-                </div>
-                <input type="hidden" name="idCouch" value=<?php echo($_GET['id']); ?>>
-                <input type="hidden" name="idUsuario" value=<?php echo($_SESSION['id_usuario']); ?>>
-            </form>
-
-            <?php } ?>
-                 
+    
             <!-- Lista de preguntas y respuestas -->
+    <h3> Preguntas de los usuarios: </h3>
 
 
+    <?php
+
+        $preguntasQuery="SELECT * FROM pregunta WHERE id_couch='" .$_GET['id'] ."'";
+        $consulta= mysqli_query($conexion, $preguntasQuery);
+        while($preguntas = mysqli_fetch_array($consulta)){
+    ?>
+            <ul class="list-group" id="lista-preguntas">
+
+        <li class="list-group-item">
+           <!-- seccion de pregunta -->
+            <div class="text-center">
+            <p class="text-left"> El usuario pregunta: </p>
+            <?php echo($preguntas['contenidopregunta']) ?>
 
 
+            </div>
+
+           <!-- seccion de respiesta -->
+            <div class="text-center" id="respuesta">
+
+                <?php if($preguntas['contenidorespuesta'] != null){
+                    echo("<hr>");
+                    echo("<p class="."text-left"."> Respuesta: </p>");
+                    echo($preguntas['contenidorespuesta']);
+                } else if($esDuenio){ ?>
+                <hr>
+                <button class="btn btn-primary">Responder</button>
+
+             <?php   }  ?>
+
+            </div>
+
+        </li>
+    </ul>
+
+    <?php } ?>
+
+
+    <!-- Text area para hacer preguntas en caso de que no sea el dueño del Couch -->
+
+    <?php if(!$esDuenio){
+
+        ?>
+
+
+        <form name="form-preguntas" class="form-horizontal" method="GET" action="consultas/altaPregunta.php">
+            <div class="form-group">
+                <label class="control-label" for="preguntaCouch">Haga su pregunta al dueño: </label>
+                <textarea class="form-control" rows="5" cols="50" maxlength="500" name="preguntaCouch" id="preguntaCouch" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" name="submit" class="btn btn-default">Preguntar</button>
+            </div>
+            <input type="hidden" name="idCouch" value=<?php echo($_GET['id']); ?>>
+            <input type="hidden" name="idUsuario" value=<?php echo($_SESSION['id_usuario']); ?>>
+        </form>
+
+    <?php } ?>
 </div>
 </body>
 
