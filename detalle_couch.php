@@ -122,6 +122,17 @@ if (mysqli_num_rows($resultado) == 1){
                                         <dd> <?php echo($couch["direccion"]) ?></dd>
                                         <dt> Capacidad: </dt>
                                         <dd> <?php echo($couch["capacidad"]) ?></dd>
+
+                                 <!-- puntaje promedio -->
+                                    <?php
+                                        $promedioQuery= "SELECT AVG(puntaje) AS promedio FROM puntoscouch WHERE id_couch ='". $_GET['id'] ."'";
+                                        $promedioConsulta= mysqli_query($conexion, $promedioQuery);
+                                        while ($promedio = mysqli_fetch_array($promedioConsulta)) { ?>
+
+                                          <dt> <a href=<?php echo("listadoPuntajes.php?idCouch=".$_GET['id']);?>> Puntaje promedio: </a> </dt>
+                                          <dd> <?php echo(substr($promedio['promedio'], 0, 4)); ?></dd>
+                                       <?php }
+                                    ?>
                                     </d1>
                                 </div>
 
