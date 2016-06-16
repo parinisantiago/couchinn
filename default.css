@@ -12,6 +12,14 @@
     width: 50%;
 }
 
+#puntReser{
+    width: 30%;
+}
+
+#puntReserShow{
+    margin-top: 1%;
+}
+
 #container{
     width: 100%;
 }
