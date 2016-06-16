@@ -201,38 +201,46 @@ if (mysqli_num_rows($resultado) == 1){
 
     <!--Listado de reservas realizadas -->
     <?php
-        $queryRervasFin="SELECT id_reserva, DATE_FORMAT(finicio, '%d-%m-%y') AS finicio, DATE_FORMAT(ffin,'%d-%m-%y') AS ffin FROM reserva WHERE id_couch='".$_GET['id']."' AND estado='Finalizada' AND id_usuario='". $_SESSION['id_usuario'] ."'";
+        $queryRervasFin="SELECT id_puntajeCouch, id_reserva, DATE_FORMAT(finicio, '%d-%m-%y') AS finicio, DATE_FORMAT(ffin,'%d-%m-%y') AS ffin FROM reserva WHERE id_couch='".$_GET['id']."' AND estado='Finalizada' AND id_usuario='". $_SESSION['id_usuario'] ."'";
         $consultaReservasFin= mysqli_query($conexion, $queryRervasFin);
-        while( $reservasFin = mysqli_fetch_array($consultaReservasFin)){
+        while( $reservasFin = mysqli_fetch_array($consultaReservasFin)) {
+            if (!isset($reservasFin['id_puntajeCouch'])) {
+                ?>
 
+                <div class="panel panel-primary puntajeCouch">
+                    <div class="panel-heading">
+                        <p>Puntúe su estadía del dia: <?php echo($reservasFin['finicio']); ?> hasta el
+                            dia: <?php echo($reservasFin['ffin']); ?> </p>
+                    </div>
+                    <div class="panel-body">
+                        <form method="get" action="consultas/alta_puntajeCouch.php" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="puntReser" class="control-label">Puntua tu estadía: </label>
+                                <input type="range" min="1" max="5" name="puntReser" id="puntReser"
+                                       onchange="changeValue('puntReser' , 'puntReserShow')">
+                                <input type="text" id="puntReserShow" size="2" maxlength="1" min="1" max="5"
+                                       onkeypress="return is1to5(event)"
+                                       onchange="changeValue('puntReserShow', 'puntReser')" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="puntReserCont" class="control-label">Deje su comentario sobre la
+                                    estadía: </label>
+                                <textarea class="form-control" rows="5" cols="50" maxlength="250" name="puntReserCont"
+                                          id="puntReserCont"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" name="submit" class="btn btn-primary">Puntuar</button>
+                            </div>
+                            <input type="hidden" name="id_couch" value=<?php echo($_GET['id']); ?>>
+                            <input type="hidden" name="id_reserva" value=<?php echo($reservasFin['id_reserva']); ?>>
+                            <input type="hidden" name="id_usuario" value=<?php echo($_SESSION['id_usuario']); ?>>
+                        </form>
+                    </div>
+                </div>
+
+            <?php }
+        }
     ?>
-
-            <div class="panel panel-primary puntajeCouch">
-                <div class="panel-heading">
-                    <p>Puntúe su estadía del dia: <?php echo($reservasFin['finicio']); ?> hasta el dia: <?php echo($reservasFin['ffin']); ?> </p>
-                </div>
-                <div class="panel-body">
-                    <form method="get" action="consultas/alta_puntajeCouch.php" class="form-horizontal">
-                        <div class="form-group">
-                            <label for="puntReser" class="control-label">Puntua tu estadía: </label>
-                            <input type="range" min="1" max="5" name="puntReser" id="puntReser" onchange="changeValue('puntReser' , 'puntReserShow')">
-                            <input type="text" id="puntReserShow" size="2" maxlength="1" min="1" max="5" onkeypress="return is1to5(event)" onchange="changeValue('puntReserShow', 'puntReser')" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="puntReserCont" class="control-label">Deje su comentario sobre la estadía: </label>
-                            <textarea class="form-control" rows="5" cols="50" maxlength="250" name="puntReserCont" id="puntReserCont"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" name="submit" class="btn btn-primary">Puntuar</button>
-                        </div>
-                        <input type="hidden" name="id_couch" value=<?php echo($_GET['id']);?>>
-                        <input type="hidden" name="id_reserva" value=<?php echo($reservasFin['id_reserva']); ?>>
-                        <input type="hidden" name="id_usuario" value=<?php echo($_SESSION['id_usuario']);?>>
-                    </form>
-                </div>
-            </div>
-
-    <?php } ?>
 
             <!-- Lista de preguntas y respuestas -->
     <h3> Preguntas de los usuarios: </h3>
@@ -248,7 +256,8 @@ if (mysqli_num_rows($resultado) == 1){
 
         <li class="list-group-item">
            <!-- seccion de pregunta -->
-            <div class="text-center">
+            <div>
+                
             <p class="text-left"> El usuario pregunta: </p>
             <?php echo($preguntas['contenidopregunta']) ?>
 
