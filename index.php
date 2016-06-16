@@ -37,11 +37,11 @@
 					<?php 
 					//Muestra los criterios de búsqueda elegidos en los resultados.
 					/* Tira undefined, ver por que: if (($_GET["titulo"] != "") OR ($_GET["Descripcion"] != "") OR ($_GET["tipo"] != "Cualquiera" AND $_GET["tipo"] != "") OR ($_GET["tipo"] != "") OR ($_GET["ubicacion"] != "") OR ($_GET["caṕacidad"] != "")){ echo("Resultados de su búsqueda: ");}*/
-					if ($_GET["titulo"] != ""){ echo("Titulo-> ".$_GET["titulo"]." , "); } 
-					if ($_GET["descripcion"] != ""){ echo("Descripcion -> ".$_GET["descripcion"]." , "); } 
-					if ($_GET["tipo"] != "Cualquiera" AND $_GET["tipo"] != ""){ echo("Tipo-> ".$_GET["tipo"]." , "); } 
-					if ($_GET["ubicacion"] != ""){ echo("Ubicacion -> ".$_GET["ubicacion"]." , "); } 
-					if ($_GET["capacidad"] != ""){ echo("Capacidad-> ".$_GET["capacidad"]." personas , "); } ?>
+					if ($_GET["titulo"] != ""){ echo("Titulo-> ".$_GET["titulo"]." |||| "); } 
+					if ($_GET["descripcion"] != ""){ echo("Descripcion -> ".$_GET["descripcion"]." |||| "); } 
+					if ($_GET["tipo"] != "Cualquiera" AND $_GET["tipo"] != ""){ echo("Tipo-> ".$_GET["tipo"]." |||| "); } 
+					if ($_GET["ubicacion"] != ""){ echo("Ubicacion -> ".$_GET["ubicacion"]." |||| "); } 
+					if ($_GET["capacidad"] != ""){ echo("Capacidad-> ".$_GET["capacidad"]." personas |||| "); } ?>
 				</span>
 				<?php include("listado_hospedajes.php");?>
 		        <!-- Fin de se muestra un listado de todos los couchs publicados --> 

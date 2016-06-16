@@ -65,13 +65,13 @@ if( isset($_SESSION['sesion_usuario'])){
                     <li ><a href = "index.php" > <img class="img-responsive center-block" height = "40" width = "100" src="img/header.png"></a ></li >
 
                     <?php
-
+                    $esPremium = true;
                         //Si no es premium, mostrar boton para hacerse premium, estaria agregar un mensaje de que ya es premium en el caso de que lo sea con un else
                             include_once("conectarBD.php");
                             $query= "SELECT id_usuario FROM premium WHERE id_usuario='".$_SESSION['id_usuario']."'";
                             $resultado_navbar= mysqli_query($conexion, $query);
 
-                            if(mysqli_num_rows($resultado_navbar) == 0){
+                            if(mysqli_num_rows($resultado_navbar) == 0){ $esPremium = false;
                     ?>
 
                                 <li ><a href = "hacerse_premium.php" > Ser Premium</a ></li >
@@ -85,7 +85,7 @@ if( isset($_SESSION['sesion_usuario'])){
                         </ul>
                     </li>
                     <li class="dropdown" >
-                        <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > <?php echo($_SESSION["nombre_completo"])?> <span class="caret" ></span ></a >
+                        <a href = "#" class="dropdown-toggle  <?php if($esPremium) { echo("  glyphicon glyphicon-star-empty");} ?>" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > <?php echo($_SESSION["nombre_completo"])?> <span class="caret" ></span ></a >
                         <ul class="dropdown-menu" >
                             <li ><a href = "#" > Ver perfil </a ></li >
                             <li ><a href = "user_modForm.php" > Modificar perfil </a ></li >

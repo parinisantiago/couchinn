@@ -48,7 +48,7 @@
 	$consulta_fotos_query= mysqli_query($conexion, $consultaFotos);	
 	if(mysqli_num_rows($consulta_fotos_query) > 0){
 		$rowRuta=mysqli_fetch_array($consulta_fotos_query);
-		echo("fotos_hospedajes/".$rowRuta["ruta"]);
+		echo($rowRuta["ruta"]);
 		
 	}
 

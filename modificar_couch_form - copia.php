@@ -137,60 +137,6 @@ $resultTipo=mysqli_query($conexion, $query);
             <input type="file" name="imgCouch[]" id="imgCouch" multiple="multiple">
         </div>
 
-        <?php //busca las fotos del couch para agregarlas al carousel
-        $query_foto="SELECT ruta FROM foto WHERE id_couch='".$row['id_couch']."'";
-        $resultado_foto=mysqli_query($conexion, $query_foto);
-        $cant_fotos=mysqli_num_rows($resultado_foto);
-        $first = true;
-        ?>
-
-
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-
-                <?php for($i = 0; $i < $cant_fotos; $i++){ ?>
-
-                    <li data-target="#myCarousel" data-slide-to=<?php echo($i); if($i == 0){ echo(" class=active");} ?>></li>
-
-                <?php } ?>
-
-            </ol>
-
-            <?php if ($cant_fotos != 0){ ?>
-                <!-- Wrapper for slides class="img-responsive center-block"-->
-                <div class="carousel-inner" role="listbox">
-                    <?php while ( $foto = mysqli_fetch_array($resultado_foto)) {
-                        if( $first){ $first=false;?>
-                            <div class="item active">
-                                <img  src=<?php echo($foto["ruta"]);?> >
-                            </div>
-                        <?php } else {?>
-                            <div class="item">
-                                <img  src=<?php echo($foto["ruta"]);?> >
-                            </div>
-                        <?php }
-                    } ?>
-
-                </div>
-            <?php } else { ?>
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img  src=<?php echo("img/logo.png");?> >
-                    </div>
-                </div>
-            <?php }        ?>
-            <!-- Controls -->
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-
 
         <!-- botones de envio -->
         <div class="form-group">
