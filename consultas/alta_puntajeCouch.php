@@ -2,25 +2,31 @@
     if(isset($_GET['submit'])) {
         include("../conectarBD.php");
         $puntaje= $_GET['puntReser'];
-        $contenido= $_GET['puntReserContenido'];
+        $contenido= $_GET['puntReserCont'];
         $idCouch= $_GET['id_couch'];
         $idReserva= $_GET['id_reserva'];
         $idUsuario= $_GET['id_usuario'];
         
         //agrega el puntaje a la bd
-
+        var_dump($_GET);
         if($contenido == ""){
 
             $queryPregunta = "INSERT INTO puntoscouch(id_usuario, id_couch, puntaje) VALUES ('" . $idUsuario . "', '" . $idCouch . "', '" . $puntaje . "')";
-
+            echo($queryPregunta);
         } else {
 
-            $queryPregunta = "INSERT INTO puntoscouch(id_usuario, id_couch, comentario, puntaje) VALUES (id_usuario='" . $idUsuario . "', id_couch='" . $idCouch . "', comentario='" . $contenido . "', puntaje='" . $puntaje . "')";
-
+            $queryPregunta = "INSERT INTO puntoscouch(id_usuario, id_couch, comentario, puntaje) VALUES ('" . $idUsuario . "', '" . $idCouch . "', '" . $contenido . "', '" . $puntaje . "')";
+            echo($queryPregunta);
         }
         mysqli_query($conexion, $queryPregunta);
 
-        //cambiar estado de la reserva
+        //cagregar el puntaje a la reserva
+
+        $preguntaId= mysqli_insert_id($conexion);
+        $queryReserva= "UPDATE reserva SET id_puntajeCouch='$preguntaId' WHERE id_reserva='".$idReserva."'";
+        mysqli_query($conexion, $queryReserva);
+        echo($queryReserva);
+        header("Location: ../detalleCouch.php?msg=Su openion a sido registrada&&class=alert-success");
     } else {
         echo("que intentas hacer pillin?");
     }
