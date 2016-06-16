@@ -185,7 +185,37 @@ if (mysqli_num_rows($resultado) == 1){
             <!-- Fin de aceptar o rechazar reservas -->
             <?php }  ?>
             <a class="btn btn-default" href="index.php">Volver</a>
-    
+
+
+    <!--Listado de reservas realizadas -->
+    <?php
+        $queryRervasFin="SELECT id_reserva, DATE_FORMAT(finicio, '%d-%m-%y') AS finicio, DATE_FORMAT(ffin,'%d-%m-%y') AS ffin FROM reserva WHERE id_couch='".$_GET['id']."' AND estado='Finalizada' AND id_usuario='". $_SESSION['id_usuario'] ."'";
+        $consultaReservasFin= mysqli_query($conexion, $queryRervasFin);
+        while( $reservasFin = mysqli_fetch_array($consultaReservasFin)){
+
+    ?>
+
+            <div class="panel panel-primary puntajeCouch">
+                <div class="panel-heading">
+                    <p>Puntúe su estadía del dia: <?php echo($reservasFin['finicio']); ?> hasta el dia: <?php echo($reservasFin['ffin']); ?> </p>
+                </div>
+                <div class="panel-body">
+                    <form method="get" action="consultas/alta_puntajeCouch.php" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="puntReserCont" class="control-label">Deje su comentario sobre la estadía: </label>
+                            <textarea class="form-control" rows="5" cols="50" maxlength="250" name="puntReserCont" id="puntReserCont"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="submit" class="btn btn-primary">Puntuar</button>
+                        </div>
+                        <input type="hidden" name="id_couch" value=<?php echo($_GET['id']);?>>
+                        <input type="hidden" name="id_reserva" value=<?php echo($reservasFin['id_reserva']); ?>>
+                    </form>
+                </div>
+            </div>
+
+    <?php } ?>
+
             <!-- Lista de preguntas y respuestas -->
     <h3> Preguntas de los usuarios: </h3>
 
@@ -196,7 +226,7 @@ if (mysqli_num_rows($resultado) == 1){
         $consulta= mysqli_query($conexion, $preguntasQuery);
         while($preguntas = mysqli_fetch_array($consulta)){
     ?>
-            <ul class="list-group" id="lista-preguntas">
+            <ul class="list-group lista-preguntas">
 
         <li class="list-group-item">
            <!-- seccion de pregunta -->
@@ -208,7 +238,7 @@ if (mysqli_num_rows($resultado) == 1){
             </div>
 
            <!-- seccion de respiesta -->
-            <div class="text-center" id="respuesta">
+            <div class="text-center respuesta">
 
                 <?php if($preguntas['contenidorespuesta'] != null){
                     echo("<hr>");
@@ -238,7 +268,7 @@ if (mysqli_num_rows($resultado) == 1){
         <form name="form-preguntas" class="form-horizontal" method="GET" action="consultas/altaPregunta.php">
             <div class="form-group">
                 <label class="control-label" for="preguntaCouch">Haga su pregunta al dueño: </label>
-                <textarea class="form-control" rows="5" cols="50" maxlength="500" name="preguntaCouch" id="preguntaCouch" required></textarea>
+                <textarea class="form-control" rows="5" cols="50" maxlength="250" name="preguntaCouch" id="preguntaCouch" required></textarea>
             </div>
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default">Preguntar</button>
