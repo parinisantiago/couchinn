@@ -33,6 +33,7 @@ if (mysqli_num_rows($resultado) == 1){
     <script src="js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/altaValidaciones.js"></script>
+    <script src="js/puntajesValidaciones.js"></script>
     <title> Couchinn </title>
 </head>
 
@@ -201,6 +202,11 @@ if (mysqli_num_rows($resultado) == 1){
                 </div>
                 <div class="panel-body">
                     <form method="get" action="consultas/alta_puntajeCouch.php" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="puntReser" class="control-label">Puntua tu estadía: </label>
+                            <input type="range" min="1" max="5" name="puntReser" id="puntReser" onchange="changeValue('puntReser' , 'puntReserShow')">
+                            <input type="text" id="puntReserShow" size="2" maxlength="1" min="1" max="5" onkeypress="return is1to5(event)" onchange="changeValue('puntReserShow', 'puntReser')" required>
+                        </div>
                         <div class="form-group">
                             <label for="puntReserCont" class="control-label">Deje su comentario sobre la estadía: </label>
                             <textarea class="form-control" rows="5" cols="50" maxlength="250" name="puntReserCont" id="puntReserCont"></textarea>
