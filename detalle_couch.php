@@ -216,6 +216,7 @@ if (mysqli_num_rows($resultado) == 1){
                         </div>
                         <input type="hidden" name="id_couch" value=<?php echo($_GET['id']);?>>
                         <input type="hidden" name="id_reserva" value=<?php echo($reservasFin['id_reserva']); ?>>
+                        <input type="hidden" name="id_usuario" value=<?php echo($_SESSION['id_usuario']);?>>
                     </form>
                 </div>
             </div>
