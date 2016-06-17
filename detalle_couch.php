@@ -172,7 +172,7 @@ if (mysqli_num_rows($resultado) == 1){
                                             </div>
                                             <?php
                                             include_once("conectarBD.php");
-                                            //Se fija cuales de las reservas estan pasadas de fecha para ponerlas como vencidas.
+                                            //Se fija cuales de las reservas estan  pasadas de fecha para ponerlas como vencidas.
                                             $queryReservasVencidas = "UPDATE reserva SET estado = 'Vencida' WHERE ((finicio < CURDATE()) AND (estado='En espera'))";
                                             mysqli_query($conexion, $queryReservasVencidas);
                                             //Ltsta todas las reservas que están en espera de ser aceptadas o rechazadas
