@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.4.1deb2ubuntu1
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2016 a las 23:06:07
--- Versión del servidor: 5.7.9
--- Versión de PHP: 5.6.16
+-- Servidor: localhost
+-- Tiempo de generación: 19-06-2016 a las 14:50:26
+-- Versión del servidor: 5.7.12-0ubuntu1
+-- Versión de PHP: 5.6.22-1+donate.sury.org~wily+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,14 +26,11 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
-  `id_admin` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admin` (
+  `id_admin` int(100) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `clave` varchar(15) NOT NULL,
-  PRIMARY KEY (`id_admin`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `clave` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `admin`
@@ -48,9 +45,8 @@ INSERT INTO `admin` (`id_admin`, `email`, `clave`) VALUES
 -- Estructura de tabla para la tabla `couch`
 --
 
-DROP TABLE IF EXISTS `couch`;
-CREATE TABLE IF NOT EXISTS `couch` (
-  `id_couch` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `couch` (
+  `id_couch` int(100) NOT NULL,
   `id_usuario` int(100) NOT NULL,
   `id_tipo` int(100) NOT NULL,
   `titulo` varchar(100) NOT NULL,
@@ -59,10 +55,8 @@ CREATE TABLE IF NOT EXISTS `couch` (
   `direccion` varchar(100) NOT NULL,
   `capacidad` int(100) NOT NULL,
   `eliminado_couch` tinyint(1) NOT NULL DEFAULT '0',
-  `despublicado` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_couch`),
-  KEY `id_tipo` (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `despublicado` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `couch`
@@ -71,7 +65,6 @@ CREATE TABLE IF NOT EXISTS `couch` (
 INSERT INTO `couch` (`id_couch`, `id_usuario`, `id_tipo`, `titulo`, `descripcion`, `ubicacion`, `direccion`, `capacidad`, `eliminado_couch`, `despublicado`) VALUES
 (1, 8, 14, 'Bungalow Frente al mar', 'Luminoso alojamiento frente al mar para 2 personas.', 'Las Toninas, Bs. As., Argentina.', 'Calle 90 Nro 785', 2, 0, 0),
 (2, 9, 16, 'Carpa en la montana', 'Disfruta este intercambio en nuestra carpa en la montana.', 'Sierra de La Ventana, BS. AS., Argentina.', 'Calle holanda entre la sierra y los lenguados', 3, 0, 0),
-(3, 10, 17, 'Posada en La Plata', 'Linda posada con diferente tipo de habitaciones a su disposicion.', 'La Plata, Bs.As., Argentina.', '60 e 1 y 2.', 5, 0, 0),
 (4, 10, 15, 'Departamento en La Plata', 'Departamento mono ambiente muy comodo cerca del centro.', 'La Plata, Bs.As., Argentnia.', '7 e 48 y 49.', 2, 0, 0);
 
 -- --------------------------------------------------------
@@ -80,27 +73,11 @@ INSERT INTO `couch` (`id_couch`, `id_usuario`, `id_tipo`, `titulo`, `descripcion
 -- Estructura de tabla para la tabla `foto`
 --
 
-DROP TABLE IF EXISTS `foto`;
-CREATE TABLE IF NOT EXISTS `foto` (
-  `id_foto` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `foto` (
+  `id_foto` int(100) NOT NULL,
   `id_couch` int(100) NOT NULL,
-  `ruta` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_foto`),
-  UNIQUE KEY `ruta` (`ruta`),
-  KEY `id_couch` (`id_couch`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `foto`
---
-
-INSERT INTO `foto` (`id_foto`, `id_couch`, `ruta`) VALUES
-(1, 2, 'foto11.jpg'),
-(3, 2, 'foto2.jpg'),
-(4, 3, 'foto3.jpg'),
-(5, 3, 'foto4.jpg'),
-(6, 4, 'foto5.jpg'),
-(7, 2, 'foto6.jpg');
+  `ruta` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -108,18 +85,13 @@ INSERT INTO `foto` (`id_foto`, `id_couch`, `ruta`) VALUES
 -- Estructura de tabla para la tabla `pregunta`
 --
 
-DROP TABLE IF EXISTS `pregunta`;
-CREATE TABLE IF NOT EXISTS `pregunta` (
-  `id_pregunta` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pregunta` (
+  `id_pregunta` int(100) NOT NULL,
   `id_couch` int(100) NOT NULL,
   `id_usuariopregunta` int(100) NOT NULL,
   `id_usuariorespuesta` int(100) DEFAULT NULL,
   `contenidopregunta` text NOT NULL,
-  `contenidorespuesta` text,
-  PRIMARY KEY (`id_pregunta`),
-  KEY `id_couch` (`id_couch`),
-  KEY `id_usuariopregunta` (`id_usuariopregunta`),
-  KEY `id_usuariorespuesta` (`id_usuariorespuesta`)
+  `contenidorespuesta` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -128,34 +100,20 @@ CREATE TABLE IF NOT EXISTS `pregunta` (
 -- Estructura de tabla para la tabla `premium`
 --
 
-DROP TABLE IF EXISTS `premium`;
-CREATE TABLE IF NOT EXISTS `premium` (
-  `id_premium` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `premium` (
+  `id_premium` int(100) NOT NULL,
   `id_usuario` int(100) DEFAULT NULL,
   `tarjeta` varchar(16) NOT NULL,
   `f_incripcion` datetime(6) DEFAULT NULL,
-  `f_desuscripcion` datetime(6) DEFAULT NULL,
-  PRIMARY KEY (`id_premium`),
-  UNIQUE KEY `id_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `publicacion`
---
-
-DROP TABLE IF EXISTS `publicacion`;
-CREATE TABLE IF NOT EXISTS `publicacion` (
-  `id_publicacion` int(100) NOT NULL AUTO_INCREMENT,
-  `id_usuario` int(100) NOT NULL,
-  `id_couch` int(100) NOT NULL,
-  `finicio` datetime(6) NOT NULL,
-  `ffin` datetime(6) NOT NULL,
-  PRIMARY KEY (`id_publicacion`),
-  KEY `id_usuario` (`id_usuario`),
-  KEY `id_couch` (`id_couch`)
+  `f_desuscripcion` datetime(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `premium`
+--
+
+INSERT INTO `premium` (`id_premium`, `id_usuario`, `tarjeta`, `f_incripcion`, `f_desuscripcion`) VALUES
+(1, 10, '2131231231232131', '2016-06-04 00:00:00.000000', NULL);
 
 -- --------------------------------------------------------
 
@@ -163,16 +121,12 @@ CREATE TABLE IF NOT EXISTS `publicacion` (
 -- Estructura de tabla para la tabla `puntoscouch`
 --
 
-DROP TABLE IF EXISTS `puntoscouch`;
-CREATE TABLE IF NOT EXISTS `puntoscouch` (
-  `id_puntoscouch` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `puntoscouch` (
+  `id_puntoscouch` int(100) NOT NULL,
   `id_usuario` int(100) NOT NULL,
   `id_couch` int(100) NOT NULL,
   `comentario` text,
-  `puntaje` int(3) NOT NULL,
-  PRIMARY KEY (`id_puntoscouch`),
-  KEY `id_usuario` (`id_usuario`),
-  KEY `id_couch` (`id_couch`)
+  `puntaje` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -181,14 +135,11 @@ CREATE TABLE IF NOT EXISTS `puntoscouch` (
 -- Estructura de tabla para la tabla `puntos_usuario`
 --
 
-DROP TABLE IF EXISTS `puntos_usuario`;
-CREATE TABLE IF NOT EXISTS `puntos_usuario` (
-  `id_puntosusuario` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `puntos_usuario` (
+  `id_puntosusuario` int(100) NOT NULL,
   `id_usuario` int(100) NOT NULL,
   `comentario` text,
-  `puntuacion` int(3) NOT NULL,
-  PRIMARY KEY (`id_puntosusuario`),
-  KEY `id_usuario` (`id_usuario`)
+  `puntuacion` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -197,18 +148,42 @@ CREATE TABLE IF NOT EXISTS `puntos_usuario` (
 -- Estructura de tabla para la tabla `reserva`
 --
 
-DROP TABLE IF EXISTS `reserva`;
-CREATE TABLE IF NOT EXISTS `reserva` (
-  `id_reserva` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `reserva` (
+  `id_reserva` int(100) NOT NULL,
   `id_usuario` int(100) NOT NULL,
   `id_couch` int(100) NOT NULL,
   `finicio` datetime(6) NOT NULL,
   `ffin` datetime(6) NOT NULL,
   `estado` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_reserva`),
-  KEY `id_usuario` (`id_usuario`),
-  KEY `id_couch` (`id_couch`)
+  `id_puntajeCouch` int(100) DEFAULT NULL,
+  `id_puntajeUsuario` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `reserva`
+--
+
+INSERT INTO `reserva` (`id_reserva`, `id_usuario`, `id_couch`, `finicio`, `ffin`, `estado`, `id_puntajeCouch`, `id_puntajeUsuario`) VALUES
+(1, 10, 1, '2016-06-15 00:00:00.000000', '2017-06-15 00:00:00.000000', 'Vencida', 23, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tarjetas`
+--
+
+CREATE TABLE `tarjetas` (
+  `nro_tarjeta` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tarjetas`
+--
+
+INSERT INTO `tarjetas` (`nro_tarjeta`) VALUES
+('123456789'),
+(''),
+('987654321');
 
 -- --------------------------------------------------------
 
@@ -216,13 +191,11 @@ CREATE TABLE IF NOT EXISTS `reserva` (
 -- Estructura de tabla para la tabla `tipo`
 --
 
-DROP TABLE IF EXISTS `tipo`;
-CREATE TABLE IF NOT EXISTS `tipo` (
-  `id_tipo` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tipo` (
+  `id_tipo` int(100) NOT NULL,
   `nombre_tipo` varchar(30) NOT NULL,
-  `eliminado` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+  `eliminado` tinyint(1) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipo`
@@ -248,19 +221,15 @@ INSERT INTO `tipo` (`id_tipo`, `nombre_tipo`, `eliminado`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id_usuario` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuario` (
+  `id_usuario` int(100) NOT NULL,
   `email` varchar(30) NOT NULL,
   `nombre` varchar(35) NOT NULL,
   `apellido` varchar(35) NOT NULL,
   `fnac` date NOT NULL,
   `telefono` varchar(25) NOT NULL,
-  `clave` varchar(15) NOT NULL,
-  PRIMARY KEY (`id_usuario`) USING BTREE,
-  UNIQUE KEY `email` (`email`),
-  KEY `email_2` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+  `clave` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -271,6 +240,139 @@ INSERT INTO `usuario` (`id_usuario`, `email`, `nombre`, `apellido`, `fnac`, `tel
 (9, 'leo@gmail.com', 'Leo', 'Armendariz', '1992-05-20', '15465365', 'asd'),
 (10, 'euge@gmail.com', 'Euge', 'Parini', '1994-12-25', '4345461', 'asd');
 
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indices de la tabla `couch`
+--
+ALTER TABLE `couch`
+  ADD PRIMARY KEY (`id_couch`),
+  ADD KEY `id_tipo` (`id_tipo`);
+
+--
+-- Indices de la tabla `foto`
+--
+ALTER TABLE `foto`
+  ADD PRIMARY KEY (`id_foto`),
+  ADD UNIQUE KEY `ruta` (`ruta`),
+  ADD KEY `id_couch` (`id_couch`);
+
+--
+-- Indices de la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  ADD PRIMARY KEY (`id_pregunta`),
+  ADD KEY `id_couch` (`id_couch`),
+  ADD KEY `id_usuariopregunta` (`id_usuariopregunta`),
+  ADD KEY `id_usuariorespuesta` (`id_usuariorespuesta`);
+
+--
+-- Indices de la tabla `premium`
+--
+ALTER TABLE `premium`
+  ADD PRIMARY KEY (`id_premium`),
+  ADD UNIQUE KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `puntoscouch`
+--
+ALTER TABLE `puntoscouch`
+  ADD PRIMARY KEY (`id_puntoscouch`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_couch` (`id_couch`);
+
+--
+-- Indices de la tabla `puntos_usuario`
+--
+ALTER TABLE `puntos_usuario`
+  ADD PRIMARY KEY (`id_puntosusuario`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `reserva`
+--
+ALTER TABLE `reserva`
+  ADD PRIMARY KEY (`id_reserva`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_couch` (`id_couch`);
+
+--
+-- Indices de la tabla `tipo`
+--
+ALTER TABLE `tipo`
+  ADD PRIMARY KEY (`id_tipo`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`) USING BTREE,
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `email_2` (`email`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id_admin` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `couch`
+--
+ALTER TABLE `couch`
+  MODIFY `id_couch` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `foto`
+--
+ALTER TABLE `foto`
+  MODIFY `id_foto` int(100) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  MODIFY `id_pregunta` int(100) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `premium`
+--
+ALTER TABLE `premium`
+  MODIFY `id_premium` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `puntoscouch`
+--
+ALTER TABLE `puntoscouch`
+  MODIFY `id_puntoscouch` int(100) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `puntos_usuario`
+--
+ALTER TABLE `puntos_usuario`
+  MODIFY `id_puntosusuario` int(100) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `reserva`
+--
+ALTER TABLE `reserva`
+  MODIFY `id_reserva` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tipo`
+--
+ALTER TABLE `tipo`
+  MODIFY `id_tipo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
