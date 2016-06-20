@@ -249,7 +249,7 @@ if (mysqli_num_rows($resultado) == 1){
             <?php }
         }
     ?>
-
+     <div class="col-md-7">
             <!-- Lista de preguntas y respuestas -->
     <h3> Preguntas de los usuarios: </h3>
 
