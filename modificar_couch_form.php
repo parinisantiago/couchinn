@@ -4,6 +4,8 @@ session_start();
 include_once("conectarBD.php");
 $query= "SELECT id_tipo,nombre_tipo FROM tipo WHERE eliminado = 0";
 $resultTipo=mysqli_query($conexion, $query);
+$idFotos = []; //Arreglo que guarda la id de las fotos del carousel para poder eliminarlas despues
+$posActual = 0;
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,6 +47,7 @@ $resultTipo=mysqli_query($conexion, $query);
         <div class="form-group">
             <label class="control-label" for="idUser"></label>
             <input type="hidden" name="idCouch" class="form-control" id="idCouch" value=<?php echo($row['id_couch'])?>>
+            <input type="hidden" name="idUser" class="form-control" id="idUser" value=<?php echo($row['id_usuario'])?>>
         </div>
 
         <!-- titulo couch -->
@@ -66,7 +69,7 @@ $resultTipo=mysqli_query($conexion, $query);
         <!-- ubicacion couch -->
         <div class="form-group">
             <label class="control-label" for="ubCouch">Ubicación<span style="color:red;">*</span></label>
-            <input type="text" name="ubCouch" class="form-control" id="ubCouch" placeholder="La Plata, Buenos aires, Argentina" onkeypress="return isLetterKey(event)" maxlength="100" value = "<?php echo($row['ubicacion']);?>" aria-describedby="helpBlock-nom" required>
+            <input type="text" name="ubCouch" class="form-control" id="ubCouch" placeholder="Ciudad, Provincia, Pais" onkeypress="return isLetterKeyUb(event)" maxlength="100" value = "<?php echo($row['ubicacion']);?>" aria-describedby="helpBlock-nom" required>
             <span id="glyphicon-ubCouch" aria-hidden="true"></span>
             <span id="helpBlock-ubCouch" class="help-block"></span>
         </div>
@@ -82,23 +85,9 @@ $resultTipo=mysqli_query($conexion, $query);
         <!-- capacidad couch -->
         <div class="form-group">
             <label class="control-label" for="capCouch">Capacidad<span style="color:red;">*</span></label>
-            <select class="form-control" id="capCouch" name="capCouch">
-                <?php for($i=1; $i <= 20; $i++){
-
-                    if ($i == $row["capacidad"])
-                    { ?>
-
-                        <option selected value=<?php echo($i); ?>> <?php echo($i); ?> </option>
-                    <?php
-                    }
-                    else
-                    { ?>
-
-                        <option  value=<?php echo($i); ?>> <?php echo($i); ?> </option>
-
-                <?php } ?>
-            <?php } ?>
-            </select>
+            <input type="text" class="form-control"  name="capCouch" id="capCouch" value = "<?php echo($row['capacidad']);?>" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="1" required>
+            <span id="glyphicon-capCouch" aria-hidden="true"></span>
+            <span id="helpBlock-capCouch" class="help-block"></span>
         </div>
 
         <!-- tipo couch -->
@@ -123,7 +112,7 @@ $resultTipo=mysqli_query($conexion, $query);
         <!-- imagen couch -->
         <div class="form-group">
             <label class="control-label" for="imgCouch">
-                Añada nuevas fotos:
+                Añada nuevas fotos (*.jpg, *.jpeg, *.png):
                 <?php
                 $query_premium="SELECT id_usuario FROM premium WHERE id_usuario='". $_SESSION['id_usuario'] ."'";
                 $result_premium= mysqli_query($conexion, $query_premium);
@@ -134,63 +123,28 @@ $resultTipo=mysqli_query($conexion, $query);
                 <?php } ?>
 
             </label>
-            <input type="file" name="imgCouch[]" id="imgCouch" multiple="multiple">
+            <input type="file" accept=".jpg,.jpeg,.png" name="imgCouch[]" id="imgCouch" multiple="multiple">
         </div>
 
-        <?php //busca las fotos del couch para agregarlas al carousel
-        $query_foto="SELECT ruta FROM foto WHERE id_couch='".$row['id_couch']."'";
+        <?php //CAROUSEL busca las fotos del couch para agregarlas al carousel
+        $query_foto="SELECT ruta,id_foto FROM foto WHERE id_couch='".$row['id_couch']."'";
         $resultado_foto=mysqli_query($conexion, $query_foto);
-        $cant_fotos=mysqli_num_rows($resultado_foto);
-        $first = true;
         ?>
-
-
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-
-                <?php for($i = 0; $i < $cant_fotos; $i++){ ?>
-
-                    <li data-target="#myCarousel" data-slide-to=<?php echo($i); if($i == 0){ echo(" class=active");} ?>></li>
-
-                <?php } ?>
-
-            </ol>
-
-            <?php if ($cant_fotos != 0){ ?>
-                <!-- Wrapper for slides class="img-responsive center-block"-->
-                <div class="carousel-inner" role="listbox">
-                    <?php while ( $foto = mysqli_fetch_array($resultado_foto)) {
-                        if( $first){ $first=false;?>
-                            <div class="item active">
-                                <img  src=<?php echo($foto["ruta"]);?> >
+        <div class="row">
+            <div class=”col-md-4″>
+                <?php
+                    while ($row = mysqli_fetch_array($resultado_foto))
+                    { 
+                        $ruta = $row["ruta"];
+                        ?>
+                            <div class="checkbox-inline">
+                                <label><input type="checkbox" name="imagenSeleccionada.<?php echo($row['id_foto']); ?>" value = "<?php echo($row['id_foto']); ?>" >
+                                <img class="img-circle" src = "<?php echo($ruta);?>" height = "250" width = "350"></label>
                             </div>
-                        <?php } else {?>
-                            <div class="item">
-                                <img  src=<?php echo($foto["ruta"]);?> >
-                            </div>
-                        <?php }
-                    } ?>
-
-                </div>
-            <?php } else { ?>
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img  src=<?php echo("img/logo.png");?> >
-                    </div>
-                </div>
-            <?php }        ?>
-            <!-- Controls -->
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+                    <?php } ?>
+            </div>
+            
         </div>
-
 
         <!-- botones de envio -->
         <div class="form-group">

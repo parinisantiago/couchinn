@@ -156,11 +156,7 @@ if (mysqli_num_rows($resultado) == 1){
                                 </div>
 
                             <?php   }    ?>
-                                <?php   if (isset($_SESSION["admin"]) && !$esDuenio && !$_SESSION["admin"]) {  ?>
-                                    <?php include("reservar_couch.php");?>
-                                    <a class="btn btn-default" href="#" data-toggle="modal" data-target="#modalReservarCouch"> Reservar</a>
-
-                                <?php   }  ?>
+                                
                                 <?php if($esDuenio){  ?>
                                     <!-- Inicio de aceptar o rechazar reservas -->
                                     <div class="col-md-7">
@@ -175,8 +171,10 @@ if (mysqli_num_rows($resultado) == 1){
                                             //Se fija cuales de las reservas estan  pasadas de fecha para ponerlas como vencidas.
                                             $queryReservasVencidas = "UPDATE reserva SET estado = 'Vencida' WHERE ((finicio < CURDATE()) AND (estado='En espera'))";
                                             mysqli_query($conexion, $queryReservasVencidas);
+                                            $queryReservasFinalizadas = "UPDATE reserva SET estado = 'Finalizada' WHERE ((ffin < CURDATE()) AND (estado='Aceptada'))";
+                                            mysqli_query($conexion, $queryReservasFinalizadas);
                                             //Ltsta todas las reservas que están en espera de ser aceptadas o rechazadas
-                                            $queryReservasEnEspera = "SELECT * FROM reserva NATURAL JOIN usuario WHERE ((id_couch = '".$_GET["id"]."') AND (estado = 'En espera'))";
+                                            $queryReservasEnEspera = "SELECT id_reserva, usuario.nombre, usuario.apellido, id_usuario, id_couch, estado,DATE_FORMAT(finicio, '%d-%m-%y') AS finicio, DATE_FORMAT(ffin, '%d-%m-%y') AS ffin FROM reserva NATURAL JOIN usuario WHERE ((id_couch = '".$_GET["id"]."') AND (estado = 'En espera'))";
                                             $resultadoReservasEnEspera = mysqli_query($conexion, $queryReservasEnEspera);
                                             ?>
                                             <form name="formularioReservasEnEspera" action="consultas/aceptar_rechazar_reserva.php" method="POST">
@@ -204,7 +202,7 @@ if (mysqli_num_rows($resultado) == 1){
             </div>
             <!-- Fin de aceptar o rechazar reservas -->
             <?php }  ?>
-            <a class="btn btn-default" href="index.php">Volver</a>
+            
 
 
     <!--Listado de reservas realizadas -->
@@ -214,8 +212,9 @@ if (mysqli_num_rows($resultado) == 1){
         while( $reservasFin = mysqli_fetch_array($consultaReservasFin)) {
             if (!isset($reservasFin['id_puntajeCouch'])) {
                 ?>
-
+                    <br>
                 <div class="panel panel-primary puntajeCouch">
+                    
                     <div class="panel-heading">
                         <p>Puntúe su estadía del dia: <?php echo($reservasFin['finicio']); ?> hasta el
                             dia: <?php echo($reservasFin['ffin']); ?> </p>
@@ -226,7 +225,7 @@ if (mysqli_num_rows($resultado) == 1){
                                 <label for="puntReser" class="control-label">Puntua tu estadía: </label>
                                 <input type="range" min="1" max="5" name="puntReser" id="puntReser"
                                        onchange="changeValue('puntReser' , 'puntReserShow')">
-                                <input type="text" id="puntReserShow" size="2" maxlength="1" min="1" max="5"
+                                <input type="text" id="puntReserShow" value = "3" size="1" maxlength="1" min="1" max="5"
                                        onkeypress="return is1to5(event)"
                                        onchange="changeValue('puntReserShow', 'puntReser')" required>
                             </div>
@@ -249,14 +248,14 @@ if (mysqli_num_rows($resultado) == 1){
             <?php }
         }
     ?>
-     <div class="col-md-7">
+     <div class="col-md-12">
             <!-- Lista de preguntas y respuestas -->
-    <h3> Preguntas de los usuarios: </h3>
+    <h3 align="center"> Preguntas de los usuarios: </h3>
 
 
     <?php
 
-        $preguntasQuery="SELECT * FROM pregunta WHERE id_couch='" .$_GET['id'] ."'";
+        $preguntasQuery="SELECT * FROM pregunta INNER JOIN usuario ON pregunta.id_usuariopregunta = usuario.id_usuario WHERE id_couch='" .$_GET['id'] ."'";
         $consulta= mysqli_query($conexion, $preguntasQuery);
         while($preguntas = mysqli_fetch_array($consulta)){
     ?>
@@ -266,7 +265,7 @@ if (mysqli_num_rows($resultado) == 1){
            <!-- seccion de pregunta -->
             <div>
                 
-            <p class="text-left"> El usuario pregunta: </p>
+            <p class="text-left"> <?php echo("El usuario ".$preguntas['nombre']." ".$preguntas['apellido']." pregunta:");?> </p>
             <?php echo($preguntas['contenidopregunta']) ?>
 
 
@@ -295,7 +294,7 @@ if (mysqli_num_rows($resultado) == 1){
 
     <!-- Text area para hacer preguntas en caso de que no sea el dueño del Couch -->
 
-    <?php if(!$esDuenio){
+    <?php if(!$esDuenio && isset($_SESSION['sesion_usuario']) && $_SESSION['sesion_usuario'] == true ){
 
         ?>
 
@@ -313,6 +312,12 @@ if (mysqli_num_rows($resultado) == 1){
         </form>
 
     <?php } ?>
+    <?php   if (isset($_SESSION["admin"]) && !$esDuenio && !$_SESSION["admin"]) {  ?>
+                <?php include("reservar_couch.php");?>
+                <a class="btn btn-default" href="#" data-toggle="modal" data-target="#modalReservarCouch"> Reservar</a>
+
+            <?php   }  ?>
+    <a class="btn btn-default" href="index.php">Volver</a>
 </div>
 </body>
 

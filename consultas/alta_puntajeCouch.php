@@ -26,7 +26,7 @@
         $queryReserva= "UPDATE reserva SET id_puntajeCouch='$preguntaId' WHERE id_reserva='".$idReserva."'";
         mysqli_query($conexion, $queryReserva);
         echo($queryReserva);
-        header("Location: ../detalleCouch.php?msg=Su openion a sido registrada&&class=alert-success");
+        header("Location: ../detalle_couch.php?id=$idCouch&&msg=Su opinion ha sido registrada&&class=alert-success");
     } else {
         echo("que intentas hacer pillin?");
     }

@@ -15,7 +15,7 @@
             $clave=$_POST['passUser'];
             $fNac=$_POST['fNacUser'];
             $tel=$_POST['numUser'];
-
+            $_SESSION["nombre_completo"] = $nombre." ".$apellido;
            $update="UPDATE usuario SET email='".$email."' ,nombre='".$nombre."' ,apellido='".$apellido."' ,fnac='".$fNac."' ,telefono='".$tel."' ,clave='".$clave."' WHERE id_usuario='".$_SESSION['id_usuario']."'";
             echo($update);
             mysqli_query($conexion,$update);
@@ -30,7 +30,7 @@
                 $clave = $_POST['passUser'];
                 $fNac = $_POST['fNacUser'];
                 $tel = $_POST['numUser'];
-
+                $_SESSION["nombre_completo"] = $nombre." ".$apellido;
                 $update="UPDATE usuario SET email='".$email."' ,nombre='".$nombre."' ,apellido='".$apellido."' ,fnac='".$fNac."' ,telefono='".$tel."' ,clave='".$clave."' WHERE id_usuario='".$_SESSION['id_usuario']."'";
                 echo($update);
                 mysqli_query($conexion, $update);

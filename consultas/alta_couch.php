@@ -5,7 +5,7 @@ include_once("../conectarBD.php");
 $idUser= $_POST['idUser'];
 $titCouch= $_POST['titCouch'];
 $descCouch= $_POST['descCouch'];
-$ubCouh= $_POST['ubCouch'];
+$ubCouh= $_POST['ciudad'].",".$_POST['provincia'].",".$_POST['pais'];
 $dirCouch= $_POST['dirCouch'];
 $capCouch= $_POST['capCouch'];
 $tipCouch= $_POST['tipCouch'];
@@ -25,8 +25,8 @@ $idCouch=mysqli_insert_id($conexion);
 
 
 //direccion base para los couch, se crea una carpeta para cada usuario
-$dirBase = "../fotos_hospedajes/" . $idUser . "/";
-$dirBase2 = "fotos_hospedajes/" . $idUser . "/";
+$dirBase = "../fotos_hospedajes/" . $idUser . "/" . $idCouch . "/";
+$dirBase2 = "fotos_hospedajes/" . $idUser . "/" . $idCouch . "/";
 //si el usuario no posee una carpeta para guardar sus fotos, la crea
  if( ! file_exists($dirBase)) { mkdir($dirBase, 0777);}
 
@@ -56,5 +56,5 @@ $dirCompleta = $dirBase . basename($_FILES["imgCouch"]["name"][$i]);
 }
 
     if($warning){
-        header("Location: ../index.php?msg=El couch se creo correctamente pero algunas de sus imagenes no pudieron ser subidas&&class=alert-warning");
+        header("Location: ../index.php?msg=El couch se creo correctamente pero algunas de sus imagenes no pudieron ser subidas por tener un formato invalido&&class=alert-warning");
     } else { header("Location: ../index.php?msg=Su couch se creo correctamente&&class=alert-success");}

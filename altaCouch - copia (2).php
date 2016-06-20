@@ -57,10 +57,26 @@ $result=mysqli_query($conexion, $query);
             <span id="helpBlock-descCouch" class="help-block"></span>
         </div>
 
-        <!-- ubicacion couch -->
+        <!-- ciudad couch -->
         <div class="form-group">
-            <label class="control-label" for="ubCouch">Ubicación<span style="color:red;">*</span></label>
-            <input type="text" name="ubCouch" class="form-control" id="ubCouch" placeholder="Ciudad, Provincia, Pais" onkeypress="return isLetterKeyUb(event)" maxlength="100" aria-describedby="helpBlock-nom" required>
+            <label class="control-label" for="ubCouch">Ciudad<span style="color:red;">*</span></label>
+            <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="La Plata" onkeypress="return isLetterKey(event)" maxlength="33" aria-describedby="helpBlock-nom" required>
+            <span id="glyphicon-ubCouch" aria-hidden="true"></span>
+            <span id="helpBlock-ubCouch" class="help-block"></span>
+        </div>
+
+        <!-- provincia couch -->
+        <div class="form-group">
+            <label class="control-label" for="ubCouch">Provincia<span style="color:red;">*</span></label>
+            <input type="text" name="provincia" class="form-control" id="provincia" placeholder="Buenos aires" onkeypress="return isLetterKey(event)" maxlength="33" aria-describedby="helpBlock-nom" required>
+            <span id="glyphicon-ubCouch" aria-hidden="true"></span>
+            <span id="helpBlock-ubCouch" class="help-block"></span>
+        </div>
+
+        <!-- pais couch -->
+        <div class="form-group">
+            <label class="control-label" for="ubCouch">Pais<span style="color:red;">*</span></label>
+            <input type="text" name="pais" class="form-control" id="pais" placeholder="Argentina" onkeypress="return isLetterKey(event)" maxlength="33" aria-describedby="helpBlock-nom" required>
             <span id="glyphicon-ubCouch" aria-hidden="true"></span>
             <span id="helpBlock-ubCouch" class="help-block"></span>
         </div>
@@ -76,9 +92,13 @@ $result=mysqli_query($conexion, $query);
         <!-- capacidad couch -->
         <div class="form-group">
             <label class="control-label" for="capCouch">Capacidad<span style="color:red;">*</span></label>
-            <input type="text" class="form-control"  name="capCouch" id="capCouch" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="1" required>
-            <span id="glyphicon-capCouch" aria-hidden="true"></span>
-            <span id="helpBlock-capCouch" class="help-block"></span>
+            <select class="form-control" id="capCouch" name="capCouch">
+                <?php for($i=1; $i <= 20; $i++){ ?>
+
+                    <option value=<?php echo($i); ?>> <?php echo($i); ?> </option>
+
+                <?php } ?>
+            </select>
         </div>
 
         <!-- tipo couch -->
@@ -96,7 +116,7 @@ $result=mysqli_query($conexion, $query);
         <!-- imagen couch -->
         <div class="form-group">
             <label class="control-label" for="imgCouch">
-                Fotos (*.jpg, *.jpeg, *.png):
+                Fotos:
                 <?php
                 $query_premium="SELECT id_usuario FROM premium WHERE id_usuario='". $_SESSION['id_usuario'] ."'";
                 $result_premium= mysqli_query($conexion, $query_premium);
@@ -107,7 +127,7 @@ $result=mysqli_query($conexion, $query);
                 <?php } ?>
 
             </label>
-            <input type="file" accept=".jpg,.jpeg,.png" name="imgCouch[]" id="imgCouch" multiple="multiple">
+            <input type="file" name="imgCouch[]" id="imgCouch" multiple="multiple">
         </div>
 
 

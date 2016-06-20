@@ -395,6 +395,18 @@ function isLetterKey(evt){
     return false;
 }
 
+function isLetterKeyUb(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if ((charCode >= 65 && charCode <= 90)
+        || (charCode >= 97 && charCode <= 122)
+        || (charCode == 209 || charCode == 241)
+        || (charCode == 32)
+        || (charCode == 44)
+        || (charCode == 46))
+        return true;  
+    return false;
+}
+
 function deshabilitar(){
     document.getElementById("Despublicar").disabled = true;
 }
