@@ -66,11 +66,11 @@ if( isset($_SESSION['sesion_usuario']) ){?>
 			</div>
 			<div class="panel-footer">
 			<div class="form-group " id="buttons-tipo-couch">
-				<button type="submit" name = "Eliminar" onclick="return confirm('¿Esta seguro de que desea Eliminar el couch?')" class="btn btn-default">Eliminar</button>
-                <button type="submit" name = "Despublicar" id = "Despublicar" onclick="return confirm('¿Esta seguro de que desea Despublicar el couch?')" class="btn btn-default">Despublicar</button>
-                <button type="submit" name = "Publicar" id = "Publicar" onclick="return confirm('¿Esta seguro de que desea Publicar el couch?')" class="btn btn-default">Publicar</button>
-                <button type="submit" name = "Modificar" class="btn btn-default">Modificar</button>
-                <a class="btn btn-default" href="index.php">Cancelar</a>
+				<button type="submit" name = "Eliminar" id = "Eliminar" onclick="return confirm('¿Esta seguro de que desea Eliminar el couch?')" class="btn btn-primary">Eliminar</button>
+                <button type="submit" name = "Despublicar" id = "Despublicar" onclick="return confirm('¿Esta seguro de que desea Despublicar el couch?')" class="btn btn-primary">Despublicar</button>
+                <button type="submit" name = "Publicar" id = "Publicar" onclick="return confirm('¿Esta seguro de que desea Publicar el couch?')" class="btn btn-primary">Publicar</button>
+                <button type="submit" name = "Modificar" id = "Modificar" class="btn btn-primary">Modificar</button>
+                <a class="btn btn-primary" href="index.php">Cancelar</a>
             </div>
             <script>
             	function deshabilitar(obj)
@@ -83,29 +83,50 @@ if( isset($_SESSION['sesion_usuario']) ){?>
             		{
             			document.getElementById("Despublicar").disabled = false;
             		}
-            		
+            		if (obj.id == "0")
+            		{
+						document.getElementById("Publicar").disabled = true;
+            		}
+            		else
+            		{
+            			document.getElementById("Publicar").disabled = false;
+            		}
             	}
             	function deshabilitarOnLoad() //Checkea onLoad (llamado desde el principio del <body>) si todos los couch estan despublicados
             	{							  //si lo estan deshabilita de una el boton
-            		var vrows = document.getElementsByName("couch"); //Obtengo todos los radio buttion
+            		var vrows = document.getElementsByName("couch"); //Obtengo todos los radio button
             		var todosDespublicados = true;
-            		if (vrows[0].id == 1)
-            		{
-            			document.getElementById("Despublicar").disabled = true; //Si el primero esta despublicado ya pone en disabled el Despublicar
-
-            		}
-            		for (i = 0; i < vrows.length; i++)
-            		{ 
-					    if (vrows[i].id == 0)
-					    {
-					    	todosDespublicados = false;
-					    	break;
-					    }
-					}
-            		if (todosDespublicados)
+            		if (vrows[0] == null) //SI NO HAY COUCHS DESHABILITA TODO
             		{
             			document.getElementById("Despublicar").disabled = true;
+            			document.getElementById("Publicar").disabled = true;
+            			document.getElementById("Modificar").disabled = true;
+            			document.getElementById("Eliminar").disabled = true;
             		}
+            		else
+            		{
+	            		if (vrows[0].id == 1)
+	            		{
+	            			document.getElementById("Despublicar").disabled = true; //Si el primero esta despublicado ya pone en disabled el Despublicar
+
+	            		}
+	            		else
+	            		{
+	            			document.getElementById("Publicar").disabled = true;
+	            		}
+	            		for (i = 0; i < vrows.length; i++)
+	            		{ 
+						    if (vrows[i].id == 0)
+						    {
+						    	todosDespublicados = false;
+						    	break;
+						    }
+						}
+	            		if (todosDespublicados)
+	            		{
+	            			document.getElementById("Despublicar").disabled = true;
+	            		}
+	            	}
             	}
             </script>
 			</div>

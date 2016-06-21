@@ -10,14 +10,14 @@ $dirCouch= $_POST['dirCouch'];
 $capCouch= $_POST['capCouch'];
 $tipCouch= $_POST['tipCouch'];
 $warning= false;
-//Checkea que el couch no exista en la bd.
+/*//Checkea que el couch no exista en la bd.
 $validoCouch="SELECT titulo, id_tipo, id_usuario, eliminado_couch FROM couch WHERE (titulo = '" . $titCouch ." ' AND id_tipo = '" . $tipCouch ." ' AND id_usuario = '" . $idUser ." ' AND eliminado_couch=0)";
 $resultadoValidoCouch=mysqli_query($conexion, $validoCouch);
 //Si no existe un couch igual
 if (mysqli_num_rows($resultadoValidoCouch) == 1) {
-    header("Location: ../index.php?msg=No se pudo dar de alta a su couch, ya tiene uno publicado con el mismo titulo y tipo&&class=alert-danger"); 
+    header("Location: ../altaCouch.php?msg=No se pudo dar de alta a su couch, ya tiene uno publicado con el mismo titulo y tipo&&class=alert-danger"); 
 } //Lo agrego despues de validar
- else { 
+ else { */
 
 
         //agrega el couch
@@ -35,22 +35,27 @@ if (mysqli_num_rows($resultadoValidoCouch) == 1) {
         $dirBase = "../fotos_hospedajes/" . $idUser . "/" . $idCouch . "/";
         $dirBase2 = "fotos_hospedajes/" . $idUser . "/" . $idCouch . "/";
         //si el usuario no posee una carpeta para guardar sus fotos, la crea
-         if( ! file_exists($dirBase)) { mkdir($dirBase, 0777);}
+        if(!file_exists($dirBase))
+        { 
+            mkdir("../fotos_hospedajes/" . $idUser . "/", 0777);
+            mkdir("../fotos_hospedajes/" . $idUser . "/". $idCouch . "/", 0777);
+        }
 
         //valida las imagenes una por una
         $total = count($_FILES['imgCouch']['name']);
+        echo($total);
         for ( $i = 0; $i < $total; $i++){
 
-        $ok=true;
+            $ok=true;
 
-        //ruta propiamente de la imagen
-        $dirCompleta = $dirBase . basename($_FILES["imgCouch"]["name"][$i]);
+            //ruta propiamente de la imagen
+            $dirCompleta = $dirBase . basename($_FILES["imgCouch"]["name"][$i]);
 
-        //valida que sea es una imagen
+            //valida que sea es una imagen
             $tipoImgCouch = $_FILES['imgCouch']['type'][$i];
             if (!($tipoImgCouch == 'image/png' || $tipoImgCouch == 'image/jpg' || $tipoImgCouch == 'image/jpeg')) { $ok = false; }
 
-        //valida que la imagen no exista
+            //valida que la imagen no exista
             if (file_exists($dirCompleta)) { $ok=false;}
 
             if($ok){
@@ -62,7 +67,8 @@ if (mysqli_num_rows($resultadoValidoCouch) == 1) {
             else { $warning= true;}
         }
 
-            if($warning){
-                header("Location: ../index.php?msg=El couch se creo correctamente pero algunas de sus imagenes no pudieron ser subidas por tener un formato invalido&&class=alert-warning");
-            } else { header("Location: ../index.php?msg=Su couch se creo correctamente&&class=alert-success");}
-}
+        if($warning && $total > 1){
+            header("Location: ../index.php?msg=El couch se creo correctamente pero algunas de sus imagenes no pudieron ser subidas por tener un formato invalido&&class=alert-warning");
+        } else { header("Location: ../index.php?msg=Su couch se creo correctamente&&class=alert-success");
+        }
+//}

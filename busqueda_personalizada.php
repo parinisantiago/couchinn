@@ -15,11 +15,11 @@
         </div>
         <div class="form-group">
           <label for="contain">Titulo</label>
-          <input class="form-control input-sm" type="text" value="<?php echo($_GET["titulo"]) ?>" name="titulo" id="titulo" maxlength="40" placeholder="Cualquiera" />
+          <input class="form-control input-sm" type="text" value="<?php echo($_GET["titulo"]) ?>" name="titulo" id="titulo" maxlength="100" placeholder="Cualquiera" />
         </div>
         <div class="form-group">
           <label for="contain">Descripción</label>
-          <input class="form-control input-sm" type="text" value="<?php echo($_GET["descripcion"]) ?>" name="descripcion" id="descripcion" maxlength="60" placeholder="Cualquiera" />
+          <input class="form-control input-sm" type="text" value="<?php echo($_GET["descripcion"]) ?>" name="descripcion" id="descripcion" maxlength="500" placeholder="Cualquiera" />
         </div>
         <div class="form-group">
           <label for="contain">Tipo</label>
@@ -45,15 +45,15 @@
         </div>
         <div class="form-group">
           <label for="contain">Ubicación</label>
-          <input class="form-control input-sm" type="text"  value="<?php echo($_GET["ubicacion"]) ?>" name="ubicacion" id="ubicacion" maxlength="70" placeholder="Cualquiera"/>
+          <input class="form-control input-sm" type="text"  value="<?php echo($_GET["ubicacion"]) ?>" name="ubicacion" id="ubicacion" maxlength="100" placeholder="Cualquiera"/>
         </div>
         <div class="form-group">
           <label for="contain">Capacidad</label>
           <input class="form-control input-sm" type="text"  value="<?php echo($_GET["capacidad"]) ?>" name="capacidad" id="capacidad" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="Cualquiera"/>
         </div>
         <div class="container">
-            <button type="button" class="btn btn-primary btn-sm   glyphicon glyphicon-refresh" onclick="return limpiar();"> Limpiar</button>
-            <button type="submit" id="btnBuscar" class="btn btn-primary btn-sm "><span class="glyphicon glyphicon-search" aria-hidden="true"> Buscar</span></button>
+            <button type="button" class="btn btn-primary btn-sm   " onclick="return limpiar();"><i class = "glyphicon glyphicon-refresh"></i> Limpiar</button>
+            <button type="submit" id="btnBuscar" class="btn btn-primary btn-sm "><i class = "glyphicon glyphicon-search"></i> Buscar</span></button>
         </div>
       </form>
       </div>

@@ -418,3 +418,52 @@ function fechasReserva(){
     }   
     return true;
 }
+
+function valCapCouch(text)
+{
+    if( text.value.length == 0){
+        text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
+        document.getElementById("glyphicon-capCouch").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-capCouch").innerHTML = "Debe completar este campo";
+
+    }else if ( /[\- 0-9]+/.exec(text.value) != text.value){
+        text.parentNode.setAttribute("class", "form-group has-error has-feedback");
+        document.getElementById("glyphicon-capCouch").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
+        document.getElementById("helpBlock-capCouch").innerHTML = "El numero no puede poseer letras ni simbolos";
+
+    } else {
+        text.parentNode.setAttribute("class", "form-group has-success has-feedback"); /* Los pollitos cantan pio pio pio*/
+        document.getElementById("glyphicon-capCouch").setAttribute("class","glyphicon glyphicon-ok form-control-feedback");
+        document.getElementById("helpBlock-capCouch").innerHTML = " ";
+        return(true);
+    }
+    document.getElementById("capCouch").focus();
+    return(false);
+    
+}
+function valTitCouch(text)
+{
+    var tieneDobleEspacio = text.value.indexOf("  ") > -1;
+    if( text.value.length == 0){
+        text.parentNode.setAttribute("class", "form-group has-warning has-feedback");
+        document.getElementById("glyphicon-titCouch").setAttribute("class","glyphicon glyphicon-warning-sign form-control-feedback");
+        document.getElementById("helpBlock-titCouch").innerHTML = "Debe completar este campo";
+
+    }else if (tieneDobleEspacio){
+        text.parentNode.setAttribute("class", "form-group has-error has-feedback");
+        document.getElementById("glyphicon-titCouch").setAttribute("class","glyphicon glyphicon-remove form-control-feedback");
+        document.getElementById("helpBlock-titCouch").innerHTML = "El titulo no puede tener mas de un espacio entre palabras";
+
+    } else {
+        text.parentNode.setAttribute("class", "form-group has-success has-feedback"); /* Los pollitos cantan pio pio pio*/
+        document.getElementById("glyphicon-titCouch").setAttribute("class","glyphicon glyphicon-ok form-control-feedback");
+        document.getElementById("helpBlock-titCouch").innerHTML = " ";
+        return(true);
+    }
+    document.getElementById("titCouch").focus();
+    return(false);
+}
+function valCouch()
+{
+    return valTitCouch(document.getElementById("titCouch")) && valCapCouch(document.getElementById("capCouch"));
+}

@@ -1,5 +1,6 @@
 <?php	            	
 	include_once("conectarBD.php");
+	$esPremium = false;
 	//Para que tome a "Cualquiera" como nulo cuando viene del index.
 	if ($_GET["tipo"] == "Cualquiera"){
 		$_GET["tipo"] = '';
@@ -51,10 +52,15 @@
 		echo($rowRuta["ruta"]);
 		
 	}
+	else
+	{
+		echo("img/logoPremium.jpg");
+	}
 
 
   	}else{
   		echo("img/logo.png");
+
   	} ?>"></div>
   <div class="col-md-6"><h4 class="list-group-item-heading"><?php echo($titulo) ?></h4>
     	<p class="list-group-item-text"><?php echo ("<strong>Descripción: </strong>".$descripcion."<br> <strong>Ubicación: </strong>".$ubicacion."<br> <strong>Dirección: </strong>".$direccion."<br> <strong>Capacidad: </strong> para ".$capacidad." personas. <br> <strong>Tipo: </strong>".$tipo); ?> </p></div>

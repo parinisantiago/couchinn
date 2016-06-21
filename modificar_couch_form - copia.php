@@ -215,8 +215,8 @@ $posActual = 0;
         </script>
         <!-- botones de envio -->
         <div class="form-group">
-            <button type="submit" class="btn btn-default" name="submit">Aceptar</button>
-            <a class="btn btn-default" href="listado_mis_couchs.php">Cancelar</a>
+            <button type="submit" class="btn btn-primary" name="submit">Aceptar</button>
+            <a class="btn btn-primary" href="listado_mis_couchs.php">Cancelar</a>
         </div>
     </form>
 </div>

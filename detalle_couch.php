@@ -152,6 +152,19 @@ if (mysqli_num_rows($resultado) == 1){
                                     <d1 class="dl-horizontal">
                                         <dt> Nombre: </dt>
                                         <dd> <?php echo($couch["nombre"]) ?> <?php echo($couch["apellido"]) ?></dd>
+                                        <?php
+                                            $queryDatosExtras = "SELECT estado FROM reserva WHERE id_usuario = '".$_SESSION['id_usuario']."' AND estado = 'Aceptada' AND id_couch = '".$_GET['id']."'";
+                                            $resultadoDatosExtras = mysqli_query($conexion, $queryDatosExtras);
+                                            if (mysqli_num_rows($resultadoDatosExtras) > 0)
+                                            {
+                                                ?>
+                                                <dt> Email: </dt>
+                                                <dd> <?php echo($couch["email"]) ?></dd>
+                                                <dt> Telefono: </dt>
+                                                <dd> <?php echo($couch["telefono"])?></dd>
+                                            <?php
+                                            }
+                                        ?>
                                     </d1>
                                 </div>
 
@@ -187,8 +200,8 @@ if (mysqli_num_rows($resultado) == 1){
 
                                                     <div class="form-group" id="">
                             <?php  echo("Solicitud de ".$rowReservas["nombre"]." ".$rowReservas["apellido"]." del ".$rowReservas["finicio"]." al ".$rowReservas["ffin"]);?>
-                            <button type="submit" class="btn btn-sm btn-primary glyphicon glyphicon-ok" name = "aceptar" id="aceptar.<?php  echo($rowReservas["id_reserva"]); ?>" onclick="return confirm('¿Esta seguro de que desea aceptar la reserva?')" value="<?php  echo($rowReservas["id_reserva"]); ?>" class="btn btn-default"> Aceptar</button>
-                            <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove" name = "rechazar" id = "rechazar.<?php  echo($rowReservas["id_reserva"]); ?>" onclick="return confirm('¿Esta seguro de que desea rechazar la reserva?')" value="<?php  echo($rowReservas["id_reserva"]); ?>" class="btn btn-default"> Rechazar</button>
+                            <button type="submit" class="btn btn-sm btn-primary glyphicon glyphicon-ok" name = "aceptar" id="aceptar.<?php  echo($rowReservas["id_reserva"]); ?>" onclick="return confirm('¿Esta seguro de que desea aceptar la reserva?')" value="<?php  echo($rowReservas["id_reserva"]); ?>" class="btn btn-primary"> Aceptar</button>
+                            <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove" name = "rechazar" id = "rechazar.<?php  echo($rowReservas["id_reserva"]); ?>" onclick="return confirm('¿Esta seguro de que desea rechazar la reserva?')" value="<?php  echo($rowReservas["id_reserva"]); ?>" class="btn btn-primary"> Rechazar</button>
                             <hr>    
                         </div> 
                             <?php   }
@@ -302,10 +315,10 @@ if (mysqli_num_rows($resultado) == 1){
         <form name="form-preguntas" class="form-horizontal" method="GET" action="consultas/altaPregunta.php">
             <div class="form-group">
                 <label class="control-label" for="preguntaCouch">Haga su pregunta al dueño: </label>
-                <textarea class="form-control" rows="5" cols="50" maxlength="250" name="preguntaCouch" id="preguntaCouch" required></textarea>
+                <textarea class="form-control" rows="5" cols="50" maxlength="500" name="preguntaCouch" id="preguntaCouch" required></textarea>
             </div>
             <div class="form-group">
-                <button type="submit" name="submit" class="btn btn-default">Preguntar</button>
+                <button type="submit" name="submit" class="btn btn-primary">Preguntar</button>
             </div>
             <input type="hidden" name="idCouch" value=<?php echo($_GET['id']); ?>>
             <input type="hidden" name="idUsuario" value=<?php echo($_SESSION['id_usuario']); ?>>
@@ -314,17 +327,17 @@ if (mysqli_num_rows($resultado) == 1){
     <?php } ?>
     <?php   if (isset($_SESSION["admin"]) && !$esDuenio && !$_SESSION["admin"]) {  ?>
                 <?php include("reservar_couch.php");?>
-                <a class="btn btn-default" href="#" data-toggle="modal" data-target="#modalReservarCouch"> Reservar</a>
+                <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalReservarCouch"> Reservar</a>
 
             <?php   }  ?>
-    <a class="btn btn-default" href="index.php">Volver</a>
+    <a class="btn btn-primary" href="index.php">Volver</a>
 </div>
 </body>
 
 </html>
 <?php } else { 
     echo("Este Couch ha sido eliminado"); ?>
-    <br><a class="btn btn-default" href="index.php">Volver</a>
+    <br><a class="btn btn-primary" href="index.php">Volver</a>
 
 <?php } ?>
 

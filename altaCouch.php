@@ -30,7 +30,7 @@ $result=mysqli_query($conexion, $query);
             <?php echo($_GET['msg']) ?>
         </div>
     <?php } ?>
-    <form class="form-horizontal" name="altaCouch" method="post" action="consultas/alta_couch.php" enctype="multipart/form-data">
+    <form class="form-horizontal" name="altaCouch" method="post" onsubmit="return valCouch()" action="consultas/alta_couch.php" enctype="multipart/form-data">
         <div class="form-group">
             <span class="text-muted"><em><span style="color:red;">*</span> Estos campos son requeridos</em></span>
         </div>
@@ -44,7 +44,7 @@ $result=mysqli_query($conexion, $query);
         <!-- titulo couch -->
         <div class="form-group">
             <label class="control-label" for="titCouch">Título<span style="color:red;">*</span></label>
-            <input type="text" name="titCouch" class="form-control" id="titCouch" placeholder="El nombre de mi couch" onkeypress="return isLetterKey(event)" maxlength="100" aria-describedby="helpBlock-nom" required>
+            <input type="text" name="titCouch" class="form-control" id="titCouch" placeholder="El nombre de mi couch" onkeypress="return isLetterKey(event)" maxlength="100" aria-describedby="helpBlock-titCouch" required>
             <span id="glyphicon-titCouch" aria-hidden="true"></span>
             <span id="helpBlock-titCouch" class="help-block"></span>
         </div>
@@ -76,7 +76,7 @@ $result=mysqli_query($conexion, $query);
         <!-- capacidad couch -->
         <div class="form-group">
             <label class="control-label" for="capCouch">Capacidad<span style="color:red;">*</span></label>
-            <input type="text" class="form-control"  name="capCouch" id="capCouch" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="1" required>
+            <input type="text" class="form-control"  name="capCouch" id="capCouch" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="1" aria-describedby="helpBlock-capCouch" required>
             <span id="glyphicon-capCouch" aria-hidden="true"></span>
             <span id="helpBlock-capCouch" class="help-block"></span>
         </div>
@@ -102,7 +102,7 @@ $result=mysqli_query($conexion, $query);
                 $result_premium= mysqli_query($conexion, $query_premium);
                 if (mysqli_num_rows($result_premium) > 0){ ?>
 
-                    <span style="color: red"> La primera imagen que suba se la considerará como portada del couch</span>
+                    <span style="color: red"> La ultima imagen que seleccione se la considerará como portada del couch</span>
 
                 <?php } ?>
 
@@ -113,8 +113,8 @@ $result=mysqli_query($conexion, $query);
 
         <!-- botones de envio -->
         <div class="form-group">
-            <button type="submit" class="btn btn-default" name="submit">Aceptar</button>
-            <a class="btn btn-default" href="index.php">Cancelar</a>
+            <button type="submit" class="btn btn-primary" name="submit">Aceptar</button>
+            <a class="btn btn-primary" href="index.php">Cancelar</a>
         </div>
     </form>
 </div>

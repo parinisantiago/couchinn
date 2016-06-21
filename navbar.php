@@ -44,7 +44,7 @@ if( isset($_SESSION['sesion_usuario'])){
                     </ul >
 
                     <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
-                        <button type="submit" class="btn btn-default">Cerrar Sesion</button>
+                        <button type="submit" class="btn btn-primary">Cerrar Sesion</button>
                     </form>
 
 
@@ -85,7 +85,7 @@ if( isset($_SESSION['sesion_usuario'])){
                         </ul>
                     </li>
                     <li class="dropdown" >
-                        <a href = "#" class="dropdown-toggle  <?php if($esPremium) { echo("  glyphicon glyphicon-star-empty");} ?>" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > <?php echo($_SESSION["nombre_completo"])?> <span class="caret" ></span ></a >
+                        <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" ><?php if($esPremium) { echo("<i class='glyphicon glyphicon-star-empty'></i>");} ?> <?php echo($_SESSION["nombre_completo"])?> <span class="caret" ></span ></a >
                         <ul class="dropdown-menu" >
                             <li ><a href = "#" > Ver perfil </a ></li >
                             <li ><a href = "user_modForm.php" > Modificar perfil </a ></li >
@@ -95,7 +95,7 @@ if( isset($_SESSION['sesion_usuario'])){
 
                 <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
                     
-                    <button type="submit" class="btn btn-default">Cerrar Sesion</button>
+                    <button type="submit" class="btn btn-primary">Cerrar Sesion</button>
                 </form>
 
             </div >
@@ -116,7 +116,7 @@ if( isset($_SESSION['sesion_usuario'])){
 
 
                 <form id="register" class="form-inline pull-right" method="get" action="user_form.php">
-                    <button type="submit" class="btn btn-default">Registrarse </button>
+                    <button type="submit" class="btn btn-primary">Registrarse </button>
                 </form>
 
 
@@ -130,7 +130,7 @@ if( isset($_SESSION['sesion_usuario'])){
                         <label class="sr-only" for="claveLoggin">Contraseña</label>
                         <input type="password" name="clave" class="form-control" id="claveLoggin" placeholder="Contraseña" maxlength="15" required>
                     </div>
-                    <button type="submit" class="btn btn-default">Iniciar Sesion</button>
+                    <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
 
                 </form>
             </div>

@@ -17,7 +17,7 @@ $validoCouch="SELECT titulo, id_tipo, id_usuario, eliminado_couch FROM couch WHE
 $resultadoValidoCouch=mysqli_query($conexion, $validoCouch);
 //Si no existe un couch igual
 if (mysqli_num_rows($resultadoValidoCouch) == 1) {
-    header("Location: ../index.php?msg=No se pudo modificar su couch, ya tiene uno publicado con el mismo titulo y tipo&&class=alert-danger"); 
+    header("Location: ../listado_mis_couchs.php?msg=No se pudo modificar su couch, ya tiene uno publicado con el mismo titulo y tipo&&class=alert-danger"); 
 } //Lo agrego despues de validar
  else { 
 
@@ -77,7 +77,7 @@ if (mysqli_num_rows($resultadoValidoCouch) == 1) {
 		if($row != 0) {
 		   $update="UPDATE couch SET titulo='".$titCouch."' ,descripcion='".$descCouch."' ,ubicacion='".$ubCouch."' ,direccion='".$dirCouch."' ,capacidad='".$capCouch."',id_tipo='".$tipCouch."' WHERE id_couch='".$idCouch."'";
 		    mysqli_query($conexion,$update);
-		    if($warning){
+		    if($warning && $total > 1){
 		        header("Location: ../listado_mis_couchs.php?msg=Su couch se ha modificado correctamente salvo algunas fotos que no se pudieron agregar por tener un formato invalido&&class=alert-warning");
 		    } else { header("Location: ../listado_mis_couchs.php?msg=Su couch se ha modificado correctamente&&class=alert-success");}
 

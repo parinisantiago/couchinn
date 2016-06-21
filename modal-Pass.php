@@ -16,8 +16,8 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-default">Recuperar Contraseña</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Recuperar Contraseña</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
                 </div>

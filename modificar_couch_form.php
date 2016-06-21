@@ -38,7 +38,7 @@ $posActual = 0;
             <?php echo($_GET['msg']) ?>
         </div>
     <?php } ?>
-    <form class="form-horizontal" name="altaCouch" method="post" action="consultas/modificar_couch.php" enctype="multipart/form-data">
+    <form class="form-horizontal" name="altaCouch" method="post" onsubmit = "return valCouch()" action="consultas/modificar_couch.php" enctype="multipart/form-data">
         <div class="form-group">
             <span class="text-muted"><em><span style="color:red;">*</span> Estos campos son requeridos</em></span>
         </div>
@@ -53,7 +53,7 @@ $posActual = 0;
         <!-- titulo couch -->
         <div class="form-group">
             <label class="control-label" for="titCouch">Título<span style="color:red;">*</span></label>
-            <input type="text" name="titCouch" class="form-control" id="titCouch" placeholder="El nombre de mi couch" onkeypress="return isLetterKey(event)" maxlength="100" aria-describedby="helpBlock-nom" value = "<?php echo($row['titulo']);?>"  required>
+            <input type="text" name="titCouch" class="form-control" id="titCouch" placeholder="El nombre de mi couch" onkeypress="return isLetterKey(event)" maxlength="100" aria-describedby="helpBlock-titCouch" value = "<?php echo($row['titulo']);?>"  required>
             <span id="glyphicon-titCouch" aria-hidden="true"></span>
             <span id="helpBlock-titCouch" class="help-block"></span>
         </div>
@@ -85,7 +85,7 @@ $posActual = 0;
         <!-- capacidad couch -->
         <div class="form-group">
             <label class="control-label" for="capCouch">Capacidad<span style="color:red;">*</span></label>
-            <input type="text" class="form-control"  name="capCouch" id="capCouch" value = "<?php echo($row['capacidad']);?>" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="1" required>
+            <input type="text" class="form-control"  name="capCouch" id="capCouch" value = "<?php echo($row['capacidad']);?>" onkeypress="return isNumberKey(event)" maxlength="2" placeholder="1" aria-describedby="helpBlock-capCouch" required>
             <span id="glyphicon-capCouch" aria-hidden="true"></span>
             <span id="helpBlock-capCouch" class="help-block"></span>
         </div>
@@ -118,7 +118,7 @@ $posActual = 0;
                 $result_premium= mysqli_query($conexion, $query_premium);
                 if (mysqli_num_rows($result_premium) > 0){ ?>
 
-                    <span style="color: red"> Si todavia no ha subido imagenes, la primera imagen que suba se la considerará como portada del couch</span>
+                    <span style="color: red"> Si todavia no ha subido imagenes, la ultima imagen que seleccione se la considerará como portada del couch</span>
 
                 <?php } ?>
 
@@ -126,9 +126,13 @@ $posActual = 0;
             <input type="file" accept=".jpg,.jpeg,.png" name="imgCouch[]" id="imgCouch" multiple="multiple">
         </div>
 
-        <?php //CAROUSEL busca las fotos del couch para agregarlas al carousel
+        <?php 
         $query_foto="SELECT ruta,id_foto FROM foto WHERE id_couch='".$row['id_couch']."'";
         $resultado_foto=mysqli_query($conexion, $query_foto);
+        if (mysqli_num_rows($resultado_foto) > 0)
+        {
+            echo("<hr><h4 align = 'center'>Seleccione las fotos que desea eliminar</h4>");
+        }
         ?>
         <div class="row">
             <div class=”col-md-4″>
@@ -148,8 +152,8 @@ $posActual = 0;
 
         <!-- botones de envio -->
         <div class="form-group">
-            <button type="submit" class="btn btn-default" name="submit">Aceptar</button>
-            <a class="btn btn-default" href="listado_mis_couchs.php">Cancelar</a>
+            <button type="submit" class="btn btn-primary" name="submit">Aceptar</button>
+            <a class="btn btn-primary" href="listado_mis_couchs.php">Cancelar</a>
         </div>
     </form>
 </div>

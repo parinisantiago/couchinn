@@ -72,8 +72,8 @@ if( isset($_SESSION['sesion_usuario']) ){
             </div>
             <div class="form-group">
 
-                <button type="submit" class="btn btn-default">Guardar cambios</button>
-                <a class="btn btn-default" href="index.php">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a class="btn btn-primary" href="index.php">Cancelar</a>
             </div>
         </form>
             <?php }else{ ?>
@@ -130,8 +130,8 @@ if( isset($_SESSION['sesion_usuario']) ){
                 <span id="helpBlock-num" class="help-block"></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-default">Guardar cambios</button>
-                <a class="btn btn-default" href="index.php">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a class="btn btn-primary" href="index.php">Cancelar</a>
             </div>
         </form>
             <?php } ?>

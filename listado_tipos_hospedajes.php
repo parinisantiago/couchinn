@@ -56,9 +56,9 @@ if( isset($_SESSION['sesion_usuario']) ){
 			</div>
 			<div class="panel-footer">
 			<div class="form-group " id="buttons-tipo-couch">
-                <button type="submit" name = "Eliminar" class="btn btn-default">Eliminar</button>
-                <button type="submit" name = "Modificar" class="btn btn-default">Modificar</button>
-                <a class="btn btn-default" href="index.php">Cancelar</a>
+                <button type="submit" name = "Eliminar" class="btn btn-primary">Eliminar</button>
+                <button type="submit" name = "Modificar" class="btn btn-primary">Modificar</button>
+                <a class="btn btn-primary" href="index.php">Cancelar</a>
             </div>
 			</div>
             </form>
