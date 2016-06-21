@@ -5,7 +5,7 @@ include_once("../conectarBD.php");
 $idUser= $_POST['idUser'];
 $titCouch= $_POST['titCouch'];
 $descCouch= $_POST['descCouch'];
-$ubCouh= $_POST['ciudad'].",".$_POST['provincia'].",".$_POST['pais'];
+$ubCouh= $_POST['ubCouch'];
 $dirCouch= $_POST['dirCouch'];
 $capCouch= $_POST['capCouch'];
 $tipCouch= $_POST['tipCouch'];
