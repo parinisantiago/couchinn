@@ -15,7 +15,7 @@ $validoCouch="SELECT titulo, id_tipo, id_usuario FROM couch WHERE (titulo = '" .
 $resultadoValidoCouch=mysqli_query($conexion, $validoCouch);
 //Si no existe un couch igual
 if (mysqli_num_rows($resultadoValidoCouch) == 1) {
-    header("Location: ../index.php?msg=No se pudo dar de alta a su couch, ya tiene uno publicado con el mismo titulo y tipo&&class=alert-warning"); 
+    header("Location: ../index.php?msg=No se pudo dar de alta a su couch, ya tiene uno publicado con el mismo titulo y tipo&&class=alert-danger"); 
 } //Lo agrego despues de validar
  else { 
 
