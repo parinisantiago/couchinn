@@ -13,7 +13,7 @@ $tipCouch= $_POST['tipCouch'];
 $fPublicacion= date('Y-m-d');
 
 //Checkea que el couch no exista en la bd.
-$validoCouch="SELECT titulo, id_tipo, id_usuario FROM couch WHERE (titulo = '" . $titCouch ." ' AND id_tipo = '" . $tipCouch ." ' AND id_usuario = '" . $idUser ." ' AND id_couch <> '" . $idCouch ." ')";
+$validoCouch="SELECT titulo, id_tipo, id_usuario, eliminado_couch FROM couch WHERE (titulo = '" . $titCouch ." ' AND id_tipo = '" . $tipCouch ." ' AND id_usuario = '" . $idUser ." ' AND id_couch <> '" . $idCouch ." ' AND eliminado_couch = 0)";
 $resultadoValidoCouch=mysqli_query($conexion, $validoCouch);
 //Si no existe un couch igual
 if (mysqli_num_rows($resultadoValidoCouch) == 1) {
