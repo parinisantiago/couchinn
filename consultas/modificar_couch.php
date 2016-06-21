@@ -27,7 +27,11 @@ if (mysqli_num_rows($resultadoValidoCouch) == 1) {
 		$dirBase = "../fotos_hospedajes/" . $idUser . "/". $idCouch . "/";
 		$dirBase2 = "fotos_hospedajes/" . $idUser . "/". $idCouch . "/";
 		//si el usuario no posee una carpeta para guardar sus fotos, la crea
-		 if( ! file_exists($dirBase)) { mkdir($dirBase, 0777);}
+		 if( ! file_exists($dirBase))
+		 {
+			mkdir("../fotos_hospedajes/" . $idUser . "/", 0777);
+			mkdir("../fotos_hospedajes/" . $idUser . "/". $idCouch . "/", 0777);
+		}
 
 		//valida las imagenes una por una
 		$total = count($_FILES['imgCouch']['name']);
