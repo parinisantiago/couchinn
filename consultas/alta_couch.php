@@ -10,14 +10,14 @@ $dirCouch= $_POST['dirCouch'];
 $capCouch= $_POST['capCouch'];
 $tipCouch= $_POST['tipCouch'];
 $warning= false;
-/*//Checkea que el couch no exista en la bd.
+//Checkea que el couch no exista en la bd.
 $validoCouch="SELECT titulo, id_tipo, id_usuario, eliminado_couch FROM couch WHERE (titulo = '" . $titCouch ." ' AND id_tipo = '" . $tipCouch ." ' AND id_usuario = '" . $idUser ." ' AND eliminado_couch=0)";
 $resultadoValidoCouch=mysqli_query($conexion, $validoCouch);
 //Si no existe un couch igual
 if (mysqli_num_rows($resultadoValidoCouch) == 1) {
     header("Location: ../altaCouch.php?msg=No se pudo dar de alta a su couch, ya tiene uno publicado con el mismo titulo y tipo&&class=alert-danger"); 
 } //Lo agrego despues de validar
- else { */
+ else { 
 
 
         //agrega el couch
@@ -71,4 +71,4 @@ if (mysqli_num_rows($resultadoValidoCouch) == 1) {
             header("Location: ../index.php?msg=El couch se creo correctamente pero algunas de sus imagenes no pudieron ser subidas por tener un formato invalido&&class=alert-warning");
         } else { header("Location: ../index.php?msg=Su couch se creo correctamente&&class=alert-success");
         }
-//}
+}
