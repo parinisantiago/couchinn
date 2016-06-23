@@ -33,6 +33,13 @@ include_once("conectarBD.php");
     <?php
     $queryRervasFin = "SELECT nombre, apellido,id_couch, id_reserva, reserva.id_usuario, DATE_FORMAT(finicio, '%d-%m-%y') AS finicio, DATE_FORMAT(ffin,'%d-%m-%y') AS ffin FROM reserva INNER JOIN usuario ON (reserva.id_usuario = usuario.id_usuario ) WHERE estado='Finalizada' AND id_puntajeUsuario IS NULL AND reserva.id_couch IN (SELECT id_couch FROM couch WHERE id_usuario ='" . $_SESSION['id_usuario'] . "')";
     $consultaReservasFin = mysqli_query($conexion, $queryRervasFin);
+
+    if(mysqli_num_rows($consultaReservasFin) == 0){ ?>
+        <div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert alert-warning">
+            No posee Usuarios para puntuar
+        </div>
+  <?php  }
+
     while ($reservasFin = mysqli_fetch_array($consultaReservasFin)) {
         if (!isset($reservasFin['id_puntajeUsuario'])) {
             ?>
