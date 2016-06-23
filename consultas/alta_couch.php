@@ -24,7 +24,7 @@ if (mysqli_num_rows($resultadoValidoCouch) == 1) {
 
         $query="INSERT INTO couch(id_usuario, id_tipo, titulo, descripcion, ubicacion, direccion, capacidad) VALUES ('". $idUser. "','" . $tipCouch . "','" . $titCouch ." ', '" . $descCouch . "','" . $ubCouh. "','" . $dirCouch . "','" . $capCouch . "')";
 
-    //    mysqli_query($conexion, $query);
+        mysqli_query($conexion, $query);
 
         //recoge el id resultante
 
