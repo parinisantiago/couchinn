@@ -24,7 +24,7 @@ if (mysqli_num_rows($resultadoValidoCouch) == 1) {
 
         $query="INSERT INTO couch(id_usuario, id_tipo, titulo, descripcion, ubicacion, direccion, capacidad) VALUES ('". $idUser. "','" . $tipCouch . "','" . $titCouch ." ', '" . $descCouch . "','" . $ubCouh. "','" . $dirCouch . "','" . $capCouch . "')";
 
-        mysqli_query($conexion, $query);
+    //    mysqli_query($conexion, $query);
 
         //recoge el id resultante
 
@@ -43,7 +43,6 @@ if (mysqli_num_rows($resultadoValidoCouch) == 1) {
 
         //valida las imagenes una por una
         $total = count($_FILES['imgCouch']['name']);
-        echo($total);
         for ( $i = 0; $i < $total; $i++){
 
             $ok=true;
@@ -67,7 +66,7 @@ if (mysqli_num_rows($resultadoValidoCouch) == 1) {
             else { $warning= true;}
         }
 
-        if($warning && $total > 1){
+        if($warning && !empty($_FILES['imgCouch']['name'][0])){
             header("Location: ../index.php?msg=El couch se creo correctamente pero algunas de sus imagenes no pudieron ser subidas por tener un formato invalido&&class=alert-warning");
         } else { header("Location: ../index.php?msg=Su couch se creo correctamente&&class=alert-success");
         }
