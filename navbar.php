@@ -91,6 +91,9 @@ if( isset($_SESSION['sesion_usuario'])){
                             <li ><a href = "user_modForm.php" > Modificar perfil </a ></li >
                         </ul >
                     </li >
+                    <li>
+                        <a href="puntuarHuespedes.php">Ver húespedes</a>
+                    </li>
                 </ul >
 
                 <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
