@@ -1,5 +1,6 @@
 <?php
 session_start();
+if($_SESSION['id_usuario'] == true && $_SESSION['admin'] == false){
 include_once("conectarBD.php");
 ?>
 <!DOCTYPE html>
@@ -75,3 +76,6 @@ include_once("conectarBD.php");
     }
     ?>
 </div>
+<?php } else {
+    header("Location: /index.php?msg=No posee permiso para puntuar usuarios&&class=alert-danger");
+}?>
