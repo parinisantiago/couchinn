@@ -2,7 +2,7 @@
 
 if(isset($_GET['submit'])) {
     include_once("../conectarBD.php");
-
+    var_dump(($_GET)); die();
     $idUsuario=$_GET['id_usuario'];
     $idReserva=$_GET['id_reserva'];
     $idCouch=$_GET['id_couch'];

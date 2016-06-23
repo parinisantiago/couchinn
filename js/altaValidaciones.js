@@ -471,7 +471,21 @@ function valCantFotos(inFile){
     }
 }
 
+function valCantFotosMod(inFile, cantFotos){
+    var aux = 3 - cantFotos;
+    if (inFile.files.length + cantFotos > 3){
+         document.getElementById("glyphicon-imgCouch").setAttribute("class","glyphicon glyphicon-warning-sig form-control-feedback");
+        document.getElementById("helpBlock-imgCouch").innerHTML = "Se pueden subir " + aux + " fotos como máximo, usted posee " + cantFotos + ".El maximo es 3";
+        return false;
+    }
+}
+
 function valCouch()
 {
     return valTitCouch(document.getElementById("titCouch")) && valCapCouch(document.getElementById("capCouch")) && valCantFotos(document.getElementById("imgCouch"));
+}
+
+function valCouchMod(cantFotos)
+{
+    return valTitCouch(document.getElementById("titCouch")) && valCapCouch(document.getElementById("capCouch")) && valCantFotosMod(document.getElementById("imgCouch"), cantFotos);
 }

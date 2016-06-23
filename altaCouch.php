@@ -96,13 +96,13 @@ $result=mysqli_query($conexion, $query);
         <!-- imagen couch -->
         <div class="form-group">
             <label class="control-label" for="imgCouch">
-                Fotos (*.jpg, *.jpeg, *.png):
+                Fotos (*.jpg, *.jpeg, *.png) (MAX 3):
                 <?php
                 $query_premium="SELECT id_usuario FROM premium WHERE id_usuario='". $_SESSION['id_usuario'] ."'";
                 $result_premium= mysqli_query($conexion, $query_premium);
                 if (mysqli_num_rows($result_premium) > 0){ ?>
 
-                    <span style="color: red"> La ultima imagen que seleccione se la considerará como portada del couch</span>
+                    <!--<span style="color: red"> La ultima imagen que seleccione se la considerará como portada del couch</span>-->
 
                 <?php } ?>
 

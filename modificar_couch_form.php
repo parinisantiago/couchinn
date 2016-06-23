@@ -24,21 +24,29 @@ $posActual = 0;
 
 </head>
 <body>
+
 <?php include("navbar.php") ?>
 <?php
         include("conectarBD.php");
         $query = "SELECT * FROM couch WHERE id_couch='" . $_POST["couch"] . "'";
         $result = mysqli_query($conexion, $query);
         $row = mysqli_fetch_array($result);
+
+        $query_foto="SELECT ruta,id_foto FROM foto WHERE id_couch='".$row['id_couch']."'";
+        $resultado_foto=mysqli_query($conexion, $query_foto);
+        $cantFotos = mysqli_num_rows($resultado_foto);
+        
+        
     ?>
 <!-- hay un bardo con el formulario de iniciar sesion en la navbar, valida el html cuando no debería. -->
+<body onload="deshabilitarAgregarFotos(<?php echo($cantFotos); ?> );">
 <div class="container">
     <?php if (isset($_GET['msg'])) { ?>
         <div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
             <?php echo($_GET['msg']) ?>
         </div>
     <?php } ?>
-    <form class="form-horizontal" name="altaCouch" method="post" onsubmit = "return valCouch()" action="consultas/modificar_couch.php" enctype="multipart/form-data">
+    <form class="form-horizontal" name="altaCouch" method="post" onsubmit = "return valCouchMod(<?php echo($cantFotos); ?>)" action="consultas/modificar_couch.php" enctype="multipart/form-data">
         <div class="form-group">
             <span class="text-muted"><em><span style="color:red;">*</span> Estos campos son requeridos</em></span>
         </div>
@@ -112,18 +120,20 @@ $posActual = 0;
         <!-- imagen couch -->
         <div class="form-group">
             <label class="control-label" for="imgCouch">
-                Añada nuevas fotos (*.jpg, *.jpeg, *.png):
+                Añada nuevas fotos (*.jpg, *.jpeg, *.png) (MAX 3):
                 <?php
                 $query_premium="SELECT id_usuario FROM premium WHERE id_usuario='". $_SESSION['id_usuario'] ."'";
                 $result_premium= mysqli_query($conexion, $query_premium);
                 if (mysqli_num_rows($result_premium) > 0){ ?>
 
-                    <span style="color: red"> Si todavia no ha subido imagenes, la ultima imagen que seleccione se la considerará como portada del couch</span>
+                    <!--<span style="color: red"> Si todavia no ha subido imagenes, la ultima imagen que seleccione se la considerará como portada del couch</span>-->
 
                 <?php } ?>
 
             </label>
-            <input type="file" accept=".jpg,.jpeg,.png" name="imgCouch[]" id="imgCouch" multiple="multiple">
+            <input type="file" accept=".jpg,.jpeg,.png" name="imgCouch[]" id="imgCouch" multiple="multiple" aria-describedby="helpBlock-imgCouch">
+            <span id="glyphicon-imgCouch" aria-hidden="true"></span>
+            <span id="helpBlock-imgCouch" class="help-block"></span>
         </div>
 
         <?php 
@@ -149,6 +159,16 @@ $posActual = 0;
             </div>
             
         </div>
+
+        <script type="text/javascript">
+            function deshabilitarAgregarFotos(cantFotos)
+            {
+                if (cantFotos >= 3)
+                {
+                    document.getElementById("imgCouch").disabled = true;
+                }
+            }
+        </script>
 
         <!-- botones de envio -->
         <div class="form-group">

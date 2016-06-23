@@ -1,9 +1,12 @@
 <?php
-session_start();
+if(!isset($_SESSION['sesion_usuario'])){
+    session_start();
+}
 if($_SESSION['id_usuario'] == true && $_SESSION['admin'] == false) {
     include_once("conectarBD.php");
 
     $queryPuntajes = "SELECT titulo, puntuacion, nombre, apellido,reserva.id_couch, id_reserva, reserva.id_usuario, DATE_FORMAT(finicio, '%d-%m-%y') AS finicio, DATE_FORMAT(ffin,'%d-%m-%y') AS ffin FROM reserva INNER JOIN usuario ON (reserva.id_usuario = usuario.id_usuario ) INNER JOIN puntos_usuario ON(reserva.id_puntajeUsuario = puntos_usuario.id_usuario) INNER JOIN couch ON (reserva.id_couch = couch.id_couch) WHERE id_puntajeUsuario IS NOT NULL AND reserva.id_couch IN (SELECT id_couch FROM couch WHERE id_usuario ='" . $_SESSION['id_usuario'] . "')";
+    echo($queryPuntajes);
     $consultaPuntajes = mysqli_query($conexion, $queryPuntajes);
     if (mysqli_num_rows($consultaPuntajes) == 0) { ?>
         <div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert alert-warning">
@@ -11,11 +14,11 @@ if($_SESSION['id_usuario'] == true && $_SESSION['admin'] == false) {
         </div>
     <?php }
     while ($puntajes = mysqli_fetch_array($consultaPuntajes)) {
-        ?>
+        var_dump($puntajes);?>
 
         <div class="panel panel-primary ">
             <div class="panel-heading">
-                <p> Puntaje para el usuario <?php echo($puntajes['nombre'] . " " . $puntajes['apellido']); ?>: </p>
+                <p> Puntaje para el usuario <?php echo($puntajes['nombre'] . " " . $puntajes['apellido']); ?> para el couch: <?php echo($puntajes['titulo']); ?> : </p>
             </div>
             <div class="panel-body">
                 <p>Estadía: <?php echo $puntajes['titulo']; ?></p>

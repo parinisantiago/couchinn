@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION['sesion_usuario'])){
+    session_start();
+}
 if($_SESSION['id_usuario'] == true && $_SESSION['admin'] == false){
 include_once("conectarBD.php");
 ?>
@@ -30,9 +32,11 @@ include_once("conectarBD.php");
         </div>
     <?php } ?>
 </div>
+<h2 align = "center"> Huespedes por puntuar </h2>
+<hr size = "3">
 <div class="container">
     <?php
-    $queryRervasFin = "SELECT nombre, apellido,id_couch, id_reserva, reserva.id_usuario, DATE_FORMAT(finicio, '%d-%m-%y') AS finicio, DATE_FORMAT(ffin,'%d-%m-%y') AS ffin FROM reserva INNER JOIN usuario ON (reserva.id_usuario = usuario.id_usuario ) WHERE estado='Finalizada' AND id_puntajeUsuario IS NULL AND reserva.id_couch IN (SELECT id_couch FROM couch WHERE id_usuario ='" . $_SESSION['id_usuario'] . "')";
+    $queryRervasFin = "SELECT titulo,nombre, apellido,reserva.id_couch, id_reserva, reserva.id_usuario, DATE_FORMAT(finicio, '%d-%m-%y') AS finicio, DATE_FORMAT(ffin,'%d-%m-%y') AS ffin FROM reserva INNER JOIN couch ON (reserva.id_couch = couch.id_couch) INNER JOIN usuario ON (reserva.id_usuario = usuario.id_usuario ) WHERE estado='Finalizada' AND id_puntajeUsuario IS NULL AND reserva.id_couch IN (SELECT id_couch FROM couch WHERE id_usuario ='" . $_SESSION['id_usuario'] . "')";
     $consultaReservasFin = mysqli_query($conexion, $queryRervasFin);
     
 
@@ -43,7 +47,7 @@ include_once("conectarBD.php");
             <div class="panel panel-primary puntajeCouch">
 
                 <div class="panel-heading">
-                    <p>Puntúe la estadía de su huesped:<?php echo $_SESSION['nombre_completo']; ?> del
+                    <p>Puntúe la estadía de su huesped: <?php echo $reservasFin['nombre'].' '.$reservasFin['apellido']; ?> para el couch: <?php echo $reservasFin['titulo']; ?> del
                         dia: <?php echo($reservasFin['finicio']); ?> hasta el
                         dia: <?php echo($reservasFin['ffin']); ?> </p>
                 </div>
@@ -66,12 +70,15 @@ include_once("conectarBD.php");
                     </form>
                 </div>
             </div>
-
+            
         <?php }
-    }
-    include ("listadoHuesped.php");
+    } ?>
+    <hr size = "3">
+    <h2 align = "center"> Huespedes puntuados </h2>
+    <hr size = "3">
+    <?php include ("listadoHuesped.php");
     ?>
 </div>
 <?php } else {
-    header("Location: /index.php?msg=No posee permiso para puntuar usuarios&&class=alert-danger");
+    header("Location: index.php?msg=No posee permiso para puntuar usuarios&&class=alert-danger");
 }?>

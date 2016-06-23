@@ -1,6 +1,5 @@
 <?php
 
-
 if(!isset($_SESSION['sesion_usuario']) && !isset($_SESSION["anonimo"])){
     session_start();
     $_SESSION["anonimo"] = true;
