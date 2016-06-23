@@ -38,7 +38,12 @@ include_once("conectarBD.php");
     <?php
     $queryRervasFin = "SELECT titulo,nombre, apellido,reserva.id_couch, id_reserva, reserva.id_usuario, DATE_FORMAT(finicio, '%d-%m-%y') AS finicio, DATE_FORMAT(ffin,'%d-%m-%y') AS ffin FROM reserva INNER JOIN couch ON (reserva.id_couch = couch.id_couch) INNER JOIN usuario ON (reserva.id_usuario = usuario.id_usuario ) WHERE estado='Finalizada' AND id_puntajeUsuario IS NULL AND reserva.id_couch IN (SELECT id_couch FROM couch WHERE id_usuario ='" . $_SESSION['id_usuario'] . "')";
     $consultaReservasFin = mysqli_query($conexion, $queryRervasFin);
-    
+
+    if (mysqli_num_rows($consultaReservasFin) == 0) { ?>
+        <div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert alert-warning">
+            No posee huespedes para puntuar
+        </div>
+    <?php }
 
     while ($reservasFin = mysqli_fetch_array($consultaReservasFin)) {
         if (!isset($reservasFin['id_puntajeUsuario'])) {
@@ -78,6 +83,7 @@ include_once("conectarBD.php");
     <hr size = "3">
     <?php include ("listadoHuesped.php");
     ?>
+    <a class="btn btn-primary" href="index.php">Volver</a>
 </div>
 <?php } else {
     header("Location: index.php?msg=No posee permiso para puntuar usuarios&&class=alert-danger");
