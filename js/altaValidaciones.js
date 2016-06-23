@@ -463,7 +463,15 @@ function valTitCouch(text)
     document.getElementById("titCouch").focus();
     return(false);
 }
+function valCantFotos(inFile){
+    if (inFile.files.length > 3){
+         document.getElementById("glyphicon-imgCouch").setAttribute("class","glyphicon glyphicon-warning-sig form-control-feedback");
+        document.getElementById("helpBlock-imgCouch").innerHTML = "Se pueden subir 3 fotos como máximo";
+        return false;
+    }
+}
+
 function valCouch()
 {
-    return valTitCouch(document.getElementById("titCouch")) && valCapCouch(document.getElementById("capCouch"));
+    return valTitCouch(document.getElementById("titCouch")) && valCapCouch(document.getElementById("capCouch")) && valCantFotos(document.getElementById("imgCouch"));
 }

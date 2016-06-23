@@ -107,9 +107,10 @@ $result=mysqli_query($conexion, $query);
                 <?php } ?>
 
             </label>
-            <input type="file" accept=".jpg,.jpeg,.png" name="imgCouch[]" id="imgCouch" multiple="multiple">
+            <input type="file" accept=".jpg,.jpeg,.png" name="imgCouch[]" id="imgCouch" multiple="multiple" aria-describedby="helpBlock-imgCouch">
+            <span id="glyphicon-imgCouch" aria-hidden="true"></span>
+            <span id="helpBlock-imgCouch" class="help-block"></span>
         </div>
-
 
         <!-- botones de envio -->
         <div class="form-group">
