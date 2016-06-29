@@ -34,6 +34,21 @@ if( isset($_SESSION['sesion_usuario'])){
                             </ul >
                         </li >
                         <li class="dropdown" >
+                            <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Generar Listados <span class="caret" ></span ></a >
+                            <ul class="dropdown-menu" >
+                                <li>
+                                <a href="listado_aceptadas_finalizadas_admin.php">Reservas</a>
+                                </li>
+                                <li>
+                                <a href="manejo_usuarios.php">Usuarios</a>
+                                </li>
+                                <li>
+                                <a href="">Ganancias</a>
+                                </li>
+                            </ul >
+
+                        </li >
+                        <li class="dropdown" >
                             <a href = "#" class="dropdown-toggle" data-toggle= "dropdown" role = "button" aria-haspopup = "true" aria-expanded = "false" > Administrador <span class="caret" ></span ></a >
                             <ul class="dropdown-menu" >
                                 <li ><a href = "#" > Ver perfil </a ></li >
@@ -41,9 +56,8 @@ if( isset($_SESSION['sesion_usuario'])){
                             </ul >
 
                         </li >
-                        <li>
-                        <a href="listado_aceptadas_finalizadas_admin.php">Listado de reservas aceptadas y finalizadas</a>
-                    </li>
+                        
+                        
                     </ul >
 
                     <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">

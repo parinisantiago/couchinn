@@ -331,6 +331,12 @@ if (mysqli_num_rows($resultado) == 1){
 
             <?php   }  ?>
     <a class="btn btn-primary" href="index.php">Volver</a>
+    
+    <?php /* if (isset($_SESSION["admin"]) && $_SESSION["admin"] == true)
+    { ?>
+        <form name ="form_eliminar_admin" method ="post" action ="consultas/eliminar_couch_admin.php">
+        <button type="submit" for ="form_eliminar_admin" name = "Eliminar" id = "Eliminar" onclick="return confirm('¿Esta seguro de que desea Eliminar el couch?')" class="btn btn" style="float: right; color: red;">Eliminar</button></form>
+    <?php }  */?>
 </div>
 </body>
 
