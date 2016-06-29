@@ -39,7 +39,11 @@ if( isset($_SESSION['sesion_usuario'])){
                                 <li ><a href = "#" > Ver perfil </a ></li >
                                 <li ><a href = "user_modForm.php" > Modificar perfil </a ></li >
                             </ul >
+
                         </li >
+                        <li>
+                        <a href="listado_aceptadas_finalizadas_admin.php">Listado de reservas aceptadas y finalizadas</a>
+                    </li>
                     </ul >
 
                     <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
@@ -92,6 +96,9 @@ if( isset($_SESSION['sesion_usuario'])){
                     </li >
                     <li>
                         <a href="puntuarHuespedes.php">Ver húespedes</a>
+                    </li>
+                    <li>
+                        <a href="mis_reservas_realizadas.php">Mis reservas realizadas</a>
                     </li>
                 </ul >
 

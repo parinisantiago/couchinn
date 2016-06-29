@@ -489,3 +489,11 @@ function valCouchMod(cantFotos)
 {
     return valTitCouch(document.getElementById("titCouch")) && valCapCouch(document.getElementById("capCouch")) && valCantFotosMod(document.getElementById("imgCouch"), cantFotos);
 }
+
+function valFechasListado(){
+    if (document.getElementById("finicio").value > document.getElementById("ffin").value){
+        document.getElementById("helpBlock-ffin").innerHTML = "No se pudo generar el listado, compruebe las fechas ingresadas.";
+        return false;
+    }   
+    return true;
+}

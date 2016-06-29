@@ -52,10 +52,10 @@ if( isset($_SESSION['sesion_usuario']) ){?>
 					}
 					//Alto hack para listar los tipos para poder seleccionarlos y que se autocomplete el campo de modificacion
 					if ($temp == 1){?>
-             			<input type='radio' id = "<?php echo($des); ?>" onclick = "deshabilitar(this)" checked name="couch" value= "<?php echo($row["id_couch"]);?>"> <?php echo($nombre); ?> <br>
+             			<input type='radio' id = "<?php echo($des); ?>" onclick = "deshabilitar(this)" checked name="couch" value= "<?php echo($row["id_couch"]);?>"> <?php echo( "<a style=\"color:black;\" href=\"detalle_couch.php?id=".$row["id_couch"]."\">". $nombre."</a>"); ?> <br>
              			<?php $temp = 0; ?>
              		<?php	} else {?>
-             			<input type='radio' id = "<?php echo($des); ?>" onclick = "deshabilitar(this)" name="couch" value= "<?php echo($row["id_couch"]);?>"> <?php echo($nombre); ?> <br>
+             			<input type='radio' id = "<?php echo($des); ?>" onclick = "deshabilitar(this)" name="couch" value= "<?php echo($row["id_couch"]);?>"> <?php echo( "<a style=\"color:black;\" href=\"detalle_couch.php?id=".$row["id_couch"]."\">". $nombre."</a>"); ?> <br>
              		<?php	} ?>
 				<?php	}
 					if ($noEntro) //AFUERA DEL WHILE SI NO ENTRO AL WHILE QUIERE DECIR QUE NO HABIA COUCHS PUBLICADOS
