@@ -36,22 +36,22 @@
 			?>
 			<div class="container">
 			
-                    <form class="form-inline" role="form" name="listadoAceptFinal" method="get" onsubmit="valFechasListado()">
+                    <form class="form-inline" role="form" name="listadoAceptFinal" method="get" onsubmit="return valFechasListado()">
                         <div class="form-group">    
                               <label class="control-label" for="finicio">Desde: <span style="color:red;"> *</span></label>
                               <input type="date" name="finicio" class="form-control" id="finicio" value="<?php if (isset($_GET['finicio']) && ($_GET["finicio"] != null)){echo($_GET["finicio"]);}?>" placeholder="Desde" aria-describedby="helpBlock-finicio"  required>
-                              <span id="glyphicon-finicio" aria-hidden="true"></span>
-                              <span id="helpBlock-finicio" class="help-block"></span>
+                           
 						</div>
 						<div class="form-group">
                               <label class="control-label" for="ffin">Hasta<span style="color:red;"> *</span></label>
                               <input type="date" name="ffin" class="form-control" id="ffin" value="<?php if (isset($_GET['ffin']) && ($_GET["ffin"] != null)){echo($_GET["ffin"]);}?>" placeholder="Hasta" aria-describedby="helpBlock-ffin" required>
-                              <span id="glyphicon-ffin" aria-hidden="true"></span>
-                              <span id="helpBlock-ffin" class="help-block"></span>
+
+                              
                         </div>
                         <div class="form-group">
                               <button type="submit" class="btn btn-primary"><i class = "glyphicon glyphicon-list-alt"></i> Generar Listado</span></button>
                         </div>
+                        <span id="helpBlock-ffin" class="help-block" style="color:red;"></span>
 
                     </form>
             </div>
