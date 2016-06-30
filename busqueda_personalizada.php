@@ -8,7 +8,7 @@
                  ?>
 <div class="panel-group">
     <div class="panel panel-default">
-      <div class="panel-heading">Armá tu búsqueda personalizada!</div>
+      <div class="panel-heading" align = "center">Armá tu búsqueda personalizada!</div>
       <div class="panel-body">
         <form class="form-horizontal" role="form" method="GET" action="index.php">
         <div class="form-group">    

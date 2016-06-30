@@ -9,25 +9,43 @@
 
 
 <div class="list-group">
-	
-    <?php while ($row = mysqli_fetch_array($resultado))
-    {?>
-	
-		<?php
-			$nombre=$row["nombre"];
-			$apellido=$row["apellido"];
-			$email=$row["email"];
-			$telefono=$row["telefono"];
-			$id_usuario=$row["id_usuario"];
-		//?>
-
-		<a href="" class="list-group-item">	
-			<div class="col-md-6">
-				<h4 class="list-group-item-heading"><?php echo($nombre) ?></h4>
-				<p class="list-group-item-text"><?php echo ("<strong>Descripción: </strong>".$apellido."<br> <strong>Ubicación: </strong>".$email."<br> <strong>Dirección: </strong>".$direccion."<br> <strong>telefono: </strong> para ".$telefono." personas. <br> <strong>Tipo: </strong>".$tipo); ?></p>
-			</div>
-	  	</a>		           
-	<?php } ?>
+	<style>
+	th, td {
+	    padding: 15px;
+	}
+	</style>
+	<table style="width:100%">
+		<tr>
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Apellido</th> 
+			<th>Email</th>
+			<th>Telefono</th>
+		</tr>
+	    <?php while ($row = mysqli_fetch_array($resultado))
+	    {?>
+		
+			<?php
+				$nombre=$row["nombre"];
+				$apellido=$row["apellido"];
+				$email=$row["email"];
+				$telefono=$row["telefono"];
+				$id_usuario=$row["id_usuario"];
+			//?>
+			<form name ="formUsuarios" method ="post" action ="radioButton_listado_usuario.php">
+			<tr>
+	           	<input type="hidden" name="idUser" id="idUser" value=<?php echo($id_usuario)?>>
+				<td><?php echo($row["id_usuario"]);?></td>
+				<td><?php echo($row["nombre"]);?></td>
+				<td><?php echo($row["apellido"]);?></td>
+				<td><?php echo($row["email"]);?></td>
+				<td><?php echo($row["telefono"]);?></td>
+				<td><button title = "Eliminar Usuario" type="submit" name = "eliminarUsuario" id="eliminarUsuario" onclick="return confirm('¿Esta seguro de que desea Eliminar el Usuario?')" class="btn btn-warning btn-sm "><i class = "glyphicon glyphicon-remove"></i></button><button title = "Ver Couchs" type="submit" name = "verCouchs" id="verCouchs" class="btn btn-primary btn-sm "><i class = "glyphicon glyphicon-th-list"></i></button></td>
+			</tr>
+			</form>
+						           
+		<?php } ?>
+	</table>
 </div>
 
 	
