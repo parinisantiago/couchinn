@@ -25,7 +25,7 @@
 			include("navbar.php");
 			include_once("conectarBD.php");
 			if (isset($_GET["finicio"])){
-				$listadoAceptadasFinalizadasQuery="SELECT titulo,DATE_FORMAT(reserva.finicio, '%d-%m-%y') AS finicio,  DATE_FORMAT(reserva.ffin, '%d-%m-%y') AS ffin, reserva.id_couch, reserva.estado, usuario.nombre AS huespedNombre, usuario.apellido AS huespedApellido FROM  couch INNER JOIN reserva INNER JOIN usuario ON (reserva.id_usuario=usuario.id_usuario AND couch.id_couch=reserva.id_couch) WHERE (estado='Finalizada' OR estado='Aceptada') AND ((finicio BETWEEN '" . $_GET["finicio"]. "' AND '" . $_GET["ffin"]. "') OR (ffin BETWEEN '" . $_GET["finicio"]. "' AND '" . $_GET["ffin"]. "') OR ('" . $_GET["finicio"]. "' BETWEEN finicio AND ffin) OR ('" . $_GET["ffin"]. "' BETWEEN finicio AND ffin))"; 
+				$listadoAceptadasFinalizadasQuery="SELECT titulo,DATE_FORMAT(reserva.finicio, '%d-%m-%y') AS finicio,  DATE_FORMAT(reserva.ffin, '%d-%m-%y') AS ffin, reserva.id_couch, reserva.estado, usuario.nombre AS huespedNombre, usuario.apellido AS huespedApellido, couch.eliminado_couch, couch.despublicado, couch.id_usuario FROM  couch INNER JOIN reserva INNER JOIN usuario ON (reserva.id_usuario=usuario.id_usuario AND couch.id_couch=reserva.id_couch) WHERE (estado='Finalizada' OR estado='Aceptada') AND ((finicio BETWEEN '" . $_GET["finicio"]. "' AND '" . $_GET["ffin"]. "') OR (ffin BETWEEN '" . $_GET["finicio"]. "' AND '" . $_GET["ffin"]. "') OR ('" . $_GET["finicio"]. "' BETWEEN finicio AND ffin) OR ('" . $_GET["ffin"]. "' BETWEEN finicio AND ffin))"; 
 
 	    		$resultadoAceptadasFinalizadas= mysqli_query($conexion, $listadoAceptadasFinalizadasQuery);
 
@@ -66,12 +66,32 @@
 				<div class="container">
 		  		 	
   					
-		  			<div class="well"><h4><?php echo("Couch: ".$row["titulo"]); ?></h4>
+		  			<div class="well well-sm">
+		  			
+		  			<h4>
+			  			<a href="detalle_couch.php?id=<?php echo($row["id_couch"]); ?>">
+			  			<?php 
+			  				echo("Couch: ".$row["titulo"]); 
+			  				if ($row["eliminado_couch"] == 1){
+			  					echo ("<font style=\"color:red;\">(Eliminado)</font>");
+			  				} 
+			  				if ($row["despublicado"] == 1){
+			  					echo ("<font style=\"color:orange;\">(Despublicado)</font>");
+			  				}
+			  			?>
+			  			</a>
+			  		</h4>
+		  			
+		  			<?php 
+		  				$datosDuenoQuery="SELECT nombre, apellido FROM usuario INNER JOIN couch ON (usuario.id_usuario='".$row["id_usuario"]."')";
+    								$ejecucionDatosDueno= mysqli_query($conexion, $datosDuenoQuery);
+    								$resultadoDatosDueno= mysqli_fetch_array($ejecucionDatosDueno);
+		  				echo("<strong>Dueño: </strong>".$resultadoDatosDueno["nombre"]." ".$resultadoDatosDueno["apellido"]."<br><strong>Huesped:</strong> ".$row["huespedNombre"]." ".$row["huespedApellido"]); 
+		  			?>
 		  			<br>
-		  			<?php echo("Huesped:".$row["huespedNombre"]." ".$row["huespedApellido"]); ?>
-		  			<br>
-		  			<?php echo("Fecha de reserva: ".$row["finicio"]." al ". $row["ffin"]. "
-		  			<br> Estado: ". $row["estado"]);
+		  			<?php echo("<strong>Fecha de reserva:</strong> ".$row["finicio"]." al ". $row["ffin"]. "
+		  			<br><strong>Estado:</strong> ". $row["estado"]);
+
 		  			?> 
 		  		</div>
 				</div>
