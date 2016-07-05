@@ -62,8 +62,8 @@ include("navbar.php");?>
 
  <!-- Couchs del usuario       -->
 
-<a class="btn-primary" href="listado_mis_couchs.php"> Mis couchs </a>
-<a class="btn-primary" href="mis_reservas_realizadas.php"> Mis reservas </a>
+<a class="btn btn-primary" href="listado_mis_couchs.php"> Mis couchs </a>
+<a class="btn btn-primary" href="mis_reservas_realizadas.php"> Mis reservas </a>
 
 
 </div>
