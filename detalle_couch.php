@@ -284,7 +284,7 @@ if (mysqli_num_rows($resultado) == 1){
 
             </div>
 
-           <!-- seccion de respiesta -->
+           <!-- seccion de respuesta -->
             <div class="text-center respuesta">
 
                 <?php if($preguntas['contenidorespuesta'] != null){
@@ -293,7 +293,25 @@ if (mysqli_num_rows($resultado) == 1){
                     echo($preguntas['contenidorespuesta']);
                 } else if($esDuenio){ ?>
                 <hr>
-                <button class="btn btn-primary">Responder</button>
+                <a class="btn btn-primary collapsed" role="button" data-toggle="collapse" aria-expanded="false"  aria-controls=<?php echo("#collapsedResp" . $preguntas['id_pregunta']);?> href=<?php echo("#collapsedResp" . $preguntas['id_pregunta']);?>>Responder</a>
+
+                <!-- Collapsed form para la respuesta -->
+
+                <div class="collapse" aria-expanded="false" id=<?php echo("collapsedResp" . $preguntas['id_pregunta']);?>  style="height: 0;">
+                    <div class="well">
+                        <form class="form-horizontal" method="GET" action="consultas/altaRespuesta.php" name=<?php echo("formResp" . $preguntas['id_pregunta']);?> >
+                            <div class="form-group">
+                                <label class="control-label" for=<?php echo("respCouch" . $preguntas['id_pregunta']);?> >Respuesta: </label>
+                                <textarea class="form-control" rows="5" cols="50" maxlength="500" name="respCouch"  id=<?php echo("respCouch" . $preguntas['id_pregunta']);?>  required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" name="submit" class="btn btn-primary"> Enviar </button>
+                            </div>
+                            <input type="hidden" name="idCouch" value=<?php echo($_GET['id']); ?>>
+                            <input type="hidden" name="idPregunta" value=<?php echo($preguntas['id_pregunta']); ?>>
+                        </form>
+                    </div>
+                </div>
 
              <?php   }  ?>
 
@@ -310,6 +328,7 @@ if (mysqli_num_rows($resultado) == 1){
     <?php if(!$esDuenio && isset($_SESSION['sesion_usuario']) && $_SESSION['sesion_usuario'] == true ){
 
         ?>
+
 
 
         <form name="form-preguntas" class="form-horizontal" method="GET" action="consultas/altaPregunta.php">
