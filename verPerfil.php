@@ -62,84 +62,8 @@ include("navbar.php");?>
 
  <!-- Couchs del usuario       -->
 
-<?php
-
-   $couchQuery="SELECT id_couch,titulo,descripcion, ubicacion,descripcion ,capacidad, nombre_tipo FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) WHERE eliminado_couch='0' AND couch.id_usuario='".$_SESSION['id_usuario']."'";
-   $resulCouch= mysqli_query($conexion, $couchQuery);
-
-    if(mysqli_num_rows($resulCouch) != 0){ ?>
-            <h1> Mis Couchs </h1>
-
-
-        <div class="list-group">
-
-            <?php while ($row = mysqli_fetch_array($resulCouch)){
-                ?>
-
-                <?php
-                $titulo=$row["titulo"];
-                $descripcion=$row["descripcion"];
-                $ubicacion=$row["ubicacion"];
-                $direccion=$row["direccion"];
-                $capacidad=$row["capacidad"];
-                $tipo=$row["nombre_tipo"];
-                $id_couch=$row["id_couch"];
-                $id_usuario=$row["id_usuario"];
-                //
-
-                $es_premium_query= "SELECT id_usuario FROM premium WHERE id_usuario='".$_SESSION['id_usuario']."'";
-                $es_premium_query_res= mysqli_query($conexion, $es_premium_query);
-                if(mysqli_num_rows($es_premium_query_res) == 0){
-                    $esPremium=false;
-                } else{
-                    $esPremium=true;
-                }
-
-                ?>
-
-                <a href="detalle_couch.php?id=<?php echo($id_couch) ?>" class="list-group-item">
-
-                    <div class="row">
-                        <div class="col-md-3"><img class="img-circle" height="130" width="180"  src="<?php
-                            //Si es premium muestro la foto del hospedaje, si no muestro el logo de couchinn
-                            if( (isset($esPremium)) && ($esPremium)){
-                                $consultaFotos= "SELECT ruta FROM couch NATURAL JOIN foto WHERE couch.id_couch='".$id_couch."'";
-                                $consulta_fotos_query= mysqli_query($conexion, $consultaFotos);
-                                if(mysqli_num_rows($consulta_fotos_query) > 0){
-                                    $rowRuta=mysqli_fetch_array($consulta_fotos_query);
-                                    echo($rowRuta["ruta"]);
-
-                                }
-                                else
-                                {
-                                    echo("img/logoPremium.jpg");
-                                }
-
-
-                            }else{
-                                echo("img/logo.png");
-
-                            } ?>"></div>
-                        <div class="col-md-6"><h4 class="list-group-item-heading"><?php echo($titulo) ?></h4>
-                            <p class="list-group-item-text"><?php echo ("<strong>Descripción: </strong>".$descripcion."<br> <strong>Ubicación: </strong>".$ubicacion."<br> <strong>Dirección: </strong>".$direccion."<br> <strong>Capacidad: </strong> para ".$capacidad." personas. <br> <strong>Tipo: </strong>".$tipo); ?> </p></div>
-
-                    </div>
-
-
-                </a>
-
-
-                <?php
-            }
-
-            ?>
-
-        </div>
-        
-        
-<?php        
-    }
- ?>
+<a class="btn-primary" href="listado_mis_couchs.php"> Mis couchs </a>
+<a class="btn-primary" href="mis_reservas_realizadas.php"> Mis reservas </a>
 
 
 </div>
