@@ -498,3 +498,11 @@ function valFechasListado(){
     }   
     return true;
 }
+
+function valFechasListadoGanancias(){
+    if (document.getElementById("f_incripcion").value > document.getElementById("ffin").value){
+        document.getElementById("helpBlock-ffin").innerHTML = "No se pudo generar el listado, compruebe las fechas ingresadas.";
+        return false;
+    }   
+    return true;
+}

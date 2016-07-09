@@ -43,7 +43,7 @@ if( isset($_SESSION['sesion_usuario'])){
                                 <a href="manejo_usuarios.php">Usuarios</a>
                                 </li>
                                 <li>
-                                <a href="">Ganancias</a>
+                                <a href="listado_ganancias_admin.php">Ganancias</a>
                                 </li>
                             </ul >
 
