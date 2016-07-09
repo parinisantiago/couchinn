@@ -3,6 +3,6 @@
 		//include "consultas/eliminar_usuario.php";
 	}
 	else if (isset($_POST["verCouchs"])){
-		//include "modificar_couch_form.php";
+		include "listado_mis_couchs_admin.php";
 	}
 ?>

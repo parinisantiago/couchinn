@@ -350,6 +350,23 @@ if (mysqli_num_rows($resultado) == 1){
 
             <?php   }  ?>
     <a class="btn btn-primary" href="index.php">Volver</a>
+    <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == true ){
+
+        $query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE (couch.id_couch ='".$_GET["id"]."' AND couch.eliminado_couch = 0)";
+        $resultado= mysqli_query($conexion, $query);
+        $couch = mysqli_fetch_array($resultado);
+        ?>
+        <form name="formEliminarCouch" class="form-horizontal" method="POST" action="radioButton_listado_couch.php">
+            <div class="form-group">
+                <button type="submit" name = "Eliminar" id = "Eliminar" class="btn btn-warning">Eliminar</button>
+            </div>
+            <input type="hidden" name="idUser" id = "idUser" value=<?php echo($couch['id_usuario']); ?>>
+            <input type="hidden" name="esAdmin" id = "esAdmin" value="true">
+            <input type="hidden" name="vieneDelDetalle" id = "vieneDelDetalle" value="true">
+            <input type="hidden" name="couch" id = "couch" value=<?php echo($couch['id_couch']); ?>>
+        </form>
+
+    <?php } ?>
     
     <?php /* if (isset($_SESSION["admin"]) && $_SESSION["admin"] == true)
     { ?>
