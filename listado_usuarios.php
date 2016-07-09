@@ -1,6 +1,6 @@
 <?php	            	
 	include_once("conectarBD.php");
-	$query= "SELECT * FROM usuario WHERE (nombre LIKE '%".$_GET["nombre"]."%' AND apellido LIKE '%".$_GET["apellido"]."%' AND email LIKE '%".$_GET["email"]."%' AND telefono LIKE '%".$_GET["telefono"]."%')";
+	$query= "SELECT * FROM usuario WHERE (nombre LIKE '%".$_GET["nombre"]."%' AND apellido LIKE '%".$_GET["apellido"]."%' AND email LIKE '%".$_GET["email"]."%' AND telefono LIKE '%".$_GET["telefono"]."%' AND eliminado = 0)";
 	$resultado= mysqli_query($conexion, $query);
 	//Si no se arrojan resultados, se informa sobre lo ocurrido.
 	if (mysqli_num_rows($resultado) == 0) { ?>

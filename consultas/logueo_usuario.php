@@ -5,7 +5,7 @@
     $email= $_POST['email'];
     $clave= $_POST['clave'];
 
-    $query= "SELECT id_usuario,email,clave,nombre,apellido FROM usuario WHERE email='".$email."' AND clave='".$clave."'";
+    $query= "SELECT id_usuario,email,clave,nombre,apellido FROM usuario WHERE email='".$email."' AND clave='".$clave."' AND eliminado = 0";
     $resultado=mysqli_query($conexion, $query);
 
 

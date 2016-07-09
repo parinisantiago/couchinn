@@ -3,7 +3,7 @@
 
     $email= $_POST["emailRec"];
 
-    $query= "SELECT * FROM usuario WHERE email='".$_POST['emailRec']."'";
+    $query= "SELECT * FROM usuario WHERE email='".$_POST['emailRec']."' AND eliminado = 0";
 
     $resultado= mysqli_query($conexion, $query);
     $row=mysqli_fetch_array($resultado);
