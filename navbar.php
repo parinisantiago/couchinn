@@ -114,6 +114,9 @@ if( isset($_SESSION['sesion_usuario'])){
                     <li>
                         <a href="mis_reservas_realizadas.php">Mis reservas realizadas</a>
                     </li>
+                    <li>
+                        <a href="listadoMisHospedajes.php">Mis hospedajes</a>
+                    </li>
                 </ul >
 
                 <form id="user-session" class="form-inline pull-right" method="post" action="consultas/cerrar_sesion.php">
