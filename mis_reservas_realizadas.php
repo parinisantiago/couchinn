@@ -16,11 +16,16 @@
 	</head>
 
 	<body>
-		<?php if (isset($_GET['msg'])) { ?>
+		<?php $aDondeVolver = "index.php"; if (isset($_GET['msg'])) { ?>
 					<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
 						<?php echo($_GET['msg']); ?>
 					</div>
-				<?php } ?>
+				<?php } 
+				if (isset($_GET["desde"]))
+				{
+					$aDondeVolver = "verPerfil.php";
+				}
+				?>
 		<?php 
 			include("navbar.php");
 			include_once("conectarBD.php");
@@ -73,8 +78,7 @@
     								$ejecucionDatosDueno= mysqli_query($conexion, $datosDuenoQuery);
     								$resultadoDatosDueno= mysqli_fetch_array($ejecucionDatosDueno);
 
-    								echo("<br><strong>Datos del dueño:</strong><br> <strong> * Nombre: </strong>".$resultadoDatosDueno["nombre"].
-    									"<br><strong> * Apellido: </strong>".$resultadoDatosDueno["apellido"].
+    								echo("<br><strong>Datos del dueño:</strong><br> <strong> * Nombre: </strong>".$resultadoDatosDueno["nombre"]." ".$resultadoDatosDueno["apellido"].
     									"<br><strong> * Email: </strong>".$resultadoDatosDueno["email"].
     									"<br><strong> * Teléfono: </strong>".$resultadoDatosDueno["telefono"]
     									);
@@ -88,7 +92,7 @@
 						}
 					?>
 		<div class="container">
-			<a class="btn btn-primary" href="index.php">Volver</a>				
+			<a class="btn btn-primary" href=<?php echo($aDondeVolver);?>>Volver</a>				
 		</div>
 	</body>
 

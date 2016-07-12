@@ -3,7 +3,13 @@
 include("conectarBD.php");
 
 session_start(); 
-
+$query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE (couch.id_couch ='".$_GET["id"]."' AND ((couch.eliminado_couch = 1) OR (couch.despublicado = 1)))";
+$resultado= mysqli_query($conexion, $query);
+$esEliminadoODespublicado = false;
+if (mysqli_num_rows($resultado) == 1)
+{
+    $esEliminadoODespublicado = true;
+}
 if (isset($_SESSION["anonimo"]) && !isset($_SESSION["admin"])){ //!isset($_SESSION["admin"]) forma rebuscada de verificar que "anonimo"
     $_SESSION["id_usuario"] = -1;                               //esta en false (se lo setea a false en logueo_usuario.php)
 }
@@ -17,9 +23,8 @@ if ($_SESSION["id_usuario"] == $row["id_usuario"])
 {
     $esDuenio = true;
 }
-$query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE (couch.id_couch ='".$_GET["id"]."' AND couch.eliminado_couch = 0)";
+$query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE (couch.id_couch ='".$_GET["id"]."')";
 $resultado= mysqli_query($conexion, $query);
-if (mysqli_num_rows($resultado) == 1){
 ?>
 <!DOCTYPE html>
 <html>
@@ -104,7 +109,15 @@ if (mysqli_num_rows($resultado) == 1){
                                     </a>
                                 </div>
 
-                                <p class="h2 col-md-offset-4"> Datos del Couch</p>
+                                <p class="h2 col-md-offset-4"> Datos del Couch
+                                <?php if ($couch["eliminado_couch"])
+                                    {
+                                        echo(" <font color='red'> (ELIMINADO)</font>");
+                                    }
+                                    else if ($couch["despublicado"])
+                                    {
+                                        echo(" <font color='orange'> (DESPUBLICADO)</font>");
+                                    } ?></p>
 
                                 <!-- infromacion del couch -->
 
@@ -151,7 +164,7 @@ if (mysqli_num_rows($resultado) == 1){
                                 <div class="col-md-offset-2 col-md-6 inf_couch">
                                     <d1 class="dl-horizontal">
                                         <dt> Nombre: </dt>
-                                        <dd> <?php echo($couch["nombre"]) ?> <?php echo($couch["apellido"]) ?></dd>
+                                        <dd> <?php echo($couch["nombre"]) ?> <?php echo($couch["apellido"]);?></dd>
                                         <?php
                                             $queryDatosExtras = "SELECT estado FROM reserva WHERE id_usuario = '".$_SESSION['id_usuario']."' AND estado = 'Aceptada' AND id_couch = '".$_GET['id']."'";
                                             $resultadoDatosExtras = mysqli_query($conexion, $queryDatosExtras);
@@ -168,12 +181,13 @@ if (mysqli_num_rows($resultado) == 1){
                                     </d1>
                                 </div>
 
+                                    <br><br>
                             <?php   }    ?>
                                 
                                 <?php if($esDuenio){  ?>
+                                    
                                     <!-- Inicio de aceptar o rechazar reservas -->
                                     <div class="col-md-7">
-
                                         <div class="panel panel-primary">
 
                                             <div class="panel-heading">
@@ -219,7 +233,7 @@ if (mysqli_num_rows($resultado) == 1){
 
 
     <!--Listado de reservas realizadas -->
-    <?php
+    <?php if (!$esEliminadoODespublicado){
         $queryRervasFin="SELECT id_puntajeCouch, id_reserva, DATE_FORMAT(finicio, '%d-%m-%y') AS finicio, DATE_FORMAT(ffin,'%d-%m-%y') AS ffin FROM reserva WHERE id_couch='".$_GET['id']."' AND estado='Finalizada' AND id_usuario='". $_SESSION['id_usuario'] ."'";
         $consultaReservasFin= mysqli_query($conexion, $queryRervasFin);
         while( $reservasFin = mysqli_fetch_array($consultaReservasFin)) {
@@ -259,12 +273,11 @@ if (mysqli_num_rows($resultado) == 1){
                 </div>
 
             <?php }
-        }
-    ?>
+        }}
+    ?><?php if (!$esEliminadoODespublicado){?>
      <div class="col-md-12">
             <!-- Lista de preguntas y respuestas -->
     <h3 align="center"> Preguntas de los usuarios: </h3>
-
 
     <?php
 
@@ -320,12 +333,12 @@ if (mysqli_num_rows($resultado) == 1){
         </li>
     </ul>
 
-    <?php } ?>
+    <?php }} ?>
 
 
     <!-- Text area para hacer preguntas en caso de que no sea el dueño del Couch -->
 
-    <?php if(!$esDuenio && isset($_SESSION['sesion_usuario']) && $_SESSION['sesion_usuario'] == true ){
+    <?php if(!$esDuenio && isset($_SESSION['sesion_usuario']) && $_SESSION['sesion_usuario'] == true && !$esEliminadoODespublicado){
 
         ?>
 
@@ -344,13 +357,15 @@ if (mysqli_num_rows($resultado) == 1){
         </form>
 
     <?php } ?>
-    <?php   if (isset($_SESSION["admin"]) && !$esDuenio && !$_SESSION["admin"]) {  ?>
+    <?php   if (isset($_SESSION["admin"]) && !$esDuenio && !$_SESSION["admin"] && !$esEliminadoODespublicado) {  ?>
                 <?php include("reservar_couch.php");?>
                 <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalReservarCouch"> Reservar</a>
 
             <?php   }  ?>
+    <div class = "container"></div> 
     <a class="btn btn-primary" href="index.php">Volver</a>
-    <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == true ){
+    
+    <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == true && !$couch['eliminado_couch']){
 
         $query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE (couch.id_couch ='".$_GET["id"]."' AND couch.eliminado_couch = 0)";
         $resultado= mysqli_query($conexion, $query);
@@ -377,10 +392,6 @@ if (mysqli_num_rows($resultado) == 1){
 </body>
 
 </html>
-<?php } else { 
-    echo("Este Couch ha sido eliminado"); ?>
-    <br><a class="btn btn-primary" href="index.php">Volver</a>
 
-<?php } ?>
 
 

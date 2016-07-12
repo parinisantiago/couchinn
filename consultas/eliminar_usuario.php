@@ -3,8 +3,8 @@
     include_once("conectarBD.php");
 
     //ELIMINAR USUARIO
-
-    $update="UPDATE usuario SET eliminado=1 WHERE id_usuario='".$_POST['idUser']."'";
+    //'<font color='red'> (ELIMINADO)</font>'
+    $update="UPDATE usuario SET eliminado=1, apellido = concat(apellido, '<font color=\'red\'> (ELIMINADO)</font>') WHERE id_usuario='".$_POST['idUser']."'";
     mysqli_query($conexion,$update);
     
 

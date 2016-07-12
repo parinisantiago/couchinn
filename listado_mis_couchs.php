@@ -23,11 +23,16 @@ if( isset($_SESSION['sesion_usuario']) ){?>
 			<div class="panel-heading">
 				Seleccione un couch y luego decida que hacer con el
 			</div>
-			<?php if (isset($_GET['msg'])) { ?>
+			<?php $aDondeVolver = "index.php";if (isset($_GET['msg'])) { ?>
 				<div id="alert" role="alert" class="col-md-offset-2 col-md-8 alert <?php echo($_GET['class']) ?>">
 					<?php echo($_GET['msg']); ?>
 				</div>
-			<?php } ?>
+			<?php }
+				if (isset($_GET["desde"]))
+				{
+					$aDondeVolver = "verPerfil.php";
+				}
+			 ?>
 				<div class="panel-body">
 			<form name ="form1" method ="post" action ="radioButton_listado_couch.php">
 			<?php
@@ -70,7 +75,7 @@ if( isset($_SESSION['sesion_usuario']) ){?>
                 <button type="submit" name = "Despublicar" id = "Despublicar" onclick="return confirm('¿Esta seguro de que desea Despublicar el couch?')" class="btn btn-primary">Despublicar</button>
                 <button type="submit" name = "Publicar" id = "Publicar" onclick="return confirm('¿Esta seguro de que desea Publicar el couch?')" class="btn btn-primary">Publicar</button>
                 <button type="submit" name = "Modificar" id = "Modificar" class="btn btn-primary">Modificar</button>
-                <a class="btn btn-primary" href="index.php">Cancelar</a>
+                <a class="btn btn-primary" href=<?php echo($aDondeVolver);?>>Cancelar</a>
             </div>
             <script>
             	function deshabilitar(obj)

@@ -6,7 +6,7 @@
     $queryAdmin="SELECT email FROM admin WHERE email='".$email."'";
     $resultadoAdmin= mysqli_query($conexion, $queryAdmin);
 
-    $query= "SELECT email FROM usuario WHERE email='".$email."'";
+    $query= "SELECT email FROM usuario WHERE email='".$email."' AND eliminado  = 0";
     $resultado= mysqli_query($conexion, $query);
 
     if((mysqli_num_rows($resultado) == 0) && (mysqli_num_rows($resultadoAdmin) == 0)){

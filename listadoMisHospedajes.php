@@ -86,4 +86,4 @@ if (isset($_SESSION['id_usuario'])) { ?>
     </html>
 <?php} else {
     header("Lotacion: index.php?msg=Tienes que iniciar sesion para acceder a esta página&&class=alert-danger");
-}
+}?>

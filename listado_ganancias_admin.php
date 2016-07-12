@@ -91,7 +91,9 @@
 		}
 			?>
 		
-
+		<div class = "container">
+			<a class="btn btn-primary" href="index.php">Volver</a>
+		</div>
 	</body>
 
 </html>
