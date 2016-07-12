@@ -54,7 +54,6 @@ $resultado= mysqli_query($conexion, $query);
 </div>
 <div class="container">
     <?php while ( $couch = mysqli_fetch_array($resultado)) {
-
         //busca las fotos del couch para agregarlas al carousel
         $query_foto="SELECT ruta FROM foto WHERE id_couch='".$_GET["id"]."'";
         $resultado_foto=mysqli_query($conexion, $query_foto);
@@ -365,29 +364,24 @@ $resultado= mysqli_query($conexion, $query);
     <div class = "container"></div> 
     <a class="btn btn-primary" href="index.php">Volver</a>
     
-    <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == true && !$couch['eliminado_couch']){
+    <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == true){
 
-        $query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE (couch.id_couch ='".$_GET["id"]."' AND couch.eliminado_couch = 0)";
+        $query= "SELECT * FROM couch INNER JOIN tipo ON (couch.id_tipo = tipo.id_tipo) INNER JOIN usuario ON (couch.id_usuario = usuario.id_usuario) WHERE couch.id_couch ='".$_GET["id"]."'";
         $resultado= mysqli_query($conexion, $query);
         $couch = mysqli_fetch_array($resultado);
-        ?>
-        <form name="formEliminarCouch" class="form-horizontal" method="POST" action="radioButton_listado_couch.php">
-            <div class="form-group">
-                <button type="submit" name = "Eliminar" id = "Eliminar" class="btn btn-warning">Eliminar</button>
-            </div>
-            <input type="hidden" name="idUser" id = "idUser" value=<?php echo($couch['id_usuario']); ?>>
-            <input type="hidden" name="esAdmin" id = "esAdmin" value="true">
-            <input type="hidden" name="vieneDelDetalle" id = "vieneDelDetalle" value="true">
-            <input type="hidden" name="couch" id = "couch" value=<?php echo($couch['id_couch']); ?>>
-        </form>
+        if ($couch['eliminado_couch'] == 0){?>
 
-    <?php } ?>
-    
-    <?php /* if (isset($_SESSION["admin"]) && $_SESSION["admin"] == true)
-    { ?>
-        <form name ="form_eliminar_admin" method ="post" action ="consultas/eliminar_couch_admin.php">
-        <button type="submit" for ="form_eliminar_admin" name = "Eliminar" id = "Eliminar" onclick="return confirm('¿Esta seguro de que desea Eliminar el couch?')" class="btn btn" style="float: right; color: red;">Eliminar</button></form>
-    <?php }  */?>
+            <form name="formEliminarCouch" class="form-horizontal" method="POST" action="radioButton_listado_couch.php">
+                <div class="form-group">
+                    <button type="submit" name = "Eliminar" id = "Eliminar" class="btn btn-warning">Eliminar</button>
+                </div>
+                <input type="hidden" name="idUser" id = "idUser" value=<?php echo($couch['id_usuario']); ?>>
+                <input type="hidden" name="esAdmin" id = "esAdmin" value="true">
+                <input type="hidden" name="vieneDelDetalle" id = "vieneDelDetalle" value="true">
+                <input type="hidden" name="couch" id = "couch" value=<?php echo($couch['id_couch']); ?>>
+            </form>
+
+    <?php }} ?>
 </div>
 </body>
 

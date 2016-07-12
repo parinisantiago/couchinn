@@ -65,7 +65,7 @@
 	       		else
 	       		{
 	       			$total = $cant*90;
-	       			echo("<div class=\"container\"><h4>Sus ganancias totales para el periodo son: ".$total."</h4></div>");
+	       			echo("<div class=\"container\"><h4>Sus ganancias totales para el periodo son: $".$total."</h4></div>");
 	       		}	
 			while ($row = mysqli_fetch_array($resultadoGananciasQuery)){
 		?>
@@ -75,10 +75,17 @@
 		  			<div class="well well-sm">
 		  			
 		  			<?php 
-		  				$datosUsuario="SELECT nombre, apellido FROM usuario WHERE id_usuario='".$row["id_usuario"]."'";
-    								$ejecucionDatosUsuario= mysqli_query($conexion, $datosUsuario);
-    								$resultadoDatosUsuario= mysqli_fetch_array($ejecucionDatosUsuario);
-		  				echo("<strong>Usuario: </strong>".$resultadoDatosUsuario["nombre"]." ".$resultadoDatosUsuario["apellido"]."<br><strong>ID:</strong> ".$row["id_usuario"]); 
+		  				$datosUsuario="SELECT nombre, apellido,email,eliminado FROM usuario WHERE id_usuario='".$row["id_usuario"]."'";
+    					$ejecucionDatosUsuario= mysqli_query($conexion, $datosUsuario);
+    					$resultadoDatosUsuario= mysqli_fetch_array($ejecucionDatosUsuario);
+    					if ($resultadoDatosUsuario["eliminado"] == 0)
+    					{
+		  					echo("<strong>Usuario: </strong><a href=\"manejo_usuarios.php?nombre=&apellido=&email=".$resultadoDatosUsuario["email"]."&telefono=\">".$resultadoDatosUsuario["nombre"]." ".$resultadoDatosUsuario["apellido"]."</a><br><strong>ID:</strong> ".$row["id_usuario"]);
+		  				}
+		  				else
+		  				{
+		  					echo("<strong>Usuario: </strong>".$resultadoDatosUsuario["nombre"]." ".$resultadoDatosUsuario["apellido"]."<br><strong>ID:</strong> ".$row["id_usuario"]);
+		  				} 
 		  			?>
 		  			<br>
 		  			<?php echo("<strong>Fecha de inscripcion:</strong> ".$row["f_incripcion"]);

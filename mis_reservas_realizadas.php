@@ -49,7 +49,7 @@
 			  							if ($row["eliminado_couch"] == 1){
 			  								echo ("<font style=\"color:red;\">(Eliminado)</font>");
 			  							} 
-			  							if ($row["despublicado"] == 1){
+			  							else if ($row["despublicado"] == 1){
 			  								echo ("<font style=\"color:orange;\">(Despublicado)</font>");
 			  							}
 			  						?>

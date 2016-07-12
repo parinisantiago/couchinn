@@ -25,7 +25,7 @@
 			include("navbar.php");
 			include_once("conectarBD.php");
 			if (isset($_GET["finicio"])){
-				$listadoAceptadasFinalizadasQuery="SELECT titulo,DATE_FORMAT(reserva.finicio, '%d-%m-%y') AS finicio,  DATE_FORMAT(reserva.ffin, '%d-%m-%y') AS ffin, reserva.id_couch, reserva.estado, usuario.nombre AS huespedNombre, usuario.apellido AS huespedApellido, couch.eliminado_couch, couch.despublicado, couch.id_usuario FROM  couch INNER JOIN reserva INNER JOIN usuario ON (reserva.id_usuario=usuario.id_usuario AND couch.id_couch=reserva.id_couch) WHERE (estado='Finalizada' OR estado='Aceptada') AND ((finicio BETWEEN '" . $_GET["finicio"]. "' AND '" . $_GET["ffin"]. "') OR (ffin BETWEEN '" . $_GET["finicio"]. "' AND '" . $_GET["ffin"]. "') OR ('" . $_GET["finicio"]. "' BETWEEN finicio AND ffin) OR ('" . $_GET["ffin"]. "' BETWEEN finicio AND ffin))"; 
+				$listadoAceptadasFinalizadasQuery="SELECT titulo,DATE_FORMAT(reserva.finicio, '%d-%m-%y') AS finicio,  DATE_FORMAT(reserva.ffin, '%d-%m-%y') AS ffin, reserva.id_couch, reserva.estado,usuario.email,usuario.eliminado, usuario.nombre AS huespedNombre, usuario.apellido AS huespedApellido, couch.eliminado_couch, couch.despublicado, couch.id_usuario FROM  couch INNER JOIN reserva INNER JOIN usuario ON (reserva.id_usuario=usuario.id_usuario AND couch.id_couch=reserva.id_couch) WHERE (estado='Finalizada' OR estado='Aceptada') AND ((finicio BETWEEN '" . $_GET["finicio"]. "' AND '" . $_GET["ffin"]. "') OR (ffin BETWEEN '" . $_GET["finicio"]. "' AND '" . $_GET["ffin"]. "') OR ('" . $_GET["finicio"]. "' BETWEEN finicio AND ffin) OR ('" . $_GET["ffin"]. "' BETWEEN finicio AND ffin))"; 
 
 	    		$resultadoAceptadasFinalizadas= mysqli_query($conexion, $listadoAceptadasFinalizadasQuery);
 
@@ -75,7 +75,7 @@
 			  				if ($row["eliminado_couch"] == 1){
 			  					echo ("<font style=\"color:red;\">(Eliminado)</font>");
 			  				} 
-			  				if ($row["despublicado"] == 1){
+			  				else if ($row["despublicado"] == 1){
 			  					echo ("<font style=\"color:orange;\">(Despublicado)</font>");
 			  				}
 			  			?>
@@ -83,10 +83,23 @@
 			  		</h4>
 		  			
 		  			<?php 
-		  				$datosDuenoQuery="SELECT nombre, apellido FROM usuario INNER JOIN couch ON (usuario.id_usuario='".$row["id_usuario"]."')";
-    								$ejecucionDatosDueno= mysqli_query($conexion, $datosDuenoQuery);
-    								$resultadoDatosDueno= mysqli_fetch_array($ejecucionDatosDueno);
-		  				echo("<strong>Dueño: </strong>".$resultadoDatosDueno["nombre"]." ".$resultadoDatosDueno["apellido"]."<br><strong>Huesped:</strong> ".$row["huespedNombre"]." ".$row["huespedApellido"]); 
+		  				$datosDuenoQuery="SELECT nombre, apellido, email, eliminado FROM usuario INNER JOIN couch ON (usuario.id_usuario='".$row["id_usuario"]."')";
+    					$ejecucionDatosDueno= mysqli_query($conexion, $datosDuenoQuery);
+    					$resultadoDatosDueno= mysqli_fetch_array($ejecucionDatosDueno);
+    					$datosDelHuesped = "</a><br><strong>Huesped:</strong> ".$row["huespedNombre"]." ".$row["huespedApellido"];
+    					if ($row["eliminado"] == 0)
+    					{
+    						$datosDelHuesped = "</a><br><strong>Huesped:</strong> <a href=\"manejo_usuarios.php?nombre=&apellido=&email=".$row["email"]."&telefono=\">".$row["huespedNombre"]." ".$row["huespedApellido"]."</a>";
+    					}
+
+    					if ($resultadoDatosDueno["eliminado"] == 0)
+    					{
+    						echo("<strong>Dueño: </strong><a href=\"manejo_usuarios.php?nombre=&apellido=&email=".$resultadoDatosDueno["email"]."&telefono=\">".$resultadoDatosDueno["nombre"]." ".$resultadoDatosDueno["apellido"].$datosDelHuesped);
+    					}
+    					else
+    					{
+		  					echo("<strong>Dueño: </strong>".$resultadoDatosDueno["nombre"]." ".$resultadoDatosDueno["apellido"].$datosDelHuesped);
+		  				} 
 		  			?>
 		  			<br>
 		  			<?php echo("<strong>Fecha de reserva:</strong> ".$row["finicio"]." al ". $row["ffin"]. "

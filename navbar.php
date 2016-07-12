@@ -111,10 +111,10 @@ if( isset($_SESSION['sesion_usuario'])){
                         <a href="puntuarHuespedes.php">Ver húespedes</a>
                     </li>
                     <li>
-                        <a href="mis_reservas_realizadas.php">Mis reservas realizadas</a>
+                        <a href="mis_reservas_realizadas.php">Mis reservas</a>
                     </li>
                     <li>
-                        <a href="listadoMisHospedajes.php">Mis hospedajes</a>
+                        <a href="listadoMisHospedajes.php">Couchs donde me aloje</a>
                     </li>
                 </ul >
 
