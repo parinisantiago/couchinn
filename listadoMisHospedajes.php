@@ -44,7 +44,7 @@ include("navbar.php");
             <?php   while ($hospedaje = mysqli_fetch_array($consultaHospedajes)) {
 
                 if ($hospedaje["despublicado"] != 0){
-                    $hospedaje["titulo"] = $hospedaje["titulo"]." <font color='yellow'>(DESPUBLICADO)</font>";
+                    $hospedaje["titulo"] = $hospedaje["titulo"]." <font color='orange'>(DESPUBLICADO)</font>";
                 }
                 else if ($hospedaje['eliminado_couch'] != 0)
                 {
