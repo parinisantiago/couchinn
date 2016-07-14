@@ -342,7 +342,7 @@ $resultado= mysqli_query($conexion, $query);
 
     <!-- Text area para hacer preguntas en caso de que no sea el dueño del Couch -->
 
-    <?php if(!$esDuenio && $_SESSION['admin'] != true && isset($_SESSION['sesion_usuario']) && $_SESSION['sesion_usuario'] == true && !$esEliminadoODespublicado){
+    <?php if(!$esDuenio && isset($_SESSION['admin']) && $_SESSION['admin'] != true && isset($_SESSION['sesion_usuario']) && $_SESSION['sesion_usuario'] == true && !$esEliminadoODespublicado){
 
         ?>
 
