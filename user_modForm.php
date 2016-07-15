@@ -131,7 +131,12 @@ if( isset($_SESSION['sesion_usuario']) ){
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Guardar cambios</button>
+
+                <?php if (isset($_GET['desde'])){?>
+                    <a class="btn btn-primary" href="verPerfil.php">Cancelar</a>
+                <?php }else{?>
                 <a class="btn btn-primary" href="index.php">Cancelar</a>
+                <?php } ?>
             </div>
         </form>
             <?php } ?>

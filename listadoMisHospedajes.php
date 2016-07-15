@@ -49,10 +49,7 @@ include("navbar.php");
                 else if ($hospedaje['eliminado_couch'] != 0)
                 {
                     $hospedaje["titulo"] = $hospedaje["titulo"]." <font color='red'>(ELIMINADO)</font>";
-                } else {
-                    $hospedaje["titulo"] = $hospedaje["titulo"]." <font color='green'>(PUBLICADO)</font>";
-                }
-
+                } 
 
                 ?>
                 <a class=list-group-item href="detalle_couch.php?id=<?php echo($hospedaje['id_couch']) ?>" class="list-group-item">

@@ -64,7 +64,7 @@ include("navbar.php");?>
 
 <a class="btn btn-primary" href="listado_mis_couchs.php?desde=Perfil"> Mis couchs </a>
 <a class="btn btn-primary" href="mis_reservas_realizadas.php?desde=Perfil"> Mis reservas </a>
-<a class="btn btn-primary" href="user_modForm.php"> Modificar </a>
+<a class="btn btn-primary" href="user_modForm.php?desde=Perfil"> Modificar </a>
 <a class="btn btn-primary" href="index.php"> Volver </a>
 
 
