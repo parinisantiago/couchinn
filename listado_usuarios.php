@@ -40,7 +40,7 @@
 				<td><?php echo($row["apellido"]);?></td>
 				<td><?php echo($row["email"]);?></td>
 				<td><?php echo($row["telefono"]);?></td>
-				<td><button title = "Eliminar Usuario" type="submit" name = "eliminarUsuario" id="eliminarUsuario" onclick="return confirm('¿Esta seguro de que desea Eliminar el Usuario?')" class="btn btn-warning btn-sm "><i class = "glyphicon glyphicon-remove"></i></button><button title = "Ver Couchs" type="submit" name = "verCouchs" id="verCouchs" class="btn btn-primary btn-sm "><i class = "glyphicon glyphicon-th-list"></i></button></td>
+				<td><button title = "Eliminar Usuario" type="submit" name = "eliminarUsuario" id="eliminarUsuario" onclick="return confirm('¿Esta seguro de que desea Eliminar el Usuario?')" class="btn btn-warning btn-sm "><i class = "glyphicon glyphicon-remove"></i></button> <space> <space> </space></space><button title = "Ver Couchs" type="submit" name = "verCouchs" id="verCouchs" class="btn btn-primary btn-sm "><i class = "glyphicon glyphicon-th-list"></i></button></td>
 			</tr>
 			</form>
 						           
